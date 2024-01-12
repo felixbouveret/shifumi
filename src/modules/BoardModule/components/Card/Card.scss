@@ -1,0 +1,116 @@
+.card {
+  width: 100%;
+  height: 160px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  transition: transform 0.3s ease;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  border-radius: 8px;
+  user-select: none;
+
+  .content {
+    background-color: #fff;
+  }
+
+  .front,
+  .back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+  }
+
+  .front {
+    padding: 6px;
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      font-size: 24px;
+      font-weight: bold;
+      border: solid black 2px;
+      border-radius: 6px;
+
+      h2 {
+        flex: 1;
+      }
+    }
+    /* Front side styles */
+  }
+
+  .back {
+    padding: 6px;
+    backface-visibility: visible;
+
+    .content {
+      height: 100%;
+      width: 100%;
+      border: solid #da2828 2px;
+      border-radius: 6px;
+    }
+  }
+
+  &.hoverable {
+    &:hover {
+      transform: translateY(-8px);
+    }
+  }
+
+  &.flipped {
+    transform: rotateY(180deg);
+
+    &.hoverable {
+      &:hover {
+        cursor: pointer;
+        transform: translateY(-8px) rotateY(180deg);
+      }
+    }
+  }
+
+  &.played {
+    animation: playedAnimation 5s ease-in-out infinite;
+    &:hover {
+      transform: translateY(0);
+    }
+  }
+
+  &.disabled {
+    pointer-events: none;
+    opacity: 0.7;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    background-color: black;
+
+    .content {
+      background-color: black;
+    }
+
+    .front {
+      color: white;
+    }
+
+    .back {
+      color: #fff;
+    }
+  }
+}
+@keyframes playedAnimation {
+  // floating animation
+  0% {
+    transform: translateY(0);
+    box-shadow: 0 0 0 6px rgba($color: #000000, $alpha: 0.1);
+  }
+  50% {
+    transform: translateY(-4px);
+    box-shadow: 0 0 0 6px rgba($color: #000000, $alpha: 0.1);
+  }
+  100% {
+    transform: translateY(0);
+    box-shadow: 0 0 0 6px rgba($color: #000000, $alpha: 0.1);
+  }
+}
