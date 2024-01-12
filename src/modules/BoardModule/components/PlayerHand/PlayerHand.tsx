@@ -30,7 +30,7 @@ const PlayerHand: React.FC<PlayerHandProps> = ({
                 key={cardType}
                 draggableId={cardType}
                 index={index}
-                isDragDisabled={isOpponent}
+                isDragDisabled={isOpponent || hasPlayed}
               >
                 {(provided) => (
                   <div
