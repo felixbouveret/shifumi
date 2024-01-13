@@ -5,11 +5,11 @@ import { BoardParts, CardType } from "@/types/game.enum";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 
 interface PlayerBoardProps {
-  isOpponent?: boolean;
+  cardsHidden?: boolean;
   plays: CardType[];
 }
 
-const PlayerBoard: React.FC<PlayerBoardProps> = ({ isOpponent, plays }) => {
+const PlayerBoard: React.FC<PlayerBoardProps> = ({ cardsHidden, plays }) => {
   return (
     <Droppable droppableId={BoardParts.BOARD}>
       {(provided) => (
@@ -34,8 +34,8 @@ const PlayerBoard: React.FC<PlayerBoardProps> = ({ isOpponent, plays }) => {
                 >
                   <Card
                     type={play}
-                    isFlipped={isOpponent}
-                    hoverable={!isOpponent}
+                    isFlipped={cardsHidden}
+                    hoverable={!cardsHidden}
                     isPlayed
                   />
                 </div>

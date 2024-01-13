@@ -32,21 +32,25 @@ const Card: React.FC<CardProps> = ({
 
   return (
     <div
-      className={[
-        "card",
-        hoverable ? "hoverable" : "",
-        isFlipped ? "flipped" : "",
-        isPlayed ? "played" : "",
-        isDisabled ? "disabled" : "",
-      ].join(" ")}
+      className={["cardContainer", isPlayed ? "playedContainer" : ""].join(" ")}
     >
-      <div className="back">
-        <div className="content"></div>
-      </div>
-      <div className="front">
-        <div className="content">
-          <h2>{cardContent().icon}</h2>
-          <p>{cardContent().title}</p>
+      <div
+        className={[
+          "card",
+          hoverable ? "hoverable" : "",
+          isFlipped ? "flipped" : "",
+          isPlayed ? "played" : "",
+          isDisabled ? "disabled" : "",
+        ].join(" ")}
+      >
+        <div className="back">
+          <div className="content"></div>
+        </div>
+        <div className="front">
+          <div className="content">
+            <h2>{cardContent().icon}</h2>
+            <p>{cardContent().title}</p>
+          </div>
         </div>
       </div>
     </div>

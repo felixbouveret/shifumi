@@ -1,23 +1,38 @@
 import "./BoardModule.scss";
-import React, { useState } from "react";
 import PlayerHand from "./components/PlayerHand";
+import usePlayerHand from "@/hooks/usePlayerHand";
+import React, { useEffect, useState } from "react";
 import PlayerBoard from "./components/PlayerBoard";
+import { Player } from "@/types/game.interface";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
-import { BoardParts, CardType, UserType } from "@//types/game.enum";
+import {
+  BoardParts,
+  BoardSide,
+  CardType,
+  PlayerType,
+} from "@//types/game.enum";
 
 interface BoardModuleProps {
-  onCardPlayed: (card: CardType, user: UserType) => void;
-  isOpponent?: boolean;
+  handDisabled: boolean;
+  showPlay?: boolean;
+  boardSide: BoardSide;
+  player: Player;
+  onCardPlayed: (card: CardType, player: PlayerType) => void;
 }
 
 const BoardModule: React.FC<BoardModuleProps> = ({
-  isOpponent,
+  handDisabled,
+  showPlay,
+  boardSide,
+  player,
   onCardPlayed,
 }) => {
-  const [playerHand, setPlayerHand] = useState<CardType[]>(
-    Object.values(CardType).filter((cardType) => cardType !== CardType.UNKNOWN)
-  );
+  const { defaultPlayerHand } = usePlayerHand();
+
+  const [playerHand, setPlayerHand] = useState<CardType[]>(defaultPlayerHand);
   const [playerBoard, setPlayerBoard] = useState<CardType[]>([]);
+
+  const isOpponentPlayer = player.type === PlayerType.OPPONENT;
 
   const onDragEnd = (result: DropResult) => {
     if (!result.destination) return;
@@ -38,19 +53,29 @@ const BoardModule: React.FC<BoardModuleProps> = ({
       const [cardPlayed] = cards.splice(result.source.index, 1);
       setPlayerHand(cards);
       setPlayerBoard([cardPlayed]);
-      onCardPlayed(cardPlayed, UserType.PLAYER);
+      onCardPlayed(cardPlayed, PlayerType.LOCAL_USER);
       return;
     }
   };
 
+  useEffect(() => {
+    if (player?.play) {
+      setPlayerBoard([player.play]);
+    }
+  }, [player.play]);
+
   return (
-    <div id="playerSide" className={isOpponent ? "opponentSide" : ""}>
+    <div id="playerSide" className={boardSide}>
       <DragDropContext onDragEnd={onDragEnd}>
-        <PlayerBoard isOpponent={isOpponent} plays={playerBoard} />
+        <PlayerBoard
+          cardsHidden={isOpponentPlayer && !showPlay}
+          plays={playerBoard}
+        />
         <PlayerHand
-          isOpponent={isOpponent}
+          cardsHidden={isOpponentPlayer}
           playerHand={playerHand}
-          hasPlayed={!!playerBoard.length}
+          disabled={handDisabled}
+          boardSide={boardSide}
         />
       </DragDropContext>
     </div>

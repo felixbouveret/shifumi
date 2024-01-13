@@ -1,26 +1,32 @@
 import "./PlayerHand.scss";
 import React from "react";
 import Card from "../Card";
-import { BoardParts, CardType } from "@/types/game.enum";
 import { Draggable, Droppable } from "react-beautiful-dnd";
+import { BoardParts, BoardSide, CardType } from "@/types/game.enum";
 
 interface PlayerHandProps {
-  isOpponent?: boolean;
+  cardsHidden?: boolean;
+  boardSide: BoardSide;
   playerHand: CardType[];
-  hasPlayed?: boolean;
+  disabled: boolean;
 }
 
 const PlayerHand: React.FC<PlayerHandProps> = ({
-  isOpponent,
+  cardsHidden,
   playerHand,
-  hasPlayed,
+  boardSide,
+  disabled,
 }) => {
   return (
     <Droppable droppableId={BoardParts.HAND} direction="horizontal">
       {(provided) => (
         <div
           id="playerHand"
-          className={hasPlayed ? "hasPlayed" : ""}
+          className={[
+            disabled ? "handDisabled" : "",
+            cardsHidden ? "cardsHidden" : "",
+            boardSide,
+          ].join(" ")}
           ref={provided.innerRef}
           {...provided.droppableProps}
         >
@@ -30,7 +36,7 @@ const PlayerHand: React.FC<PlayerHandProps> = ({
                 key={cardType}
                 draggableId={cardType}
                 index={index}
-                isDragDisabled={isOpponent || hasPlayed}
+                isDragDisabled={cardsHidden || disabled}
               >
                 {(provided) => (
                   <div
@@ -40,10 +46,10 @@ const PlayerHand: React.FC<PlayerHandProps> = ({
                     {...provided.dragHandleProps}
                   >
                     <Card
-                      type={isOpponent ? CardType.UNKNOWN : cardType}
-                      isFlipped={isOpponent}
-                      hoverable={!isOpponent}
-                      isDisabled={hasPlayed}
+                      type={cardsHidden ? CardType.UNKNOWN : cardType}
+                      isFlipped={cardsHidden}
+                      hoverable={!cardsHidden}
+                      isDisabled={disabled}
                     />
                   </div>
                 )}

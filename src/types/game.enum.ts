@@ -1,5 +1,5 @@
-export enum UserType {
-  PLAYER = "player",
+export enum PlayerType {
+  LOCAL_USER = "localUser",
   OPPONENT = "opponent",
 }
 
@@ -10,7 +10,12 @@ export enum CardType {
   UNKNOWN = "unknown",
 }
 
+export enum BoardSide {
+  TOP = "top",
+  BOTTOM = "bottom",
+}
+
 export enum BoardParts {
-  HAND = "playerHand",
-  BOARD = "playerBoard",
+  HAND = "hand",
+  BOARD = "board",
 }
