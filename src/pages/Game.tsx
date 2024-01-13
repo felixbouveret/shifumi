@@ -1,5 +1,5 @@
 import React from "react";
-import GameModule from "../modules/GameModule";
+import GameModule from "@/modules/GameModule";
 
 const Game: React.FC = () => <GameModule />;
 

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import PlayerHand from "./components/PlayerHand";
 import PlayerBoard from "./components/PlayerBoard";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
-import { BoardParts, CardType, UserType } from "../../types/game.enum";
+import { BoardParts, CardType, UserType } from "@//types/game.enum";
 
 interface BoardModuleProps {
   onCardPlayed: (card: CardType, user: UserType) => void;

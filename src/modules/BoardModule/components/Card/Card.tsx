@@ -1,6 +1,6 @@
 import "./Card.scss";
 import React from "react";
-import { CardType } from "../../../../types/game.enum";
+import { CardType } from "@/types/game.enum";
 
 interface CardProps {
   type: CardType;

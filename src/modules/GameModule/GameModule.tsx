@@ -1,9 +1,9 @@
 import "./GameModule.scss";
 import React from "react";
-import BoardModule from "../BoardModule";
+import BoardModule from "@/modules/BoardModule";
 import { IconButton } from "@mui/joy";
 import { Settings } from "@mui/icons-material";
-import { CardType, UserType } from "../../types/game.enum";
+import { CardType, UserType } from "@/types/game.enum";
 
 const GameModule: React.FC = () => {
   const onCardPlayed = (card: CardType, user: UserType) => {
