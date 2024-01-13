@@ -7,9 +7,14 @@ import { Draggable, Droppable } from "react-beautiful-dnd";
 interface PlayerBoardProps {
   cardsHidden?: boolean;
   plays: CardType[];
+  score: number;
 }
 
-const PlayerBoard: React.FC<PlayerBoardProps> = ({ cardsHidden, plays }) => {
+const PlayerBoard: React.FC<PlayerBoardProps> = ({
+  cardsHidden,
+  plays,
+  score = 0,
+}) => {
   return (
     <Droppable droppableId={BoardParts.BOARD}>
       {(provided) => (
@@ -18,6 +23,9 @@ const PlayerBoard: React.FC<PlayerBoardProps> = ({ cardsHidden, plays }) => {
           ref={provided.innerRef}
           {...provided.droppableProps}
         >
+          <div className="score">
+            <p>{score}</p>
+          </div>
           {plays.map((play, index) => (
             <Draggable
               key={play}

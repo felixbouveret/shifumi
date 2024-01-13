@@ -67,6 +67,7 @@ const BoardModule: React.FC<BoardModuleProps> = ({
         <PlayerBoard
           cardsHidden={isOpponentPlayer && !showPlay}
           plays={playerPlay}
+          score={player.score}
         />
         <PlayerHand
           cardsHidden={isOpponentPlayer}
