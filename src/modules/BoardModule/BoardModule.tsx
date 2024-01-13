@@ -1,7 +1,7 @@
 import "./BoardModule.scss";
+import React from "react";
 import PlayerHand from "./components/PlayerHand";
 import usePlayerHand from "@/hooks/usePlayerHand";
-import React, { useEffect, useState } from "react";
 import PlayerBoard from "./components/PlayerBoard";
 import { Player } from "@/types/game.interface";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
@@ -18,6 +18,8 @@ interface BoardModuleProps {
   boardSide: BoardSide;
   player: Player;
   onCardPlayed: (card: CardType, player: PlayerType) => void;
+  setPlayerHand: (cards: CardType[]) => void;
+  setPlayerPlay: (card: CardType) => void;
 }
 
 const BoardModule: React.FC<BoardModuleProps> = ({
@@ -26,13 +28,14 @@ const BoardModule: React.FC<BoardModuleProps> = ({
   boardSide,
   player,
   onCardPlayed,
+  setPlayerHand,
+  setPlayerPlay,
 }) => {
   const { defaultPlayerHand } = usePlayerHand();
 
-  const [playerHand, setPlayerHand] = useState<CardType[]>(defaultPlayerHand);
-  const [playerBoard, setPlayerBoard] = useState<CardType[]>([]);
-
   const isOpponentPlayer = player.type === PlayerType.OPPONENT;
+  const playerHand = player.cards || defaultPlayerHand;
+  const playerPlay = player.play ? [player.play] : [];
 
   const onDragEnd = (result: DropResult) => {
     if (!result.destination) return;
@@ -52,24 +55,18 @@ const BoardModule: React.FC<BoardModuleProps> = ({
       const cards = Array.from(playerHand);
       const [cardPlayed] = cards.splice(result.source.index, 1);
       setPlayerHand(cards);
-      setPlayerBoard([cardPlayed]);
+      setPlayerPlay(cardPlayed);
       onCardPlayed(cardPlayed, PlayerType.LOCAL_USER);
       return;
     }
   };
-
-  useEffect(() => {
-    if (player?.play) {
-      setPlayerBoard([player.play]);
-    }
-  }, [player.play]);
 
   return (
     <div id="playerSide" className={boardSide}>
       <DragDropContext onDragEnd={onDragEnd}>
         <PlayerBoard
           cardsHidden={isOpponentPlayer && !showPlay}
-          plays={playerBoard}
+          plays={playerPlay}
         />
         <PlayerHand
           cardsHidden={isOpponentPlayer}

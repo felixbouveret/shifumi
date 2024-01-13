@@ -3,6 +3,7 @@ import { CardType, PlayerType } from "./game.enum";
 export interface Player<T = PlayerType> {
   type: T;
   play: CardType | undefined;
+  cards: CardType[];
   score: number;
 }
 
