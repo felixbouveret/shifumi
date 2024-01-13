@@ -101,7 +101,7 @@ const useGame = (): UseGameReturn => {
     setGame(newGame);
   };
 
-  const setPlayer = (play: CardType, playerType: PlayerType) => {
+  const setPlay = (playerType: PlayerType, play: CardType) => {
     if (!game) return;
     const newGame = { ...game };
     newGame[playerType].play = play;
@@ -111,18 +111,22 @@ const useGame = (): UseGameReturn => {
   const userPlay = (play: CardType) => {
     if (!game) return;
     console.log(game);
-    setPlayer(play, PlayerType.LOCAL_USER);
+    setPlay(PlayerType.LOCAL_USER, play);
     setTimeout(opponentPlay, 1000);
   };
 
   const opponentPlay = () => {
     if (!game) return;
 
-    const cards = Object.values(CardType).filter((c) => c !== CardType.UNKNOWN);
+    const cards = game.opponent.cards;
     const randomPlay = Math.floor(Math.random() * cards.length);
     const play = cards[randomPlay];
 
-    setPlayer(play, PlayerType.OPPONENT);
+    setPlay(PlayerType.OPPONENT, play);
+    setPlayerHand(
+      PlayerType.OPPONENT,
+      cards.filter((c) => c !== play)
+    );
     setTimeout(revealPlaysAndCalculateWinner, 1000);
   };
 
@@ -133,10 +137,10 @@ const useGame = (): UseGameReturn => {
     setGame(newGame);
   };
 
-  const setPlayerPlay = (playerType: PlayerType, play: CardType) => {
+  const setPlayerPlay = (playerType: PlayerType, card: CardType) => {
     if (!game) return;
     const newGame = { ...game };
-    newGame[playerType].play = play;
+    newGame[playerType].play = card;
     setGame(newGame);
   };
 
