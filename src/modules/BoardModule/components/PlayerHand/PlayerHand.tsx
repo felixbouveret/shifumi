@@ -2,7 +2,7 @@ import "./PlayerHand.scss";
 import React from "react";
 import Card from "../Card";
 import { Draggable, Droppable } from "react-beautiful-dnd";
-import { BoardParts, CardType } from "../../../../types/game";
+import { BoardParts, CardType } from "../../../../types/game.enum";
 
 interface PlayerHandProps {
   isOpponent?: boolean;

@@ -1,19 +1,23 @@
 import "./BoardModule.scss";
-import React from "react";
+import React, { useState } from "react";
 import PlayerHand from "./components/PlayerHand";
 import PlayerBoard from "./components/PlayerBoard";
-import { BoardParts, CardType } from "../../types/game";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
+import { BoardParts, CardType, UserType } from "../../types/game.enum";
 
 interface BoardModuleProps {
+  onCardPlayed: (card: CardType, user: UserType) => void;
   isOpponent?: boolean;
 }
 
-const BoardModule: React.FC<BoardModuleProps> = ({ isOpponent }) => {
-  const [playerHand, setPlayerHand] = React.useState<CardType[]>(
+const BoardModule: React.FC<BoardModuleProps> = ({
+  isOpponent,
+  onCardPlayed,
+}) => {
+  const [playerHand, setPlayerHand] = useState<CardType[]>(
     Object.values(CardType).filter((cardType) => cardType !== CardType.UNKNOWN)
   );
-  const [playerBoard, setPlayerBoard] = React.useState<CardType[]>([]);
+  const [playerBoard, setPlayerBoard] = useState<CardType[]>([]);
 
   const onDragEnd = (result: DropResult) => {
     if (!result.destination) return;
@@ -31,9 +35,10 @@ const BoardModule: React.FC<BoardModuleProps> = ({ isOpponent }) => {
 
     if (start === BoardParts.HAND && end === BoardParts.BOARD) {
       const cards = Array.from(playerHand);
-      const [reorderedItem] = cards.splice(result.source.index, 1);
+      const [cardPlayed] = cards.splice(result.source.index, 1);
       setPlayerHand(cards);
-      setPlayerBoard([reorderedItem]);
+      setPlayerBoard([cardPlayed]);
+      onCardPlayed(cardPlayed, UserType.PLAYER);
       return;
     }
   };
