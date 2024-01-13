@@ -1,10 +1,9 @@
 import "./GameModule.scss";
 import useGame from "@/hooks/useGame";
 import React, { useEffect } from "react";
+import GameMenu from "./components/GameMenu";
 import BoardModule from "@/modules/BoardModule";
 import usePlayerHand from "@/hooks/usePlayerHand";
-import { IconButton } from "@mui/joy";
-import { Settings } from "@mui/icons-material";
 import { Player } from "@/types/game.interface";
 import { BoardSide, CardType, PlayerType } from "@/types/game.enum";
 
@@ -39,9 +38,7 @@ const GameModule: React.FC = () => {
   return (
     <div id="gameModule">
       <div className="header">
-        <IconButton className="settingsButton" size="lg">
-          <Settings />
-        </IconButton>
+        <GameMenu />
       </div>
       <BoardModule
         handDisabled={!isGameStarted}
