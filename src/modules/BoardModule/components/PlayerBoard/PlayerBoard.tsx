@@ -38,12 +38,7 @@ const PlayerBoard: React.FC<PlayerBoardProps> = ({
             </IconButton>
           )}
           {plays.map((play, index) => (
-            <Draggable
-              key={play}
-              draggableId={play}
-              index={index}
-              isDragDisabled
-            >
+            <Draggable key={play} draggableId={play + boardSide} index={index}>
               {(provided) => (
                 <div
                   className="cardWrapper"

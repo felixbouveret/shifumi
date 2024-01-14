@@ -1,10 +1,10 @@
 import "./BoardModule.scss";
-import React, { useRef } from "react";
+import React from "react";
 import PlayerHand from "./components/PlayerHand";
 import usePlayerHand from "@/hooks/usePlayerHand";
 import PlayerBoard from "./components/PlayerBoard";
-import { useSensors } from "@/hooks/useSensors";
 import { Player } from "@/types/game.interface";
+import { UseSensorsReturn } from "@/hooks/useSensors";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import {
   BoardParts,
@@ -18,9 +18,10 @@ interface BoardModuleProps {
   showPlay?: boolean;
   boardSide: BoardSide;
   player: Player;
-  onCardPlayed: (card: CardType, player: PlayerType) => void;
+  onCardPlayed: (player: PlayerType) => void;
   setPlayerHand: (cards: CardType[]) => void;
-  setPlayerPlay: (card: CardType) => void;
+  setPlayerPlay: (card: CardType | undefined) => void;
+  sensorHook: UseSensorsReturn;
 }
 
 const BoardModule: React.FC<BoardModuleProps> = ({
@@ -31,6 +32,7 @@ const BoardModule: React.FC<BoardModuleProps> = ({
   onCardPlayed,
   setPlayerHand,
   setPlayerPlay,
+  sensorHook,
 }) => {
   const { defaultPlayerHand, getRandomPlayableCard } = usePlayerHand();
 
@@ -44,8 +46,9 @@ const BoardModule: React.FC<BoardModuleProps> = ({
     const start = result.source.droppableId;
     const end = result.destination?.droppableId;
 
+    const cards = Array.from(playerHand);
+
     if (start === end) {
-      const cards = Array.from(playerHand);
       const [reorderedItem] = cards.splice(result.source.index, 1);
       cards.splice(result.destination.index, 0, reorderedItem);
       setPlayerHand(cards);
@@ -53,17 +56,22 @@ const BoardModule: React.FC<BoardModuleProps> = ({
     }
 
     if (start.includes(BoardParts.HAND) && end.includes(BoardParts.BOARD)) {
-      const cards = Array.from(playerHand);
       const [cardPlayed] = cards.splice(result.source.index, 1);
       setPlayerHand(cards);
       setPlayerPlay(cardPlayed);
-      onCardPlayed(cardPlayed, PlayerType.LOCAL_USER);
+      onCardPlayed(player.type);
+      return;
+    }
+
+    if (start.includes(BoardParts.BOARD) && end.includes(BoardParts.HAND)) {
+      cards.splice(result.destination.index, 0, playerPlay[0]);
+      setPlayerHand(cards);
+      setPlayerPlay(undefined);
       return;
     }
   };
 
-  const { scriptedSensor, moveCardScript } = useSensors();
-  const target = useRef(null);
+  const { scriptedSensor, moveCardScript } = sensorHook;
 
   const randomPlay = () => {
     moveCardScript({
@@ -76,7 +84,7 @@ const BoardModule: React.FC<BoardModuleProps> = ({
   return (
     <div id="playerSide" className={boardSide}>
       <DragDropContext onDragEnd={onDragEnd} sensors={[scriptedSensor]}>
-        <div ref={target}>
+        <div>
           <PlayerBoard
             cardsHidden={isOpponentPlayer && !showPlay}
             plays={playerPlay}

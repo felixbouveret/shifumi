@@ -5,6 +5,7 @@ import GameMenu from "./components/GameMenu";
 import BoardModule from "@/modules/BoardModule";
 import usePlayerHand from "@/hooks/usePlayerHand";
 import { Player } from "@/types/game.interface";
+import { useSensors } from "@/hooks/useSensors";
 import { BoardSide, CardType, PlayerType } from "@/types/game.enum";
 
 const GameModule: React.FC = () => {
@@ -17,6 +18,9 @@ const GameModule: React.FC = () => {
     cards: defaultPlayerHand,
   };
 
+  const topSensorHook = useSensors();
+  const bottomSensorHook = useSensors();
+
   const {
     isGameStarted,
     game,
@@ -25,11 +29,10 @@ const GameModule: React.FC = () => {
     userPlay,
     setPlayerHand,
     setPlayerPlay,
-  } = useGame();
-
-  const onCardPlayed = (card: CardType) => {
-    userPlay(card);
-  };
+  } = useGame({
+    topMoveCardScript: topSensorHook.moveCardScript,
+    bottomMoveCardScript: bottomSensorHook.moveCardScript,
+  });
 
   useEffect(() => {
     setTimeout(() => start(), 1000);
@@ -43,27 +46,29 @@ const GameModule: React.FC = () => {
       <BoardModule
         handDisabled={!isGameStarted}
         boardSide={BoardSide.TOP}
-        onCardPlayed={onCardPlayed}
+        onCardPlayed={userPlay}
         player={game?.opponent || initialPlayer}
         showPlay={revealPlays}
         setPlayerHand={(cards: CardType[]) =>
           setPlayerHand(PlayerType.OPPONENT, cards)
         }
-        setPlayerPlay={(card: CardType) =>
-          setPlayerPlay(PlayerType.LOCAL_USER, card)
+        setPlayerPlay={(card: CardType | undefined) =>
+          setPlayerPlay(PlayerType.OPPONENT, card)
         }
+        sensorHook={topSensorHook}
       />
       <BoardModule
         handDisabled={!isGameStarted}
         boardSide={BoardSide.BOTTOM}
-        onCardPlayed={onCardPlayed}
+        onCardPlayed={userPlay}
         player={game?.localUser || initialPlayer}
         setPlayerHand={(cards: CardType[]) =>
           setPlayerHand(PlayerType.LOCAL_USER, cards)
         }
-        setPlayerPlay={(card: CardType) =>
+        setPlayerPlay={(card: CardType | undefined) =>
           setPlayerPlay(PlayerType.LOCAL_USER, card)
         }
+        sensorHook={bottomSensorHook}
       />
     </div>
   );

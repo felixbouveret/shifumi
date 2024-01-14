@@ -1,20 +1,29 @@
 import usePlayerHand from "./usePlayerHand";
 import { useState } from "react";
 import { Game } from "@/types/game.interface";
-import { CardType, PlayerType } from "@/types/game.enum";
+import { moveCardScriptParams } from "./useSensors";
+import { BoardParts, BoardSide, CardType, PlayerType } from "@/types/game.enum";
+
+interface UseGameParams {
+  topMoveCardScript: (params: moveCardScriptParams) => void;
+  bottomMoveCardScript: (params: moveCardScriptParams) => void;
+}
 
 interface UseGameReturn {
   game: Game | null;
   start: () => void;
-  userPlay: (play: CardType) => void;
+  userPlay: (playerType: PlayerType) => void;
   setPlayerHand: (playerType: PlayerType, cards: CardType[]) => void;
-  setPlayerPlay: (playerType: PlayerType, cards: CardType) => void;
+  setPlayerPlay: (playerType: PlayerType, cards: CardType | undefined) => void;
   isGameStarted: boolean;
   revealPlays: boolean;
 }
 
-const useGame = (): UseGameReturn => {
-  const { defaultPlayerHand } = usePlayerHand();
+const useGame = ({
+  topMoveCardScript,
+  bottomMoveCardScript,
+}: UseGameParams): UseGameReturn => {
+  const { defaultPlayerHand, getRandomPlayableCard } = usePlayerHand();
 
   const [game, setGame] = useState<Game | null>(null);
   const [revealPlays, setRevealPlays] = useState<boolean>(false);
@@ -93,39 +102,36 @@ const useGame = (): UseGameReturn => {
 
   const resetCards = () => {
     if (!game) return;
-    const newGame = { ...game };
-    newGame.localUser.cards = defaultPlayerHand;
-    newGame.opponent.cards = defaultPlayerHand;
-    newGame.localUser.play = undefined;
-    newGame.opponent.play = undefined;
-    setGame(newGame);
+    console.log("Resetting cards");
+
+    topMoveCardScript({
+      card: game.opponent.play!,
+      to: BoardParts.HAND,
+      side: BoardSide.TOP,
+    });
+    bottomMoveCardScript({
+      card: game.localUser.play!,
+      to: BoardParts.HAND,
+      side: BoardSide.BOTTOM,
+    });
   };
 
-  const setPlay = (playerType: PlayerType, play: CardType) => {
-    if (!game) return;
-    const newGame = { ...game };
-    newGame[playerType].play = play;
-    setGame(newGame);
-  };
-
-  const userPlay = (play: CardType) => {
-    if (!game) return;
-    setPlay(PlayerType.LOCAL_USER, play);
+  const userPlay = (playerType: PlayerType) => {
+    if (!game || playerType === PlayerType.OPPONENT) return;
     setTimeout(opponentPlay, 1000);
   };
 
   const opponentPlay = () => {
     if (!game) return;
 
-    const cards = game.opponent.cards;
-    const randomPlay = Math.floor(Math.random() * cards.length);
-    const play = cards[randomPlay];
+    const randomCard = getRandomPlayableCard();
 
-    setPlay(PlayerType.OPPONENT, play);
-    setPlayerHand(
-      PlayerType.OPPONENT,
-      cards.filter((c) => c !== play)
-    );
+    topMoveCardScript({
+      card: randomCard,
+      to: BoardParts.BOARD,
+      side: BoardSide.TOP,
+    });
+
     setTimeout(revealPlaysAndCalculateWinner, 1000);
   };
 
@@ -136,7 +142,10 @@ const useGame = (): UseGameReturn => {
     setGame(newGame);
   };
 
-  const setPlayerPlay = (playerType: PlayerType, card: CardType) => {
+  const setPlayerPlay = (
+    playerType: PlayerType,
+    card: CardType | undefined
+  ) => {
     if (!game) return;
     const newGame = { ...game };
     newGame[playerType].play = card;

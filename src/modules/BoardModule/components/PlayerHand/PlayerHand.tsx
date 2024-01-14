@@ -18,7 +18,7 @@ const PlayerHand: React.FC<PlayerHandProps> = ({
   disabled,
 }) => {
   return (
-    <Droppable droppableId={BoardParts.HAND} direction="horizontal">
+    <Droppable droppableId={BoardParts.HAND + boardSide} direction="horizontal">
       {(provided) => (
         <div
           id="playerHand"

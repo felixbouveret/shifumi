@@ -5,11 +5,11 @@ import { BoardParts, BoardSide, CardType } from "@/types/game.enum";
 const draggableAttribute = "data-rbd-drag-handle-draggable-id";
 const droppableAttribute = "data-rbd-droppable-id";
 
-interface UseSensorsReturn {
+export interface UseSensorsReturn {
   scriptedSensor: (value: SensorAPI) => void;
   moveCardScript: (params: moveCardScriptParams) => void;
 }
-interface moveCardScriptParams {
+export interface moveCardScriptParams {
   card: CardType;
   to: BoardParts;
   side: BoardSide;
