@@ -1,8 +1,9 @@
 import "./BoardModule.scss";
-import React from "react";
+import React, { useRef } from "react";
 import PlayerHand from "./components/PlayerHand";
 import usePlayerHand from "@/hooks/usePlayerHand";
 import PlayerBoard from "./components/PlayerBoard";
+import { useSensors } from "@/hooks/useSensors";
 import { Player } from "@/types/game.interface";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import {
@@ -31,7 +32,7 @@ const BoardModule: React.FC<BoardModuleProps> = ({
   setPlayerHand,
   setPlayerPlay,
 }) => {
-  const { defaultPlayerHand } = usePlayerHand();
+  const { defaultPlayerHand, getRandomPlayableCard } = usePlayerHand();
 
   const isOpponentPlayer = player.type === PlayerType.OPPONENT;
   const playerHand = player.cards || defaultPlayerHand;
@@ -51,7 +52,7 @@ const BoardModule: React.FC<BoardModuleProps> = ({
       return;
     }
 
-    if (start === BoardParts.HAND && end === BoardParts.BOARD) {
+    if (start.includes(BoardParts.HAND) && end.includes(BoardParts.BOARD)) {
       const cards = Array.from(playerHand);
       const [cardPlayed] = cards.splice(result.source.index, 1);
       setPlayerHand(cards);
@@ -61,14 +62,29 @@ const BoardModule: React.FC<BoardModuleProps> = ({
     }
   };
 
+  const { scriptedSensor, moveCardScript } = useSensors();
+  const target = useRef(null);
+
+  const randomPlay = () => {
+    moveCardScript({
+      card: getRandomPlayableCard(),
+      to: BoardParts.BOARD,
+      side: boardSide,
+    });
+  };
+
   return (
     <div id="playerSide" className={boardSide}>
-      <DragDropContext onDragEnd={onDragEnd}>
-        <PlayerBoard
-          cardsHidden={isOpponentPlayer && !showPlay}
-          plays={playerPlay}
-          score={player.score}
-        />
+      <DragDropContext onDragEnd={onDragEnd} sensors={[scriptedSensor]}>
+        <div ref={target}>
+          <PlayerBoard
+            cardsHidden={isOpponentPlayer && !showPlay}
+            plays={playerPlay}
+            score={player.score}
+            boardSide={boardSide}
+            randomPlay={randomPlay}
+          />
+        </div>
         <PlayerHand
           cardsHidden={isOpponentPlayer}
           playerHand={playerHand}

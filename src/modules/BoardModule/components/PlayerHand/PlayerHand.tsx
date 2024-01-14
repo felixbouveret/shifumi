@@ -34,9 +34,9 @@ const PlayerHand: React.FC<PlayerHandProps> = ({
             return (
               <Draggable
                 key={cardType}
-                draggableId={cardType}
+                draggableId={cardType + boardSide}
                 index={index}
-                isDragDisabled={cardsHidden || disabled}
+                isDragDisabled={disabled}
               >
                 {(provided) => (
                   <div

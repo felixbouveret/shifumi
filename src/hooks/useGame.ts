@@ -110,7 +110,6 @@ const useGame = (): UseGameReturn => {
 
   const userPlay = (play: CardType) => {
     if (!game) return;
-    console.log(game);
     setPlay(PlayerType.LOCAL_USER, play);
     setTimeout(opponentPlay, 1000);
   };

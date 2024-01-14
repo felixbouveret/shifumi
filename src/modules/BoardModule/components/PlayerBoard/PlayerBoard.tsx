@@ -1,22 +1,28 @@
 import "./PlayerBoard.scss";
 import React from "react";
 import Card from "../Card";
-import { BoardParts, CardType } from "@/types/game.enum";
+import { IconButton } from "@mui/joy";
+import { QuestionMark } from "@mui/icons-material";
 import { Draggable, Droppable } from "react-beautiful-dnd";
+import { BoardParts, BoardSide, CardType } from "@/types/game.enum";
 
 interface PlayerBoardProps {
   cardsHidden?: boolean;
   plays: CardType[];
   score: number;
+  boardSide: BoardSide;
+  randomPlay: () => void;
 }
 
 const PlayerBoard: React.FC<PlayerBoardProps> = ({
   cardsHidden,
   plays,
   score = 0,
+  boardSide,
+  randomPlay,
 }) => {
   return (
-    <Droppable droppableId={BoardParts.BOARD}>
+    <Droppable droppableId={`${BoardParts.BOARD}${boardSide}`}>
       {(provided) => (
         <div
           id="playerBoard"
@@ -26,6 +32,11 @@ const PlayerBoard: React.FC<PlayerBoardProps> = ({
           <div className="score">
             <p>{score}</p>
           </div>
+          {boardSide === BoardSide.BOTTOM && (
+            <IconButton className="button" size="lg" onClick={randomPlay}>
+              <QuestionMark />
+            </IconButton>
+          )}
           {plays.map((play, index) => (
             <Draggable
               key={play}
