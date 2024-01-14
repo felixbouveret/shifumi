@@ -1,7 +1,6 @@
 import "./GameModule.scss";
 import useGame from "@/hooks/useGame";
 import React, { useEffect } from "react";
-import GameMenu from "./components/GameMenu";
 import BoardModule from "@/modules/BoardModule";
 import usePlayerHand from "@/hooks/usePlayerHand";
 import { Player } from "@/types/game.interface";
@@ -40,9 +39,6 @@ const GameModule: React.FC = () => {
 
   return (
     <div id="gameModule">
-      <div className="header">
-        <GameMenu />
-      </div>
       <BoardModule
         handDisabled={!isGameStarted}
         boardSide={BoardSide.TOP}
