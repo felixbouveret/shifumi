@@ -16,6 +16,10 @@
     max-width: 130px;
   }
 
+  &.cardsHidden {
+    pointer-events: none;
+  }
+
   &.handDisabled {
     transform: translateY(100px);
     opacity: 0.7;

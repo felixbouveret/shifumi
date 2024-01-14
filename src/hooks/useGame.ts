@@ -38,12 +38,14 @@ const useGame = ({
         play: undefined,
         cards: defaultPlayerHand,
         score: 0,
+        hasPlayed: false,
       },
       opponent: {
         type: PlayerType.OPPONENT,
         play: undefined,
         cards: defaultPlayerHand,
         score: 0,
+        hasPlayed: false,
       },
       round: 0,
       isGameOver: false,
@@ -145,6 +147,7 @@ const useGame = ({
     if (!game) return;
     const newGame = { ...game };
     newGame[playerType].play = card;
+    newGame[playerType].hasPlayed = !!card;
     setGame(newGame);
   };
 

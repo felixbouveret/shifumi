@@ -15,14 +15,15 @@ const GameModule: React.FC = () => {
     play: undefined,
     score: 0,
     cards: defaultPlayerHand,
+    hasPlayed: false,
   };
 
   const topSensorHook = useSensors();
   const bottomSensorHook = useSensors();
 
   const {
-    isGameStarted,
     game,
+    isGameStarted,
     revealPlays,
     start,
     userPlay,
@@ -40,7 +41,7 @@ const GameModule: React.FC = () => {
   return (
     <div id="gameModule">
       <BoardModule
-        handDisabled={!isGameStarted}
+        handDisabled={!isGameStarted || !!game?.opponent?.hasPlayed}
         boardSide={BoardSide.TOP}
         onCardPlayed={userPlay}
         player={game?.opponent || initialPlayer}
@@ -54,7 +55,7 @@ const GameModule: React.FC = () => {
         sensorHook={topSensorHook}
       />
       <BoardModule
-        handDisabled={!isGameStarted}
+        handDisabled={!isGameStarted || !!game?.localUser?.hasPlayed}
         boardSide={BoardSide.BOTTOM}
         onCardPlayed={userPlay}
         player={game?.localUser || initialPlayer}
