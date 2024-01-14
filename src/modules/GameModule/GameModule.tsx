@@ -3,6 +3,7 @@ import useGame from "@/hooks/useGame";
 import React, { useEffect } from "react";
 import BoardModule from "@/modules/BoardModule";
 import usePlayerHand from "@/hooks/usePlayerHand";
+import PartyEndPopin from "@/components/PartyEndPopin";
 import { Player } from "@/types/game.interface";
 import { useSensors } from "@/hooks/useSensors";
 import { BoardSide, CardType, PlayerType } from "@/types/game.enum";
@@ -30,10 +31,12 @@ const GameModule: React.FC = () => {
     userPlay,
     setPlayerHand,
     setPlayerPlay,
+    restart,
   } = useGame({
     topMoveCardScript: topSensorHook.moveCardScript,
     bottomMoveCardScript: bottomSensorHook.moveCardScript,
   });
+  console.log(game);
 
   useEffect(() => {
     setTimeout(() => start(), 1000);
@@ -73,6 +76,14 @@ const GameModule: React.FC = () => {
           sensorHook={bottomSensorHook}
         />
       </div>
+
+      {!!game?.winner && (
+        <PartyEndPopin
+          visible={!!game?.winner}
+          player={game?.winner}
+          onClosed={restart}
+        />
+      )}
     </div>
   );
 };

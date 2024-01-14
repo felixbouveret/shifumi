@@ -1,0 +1,19 @@
+.gamesHistory {
+  background-color: #185118;
+  border-radius: 16px;
+  padding: 20px;
+  border: solid 6px #113b11;
+
+  .game {
+    display: flex;
+    justify-content: space-between;
+
+    &.heading {
+      color: #c4af3b;
+      font-weight: bold;
+      padding-bottom: 4px;
+      margin-bottom: 4px;
+      border-bottom: solid 2px #113b11;
+    }
+  }
+}

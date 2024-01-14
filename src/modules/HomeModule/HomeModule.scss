@@ -1,18 +1,18 @@
-.container {
+.homeContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
   max-width: 300px;
   width: 100%;
   margin: 0 auto;
   padding: 0 20px;
   text-align: center;
+
+  h1 {
+    margin: 0;
+  }
 }
 
 .button {
   width: 100%;
-}
-
-.iconButtonsContainer {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-  gap: 8px;
 }

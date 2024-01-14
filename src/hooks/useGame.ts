@@ -1,4 +1,5 @@
 import usePlayerHand from "./usePlayerHand";
+import useGamesHistory from "./useGamesHistory";
 import { useState } from "react";
 import { moveCardScriptParams } from "./useSensors";
 import { Game, Player } from "@/types/game.interface";
@@ -12,6 +13,7 @@ interface UseGameParams {
 interface UseGameReturn {
   game: Game | null;
   start: () => void;
+  restart: () => void;
   userPlay: (playerType: PlayerType) => void;
   setPlayerHand: (playerType: PlayerType, cards: CardType[]) => void;
   setPlayerPlay: (playerType: PlayerType, cards: CardType | undefined) => void;
@@ -24,6 +26,7 @@ const useGame = ({
   bottomMoveCardScript,
 }: UseGameParams): UseGameReturn => {
   const { defaultPlayerHand, getRandomPlayableCard } = usePlayerHand();
+  const { saveGame } = useGamesHistory();
 
   const [game, setGame] = useState<Game | null>(null);
   const [revealPlays, setRevealPlays] = useState<boolean>(false);
@@ -60,6 +63,12 @@ const useGame = ({
     return await new Promise((resolve) => setTimeout(resolve, 1000));
   };
 
+  const checkPoints = (game: Game): PlayerType | null => {
+    if (game.opponent.score === 3) return PlayerType.OPPONENT;
+    if (game.localUser.score === 3) return PlayerType.LOCAL_USER;
+    return null;
+  };
+
   const revealPlaysAndCalculateWinner = async () => {
     if (!game) return;
 
@@ -77,22 +86,22 @@ const useGame = ({
       (localUser.play === CardType.SCISSORS && opponent.play === CardType.PAPER)
     ) {
       newGame.localUser.wonTheRound = true;
-      console.log("Local user wins");
       newGame.localUser.score++;
     } else {
       newGame.opponent.wonTheRound = true;
-      console.log("Opponent wins");
       newGame.opponent.score++;
     }
 
-    if (newGame.round === 3) {
+    const winner = checkPoints(newGame);
+
+    if (winner !== null) {
       newGame.isGameOver = true;
-      newGame.winner =
-        newGame.localUser.score > newGame.opponent.score
-          ? newGame.localUser
-          : newGame.opponent;
+      newGame.winner = winner;
     }
+
     setGame(newGame);
+
+    if (winner) return saveGame(newGame);
 
     setTimeout(() => {
       cleanBoard();
@@ -163,6 +172,12 @@ const useGame = ({
     setGame(newGame);
   };
 
+  const restart = () => {
+    setGame(null);
+    setIsGameStarted(false);
+    start();
+  };
+
   return {
     game,
     isGameStarted,
@@ -171,6 +186,7 @@ const useGame = ({
     userPlay,
     setPlayerHand,
     setPlayerPlay,
+    restart,
   };
 };
 

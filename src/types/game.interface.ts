@@ -15,5 +15,5 @@ export interface Game {
   [PlayerType.OPPONENT]: Player<PlayerType.OPPONENT>;
   round: number;
   isGameOver: boolean;
-  winner: Player | null;
+  winner: PlayerType | null;
 }
