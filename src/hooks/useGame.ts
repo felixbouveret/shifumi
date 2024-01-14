@@ -95,15 +95,11 @@ const useGame = ({
     setTimeout(() => {
       setRevealPlays(false);
       resetCards();
-
-      console.log("Waiting for user play...");
     }, 2000);
   };
 
   const resetCards = () => {
     if (!game) return;
-    console.log("Resetting cards");
-
     topMoveCardScript({
       card: game.opponent.play!,
       to: BoardParts.HAND,
