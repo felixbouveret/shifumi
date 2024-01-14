@@ -98,6 +98,13 @@ const BoardModule: React.FC<BoardModuleProps> = ({
           playerHand={playerHand}
           disabled={handDisabled}
           boardSide={boardSide}
+          onDoubleClick={(card) => {
+            moveCardScript({
+              card: card,
+              to: BoardParts.BOARD,
+              side: boardSide,
+            });
+          }}
         />
       </DragDropContext>
     </div>

@@ -82,8 +82,6 @@ const useGame = ({
       newGame.opponent.score++;
     }
 
-    newGame.round++;
-
     if (newGame.round === 3) {
       newGame.isGameOver = true;
       newGame.winner =
@@ -91,13 +89,20 @@ const useGame = ({
           ? newGame.localUser
           : newGame.opponent;
     }
-
     setGame(newGame);
 
     setTimeout(() => {
       setRevealPlays(false);
       resetCards();
+      incrementRound();
     }, 2000);
+  };
+
+  const incrementRound = () => {
+    if (!game) return;
+    const newGame = { ...game };
+    newGame.round++;
+    setGame(newGame);
   };
 
   const resetCards = () => {
@@ -116,7 +121,7 @@ const useGame = ({
 
   const userPlay = (playerType: PlayerType) => {
     if (!game || playerType === PlayerType.OPPONENT) return;
-    setTimeout(opponentPlay, 1000);
+    opponentPlay();
   };
 
   const opponentPlay = () => {

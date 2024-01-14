@@ -1,13 +1,24 @@
 #gameModule {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  gap: 24px;
+  justify-content: center;
   height: 100vh;
   padding: 20px;
   overflow: hidden;
 
-  & > * {
+  & > .boards {
     flex: 1;
+
+    & > * {
+      height: 100%;
+    }
+  }
+
+  & > .roundCount {
+    border-radius: 8px;
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.3);
   }
 }
