@@ -1,7 +1,7 @@
 import usePlayerHand from "./usePlayerHand";
 import { useState } from "react";
-import { Game } from "@/types/game.interface";
 import { moveCardScriptParams } from "./useSensors";
+import { Game, Player } from "@/types/game.interface";
 import { BoardParts, BoardSide, CardType, PlayerType } from "@/types/game.enum";
 
 interface UseGameParams {
@@ -29,24 +29,20 @@ const useGame = ({
   const [revealPlays, setRevealPlays] = useState<boolean>(false);
   const [isGameStarted, setIsGameStarted] = useState<boolean>(false);
 
+  const getPlayer = <T>(playerType: T): Player<T> => ({
+    type: playerType,
+    play: undefined,
+    cards: defaultPlayerHand,
+    score: 0,
+    wonTheRound: false,
+    hasPlayed: false,
+  });
+
   const start = () => {
     const newGame: Game = {
       id: new Date().getTime().toString(),
-
-      localUser: {
-        type: PlayerType.LOCAL_USER,
-        play: undefined,
-        cards: defaultPlayerHand,
-        score: 0,
-        hasPlayed: false,
-      },
-      opponent: {
-        type: PlayerType.OPPONENT,
-        play: undefined,
-        cards: defaultPlayerHand,
-        score: 0,
-        hasPlayed: false,
-      },
+      localUser: getPlayer(PlayerType.LOCAL_USER),
+      opponent: getPlayer(PlayerType.OPPONENT),
       round: 0,
       isGameOver: false,
       winner: null,
@@ -59,10 +55,15 @@ const useGame = ({
     console.log("Waiting for user play...");
   };
 
-  const revealPlaysAndCalculateWinner = () => {
+  const setCardsReveal = async (bool: boolean): Promise<void> => {
+    setRevealPlays(bool);
+    return await new Promise((resolve) => setTimeout(resolve, 1000));
+  };
+
+  const revealPlaysAndCalculateWinner = async () => {
     if (!game) return;
 
-    setRevealPlays(true);
+    await setCardsReveal(true);
 
     const newGame = { ...game };
     const { localUser, opponent } = newGame;
@@ -75,9 +76,11 @@ const useGame = ({
       (localUser.play === CardType.PAPER && opponent.play === CardType.ROCK) ||
       (localUser.play === CardType.SCISSORS && opponent.play === CardType.PAPER)
     ) {
+      newGame.localUser.wonTheRound = true;
       console.log("Local user wins");
       newGame.localUser.score++;
     } else {
+      newGame.opponent.wonTheRound = true;
       console.log("Opponent wins");
       newGame.opponent.score++;
     }
@@ -92,17 +95,8 @@ const useGame = ({
     setGame(newGame);
 
     setTimeout(() => {
-      setRevealPlays(false);
-      resetCards();
-      incrementRound();
+      cleanBoard();
     }, 2000);
-  };
-
-  const incrementRound = () => {
-    if (!game) return;
-    const newGame = { ...game };
-    newGame.round++;
-    setGame(newGame);
   };
 
   const resetCards = () => {
@@ -117,6 +111,19 @@ const useGame = ({
       to: BoardParts.HAND,
       side: BoardSide.BOTTOM,
     });
+  };
+
+  const cleanBoard = () => {
+    if (!game) return;
+    const newGame = { ...game };
+    newGame.round++;
+    newGame.localUser.wonTheRound = false;
+    newGame.opponent.wonTheRound = false;
+
+    setGame(newGame);
+
+    setRevealPlays(false);
+    resetCards();
   };
 
   const userPlay = (playerType: PlayerType) => {

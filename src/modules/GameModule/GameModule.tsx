@@ -16,6 +16,7 @@ const GameModule: React.FC = () => {
     score: 0,
     cards: defaultPlayerHand,
     hasPlayed: false,
+    wonTheRound: false,
   };
 
   const topSensorHook = useSensors();

@@ -5,6 +5,8 @@
   height: 100vh;
   padding: 20px;
   overflow: hidden;
+  max-width: 720px;
+  margin: 0 auto;
 
   & > .boards {
     flex: 1;

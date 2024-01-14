@@ -8,6 +8,7 @@ interface CardProps {
   hoverable?: boolean;
   isPlayed?: boolean;
   isDisabled?: boolean;
+  winnerCard?: boolean;
 }
 
 const Card: React.FC<CardProps> = ({
@@ -16,6 +17,7 @@ const Card: React.FC<CardProps> = ({
   hoverable,
   isPlayed,
   isDisabled,
+  winnerCard,
 }) => {
   const cardContent = () => {
     switch (type) {
@@ -32,7 +34,11 @@ const Card: React.FC<CardProps> = ({
 
   return (
     <div
-      className={["cardContainer", isPlayed ? "playedContainer" : ""].join(" ")}
+      className={[
+        "cardContainer",
+        isPlayed ? "playedContainer" : "",
+        winnerCard ? "winnerContainer" : "",
+      ].join(" ")}
     >
       <div
         className={[

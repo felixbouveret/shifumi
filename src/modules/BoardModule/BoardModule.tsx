@@ -91,6 +91,7 @@ const BoardModule: React.FC<BoardModuleProps> = ({
             score={player.score}
             boardSide={boardSide}
             randomPlay={randomPlay}
+            wonTheRound={player.wonTheRound}
           />
         </div>
         <PlayerHand

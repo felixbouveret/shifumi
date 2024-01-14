@@ -3,6 +3,10 @@
     animation: playedAnimation 5s ease-in-out infinite;
     border-radius: 8px;
   }
+
+  &.winnerContainer {
+    animation: winAnimation 0.5s ease-in-out;
+  }
 }
 
 $card-background: #dbd495;
@@ -144,8 +148,8 @@ $card-back-color: #791111;
     }
   }
 }
+
 @keyframes playedAnimation {
-  // floating animation
   0% {
     transform: translateY(0);
     box-shadow: 0 0 20px 6px rgba($color: #000000, $alpha: 0.1);
@@ -157,5 +161,17 @@ $card-back-color: #791111;
   100% {
     transform: translateY(0);
     box-shadow: 0 0 20px 6px rgba($color: #000000, $alpha: 0.1);
+  }
+}
+
+@keyframes winAnimation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
   }
 }

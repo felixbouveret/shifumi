@@ -11,6 +11,7 @@ interface PlayerBoardProps {
   plays: CardType[];
   score: number;
   boardSide: BoardSide;
+  wonTheRound: boolean;
   randomPlay: () => void;
 }
 
@@ -19,6 +20,7 @@ const PlayerBoard: React.FC<PlayerBoardProps> = ({
   plays,
   score = 0,
   boardSide,
+  wonTheRound,
   randomPlay,
 }) => {
   return (
@@ -55,6 +57,7 @@ const PlayerBoard: React.FC<PlayerBoardProps> = ({
                       isFlipped={cardsHidden}
                       hoverable={!cardsHidden}
                       isPlayed
+                      winnerCard={wonTheRound}
                     />
                   </div>
                 )}
