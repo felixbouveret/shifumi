@@ -4,7 +4,18 @@
   justify-content: space-between;
   gap: 24px;
 
+  > .playerBoard {
+    background-color: green;
+    border-radius: 16px;
+    padding: 16px 0 32px;
+    border: solid 6px rgb(4, 108, 4);
+  }
+
   &.top {
     flex-direction: column-reverse;
+
+    > .playerBoard {
+      padding: 32px 0 16px;
+    }
   }
 }

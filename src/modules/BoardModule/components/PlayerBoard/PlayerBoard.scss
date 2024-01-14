@@ -1,43 +1,31 @@
 #playerBoard {
   display: flex;
   justify-content: center;
+  gap: 40px;
+  align-items: center;
   position: relative;
 
-  width: 130px;
-  height: 160px;
   margin: 0 auto;
 
-  &::before {
-    content: "";
-    display: block;
-    position: absolute;
-    width: 100%;
-    height: 100%;
+  .cardSpot {
+    width: 130px;
+    height: 160px;
     border-radius: 8px;
     background-color: rgba($color: #000000, $alpha: 0.2);
     box-shadow: 0 0 0 6px rgba($color: #000000, $alpha: 0.1);
   }
 
-  .cardWrapper {
-    width: 100%;
-    max-width: 130px;
-    pointer-events: none;
-  }
-
   .score {
-    position: absolute;
-    top: 50%;
-    left: calc(100% + 48px);
-    transform: translateY(-50%);
     font-size: 64px;
     font-weight: 700;
     color: rgba($color: #000000, $alpha: 0.3);
+    margin: 0;
+  }
+
+  .action {
+    width: 44px;
   }
   .button {
-    position: absolute;
     width: auto;
-    top: 50%;
-    left: calc(-100% + 48px);
-    transform: translateY(-50%);
   }
 }

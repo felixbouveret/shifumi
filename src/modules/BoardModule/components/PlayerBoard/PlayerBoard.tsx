@@ -22,44 +22,50 @@ const PlayerBoard: React.FC<PlayerBoardProps> = ({
   randomPlay,
 }) => {
   return (
-    <Droppable droppableId={`${BoardParts.BOARD}${boardSide}`}>
-      {(provided) => (
-        <div
-          id="playerBoard"
-          ref={provided.innerRef}
-          {...provided.droppableProps}
-        >
-          <div className="score">
-            <p>{score}</p>
+    <div id="playerBoard">
+      <div className="action">
+        {boardSide === BoardSide.BOTTOM && (
+          <IconButton className="button" size="lg" onClick={randomPlay}>
+            <QuestionMark />
+          </IconButton>
+        )}
+      </div>
+      <Droppable droppableId={`${BoardParts.BOARD}${boardSide}`}>
+        {(provided) => (
+          <div
+            className="cardSpot"
+            ref={provided.innerRef}
+            {...provided.droppableProps}
+          >
+            {plays.map((play, index) => (
+              <Draggable
+                key={play}
+                draggableId={play + boardSide}
+                index={index}
+              >
+                {(provided) => (
+                  <div
+                    className="cardWrapper"
+                    ref={provided.innerRef}
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                  >
+                    <Card
+                      type={play}
+                      isFlipped={cardsHidden}
+                      hoverable={!cardsHidden}
+                      isPlayed
+                    />
+                  </div>
+                )}
+              </Draggable>
+            ))}
+            {provided.placeholder}
           </div>
-          {boardSide === BoardSide.BOTTOM && (
-            <IconButton className="button" size="lg" onClick={randomPlay}>
-              <QuestionMark />
-            </IconButton>
-          )}
-          {plays.map((play, index) => (
-            <Draggable key={play} draggableId={play + boardSide} index={index}>
-              {(provided) => (
-                <div
-                  className="cardWrapper"
-                  ref={provided.innerRef}
-                  {...provided.draggableProps}
-                  {...provided.dragHandleProps}
-                >
-                  <Card
-                    type={play}
-                    isFlipped={cardsHidden}
-                    hoverable={!cardsHidden}
-                    isPlayed
-                  />
-                </div>
-              )}
-            </Draggable>
-          ))}
-          {provided.placeholder}
-        </div>
-      )}
-    </Droppable>
+        )}
+      </Droppable>
+      <p className="score">{score}</p>
+    </div>
   );
 };
 

@@ -84,7 +84,7 @@ const BoardModule: React.FC<BoardModuleProps> = ({
   return (
     <div id="playerSide" className={boardSide}>
       <DragDropContext onDragEnd={onDragEnd} sensors={[scriptedSensor]}>
-        <div>
+        <div className="playerBoard">
           <PlayerBoard
             cardsHidden={isOpponentPlayer && !showPlay}
             plays={playerPlay}
