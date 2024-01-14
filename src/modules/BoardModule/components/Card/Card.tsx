@@ -44,12 +44,17 @@ const Card: React.FC<CardProps> = ({
         ].join(" ")}
       >
         <div className="back">
-          <div className="content"></div>
+          <div className="content">
+            <div className="detail">
+              <h2>♠️</h2>
+            </div>
+          </div>
         </div>
         <div className="front">
           <div className="content">
+            <p className="letter top">{cardContent().title[0]}</p>
             <h2>{cardContent().icon}</h2>
-            <p>{cardContent().title}</p>
+            <p className="letter bot">{cardContent().title[0]}</p>
           </div>
         </div>
       </div>
