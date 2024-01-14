@@ -1,5 +1,6 @@
 import "./Card.scss";
 import React from "react";
+import ConfettiExplosion, { ConfettiProps } from "react-confetti-explosion";
 import { CardType } from "@/types/game.enum";
 
 interface CardProps {
@@ -8,6 +9,7 @@ interface CardProps {
   hoverable?: boolean;
   isPlayed?: boolean;
   isDisabled?: boolean;
+  winnerCard?: boolean;
 }
 
 const Card: React.FC<CardProps> = ({
@@ -16,6 +18,7 @@ const Card: React.FC<CardProps> = ({
   hoverable,
   isPlayed,
   isDisabled,
+  winnerCard,
 }) => {
   const cardContent = () => {
     switch (type) {
@@ -30,10 +33,24 @@ const Card: React.FC<CardProps> = ({
     }
   };
 
+  const confettiConfig: ConfettiProps = {
+    force: 0.4,
+    duration: 2500,
+    particleCount: 30,
+    width: 400,
+  };
+
   return (
     <div
-      className={["cardContainer", isPlayed ? "playedContainer" : ""].join(" ")}
+      className={[
+        "cardContainer",
+        isPlayed ? "playedContainer" : "",
+        winnerCard ? "winnerContainer" : "",
+      ].join(" ")}
     >
+      <div className="confetti">
+        {winnerCard && <ConfettiExplosion {...confettiConfig} />}
+      </div>
       <div
         className={[
           "card",
@@ -44,12 +61,17 @@ const Card: React.FC<CardProps> = ({
         ].join(" ")}
       >
         <div className="back">
-          <div className="content"></div>
+          <div className="content">
+            <div className="detail">
+              <h2>♠️</h2>
+            </div>
+          </div>
         </div>
         <div className="front">
           <div className="content">
+            <p className="letters top">{cardContent().title[0]}</p>
             <h2>{cardContent().icon}</h2>
-            <p>{cardContent().title}</p>
+            <p className="letters bot">{cardContent().title[0]}</p>
           </div>
         </div>
       </div>

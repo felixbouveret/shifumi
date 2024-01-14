@@ -9,6 +9,7 @@ interface PlayerHandProps {
   boardSide: BoardSide;
   playerHand: CardType[];
   disabled: boolean;
+  onDoubleClick: (card: CardType) => void;
 }
 
 const PlayerHand: React.FC<PlayerHandProps> = ({
@@ -16,6 +17,7 @@ const PlayerHand: React.FC<PlayerHandProps> = ({
   playerHand,
   boardSide,
   disabled,
+  onDoubleClick,
 }) => {
   return (
     <Droppable droppableId={BoardParts.HAND + boardSide} direction="horizontal">
@@ -40,6 +42,7 @@ const PlayerHand: React.FC<PlayerHandProps> = ({
               >
                 {(provided) => (
                   <div
+                    onDoubleClick={() => onDoubleClick(cardType)}
                     className="cardWrapper"
                     ref={provided.innerRef}
                     {...provided.draggableProps}

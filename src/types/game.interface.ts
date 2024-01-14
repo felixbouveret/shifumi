@@ -5,6 +5,8 @@ export interface Player<T = PlayerType> {
   play: CardType | undefined;
   cards: CardType[];
   score: number;
+  hasPlayed: boolean;
+  wonTheRound: boolean;
 }
 
 export interface Game {

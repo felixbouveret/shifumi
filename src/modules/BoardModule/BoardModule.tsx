@@ -84,13 +84,14 @@ const BoardModule: React.FC<BoardModuleProps> = ({
   return (
     <div id="playerSide" className={boardSide}>
       <DragDropContext onDragEnd={onDragEnd} sensors={[scriptedSensor]}>
-        <div>
+        <div className="playerBoard">
           <PlayerBoard
             cardsHidden={isOpponentPlayer && !showPlay}
             plays={playerPlay}
             score={player.score}
             boardSide={boardSide}
             randomPlay={randomPlay}
+            wonTheRound={player.wonTheRound}
           />
         </div>
         <PlayerHand
@@ -98,6 +99,13 @@ const BoardModule: React.FC<BoardModuleProps> = ({
           playerHand={playerHand}
           disabled={handDisabled}
           boardSide={boardSide}
+          onDoubleClick={(card) => {
+            moveCardScript({
+              card: card,
+              to: BoardParts.BOARD,
+              side: boardSide,
+            });
+          }}
         />
       </DragDropContext>
     </div>

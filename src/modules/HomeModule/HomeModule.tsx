@@ -1,8 +1,8 @@
 import "./HomeModule.scss";
 import React from "react";
+import { People } from "@mui/icons-material";
 import { Button, IconButton } from "@mui/joy";
 import { useNavigate } from "react-router-dom";
-import { People, Settings } from "@mui/icons-material";
 
 const HomeModule: React.FC = () => {
   const navigate = useNavigate();
@@ -11,16 +11,12 @@ const HomeModule: React.FC = () => {
     <div className="container">
       <h1>Shifumi</h1>
       <Button className="button" size="lg" onClick={() => navigate("/Game")}>
-        Play
+        Play now
       </Button>
 
       <div className="iconButtonsContainer">
         <IconButton className="IconButton" size="lg">
           <People />
-        </IconButton>
-
-        <IconButton className="IconButton" size="lg">
-          <Settings />
         </IconButton>
       </div>
     </div>

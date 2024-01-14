@@ -12,16 +12,18 @@
 
   .cardWrapper {
     margin-right: 8px;
-    width: 100%;
-    max-width: 130px;
+  }
+
+  &.cardsHidden {
+    pointer-events: none;
   }
 
   &.handDisabled {
-    transform: translateY(100px);
+    transform: translateY(50%);
     opacity: 0.7;
 
     &.top {
-      transform: translateY(-100px);
+      transform: translateY(-50%);
     }
   }
 }
@@ -31,7 +33,7 @@
     transform: translateY(calc(-100% - 80px));
   }
   100% {
-    transform: translateY(-100px);
+    transform: translateY(-50%);
   }
 }
 
@@ -40,6 +42,6 @@
     transform: translateY(calc(100% + 80px));
   }
   100% {
-    transform: translateY(100px);
+    transform: translateY(50%);
   }
 }

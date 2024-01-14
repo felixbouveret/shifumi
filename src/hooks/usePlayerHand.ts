@@ -10,6 +10,7 @@ const usePlayerHand = (): usePlayerHandReturn => {
   const defaultPlayerHand = Object.values(CardType).filter(
     (cardType) => cardType !== CardType.UNKNOWN
   );
+
   const defaultOpponentHand = new Array(3).fill(CardType.UNKNOWN);
 
   const getRandomPlayableCard = (): CardType => {
