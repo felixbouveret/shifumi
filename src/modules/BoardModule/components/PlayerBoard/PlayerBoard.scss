@@ -24,6 +24,10 @@
     }
   }
 
+  .cardWrapper {
+    pointer-events: none;
+  }
+
   .score,
   .action {
     display: flex;

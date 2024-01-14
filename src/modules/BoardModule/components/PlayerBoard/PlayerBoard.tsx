@@ -15,6 +15,12 @@ interface PlayerBoardProps {
   randomPlay: () => void;
 }
 
+const buttonStyle = {
+  backgroundColor: "rgba(0, 0, 0, 0.3)",
+  color: "#185118",
+  boxShadow: "0 0 0 2px #185118, 0 0 0 4px rgba(0, 0, 0, 0.3)",
+};
+
 const PlayerBoard: React.FC<PlayerBoardProps> = ({
   cardsHidden,
   plays,
@@ -29,13 +35,10 @@ const PlayerBoard: React.FC<PlayerBoardProps> = ({
         {boardSide === BoardSide.BOTTOM && (
           <IconButton
             className="button"
+            disabled={!!plays.length}
             size="lg"
             onClick={randomPlay}
-            style={{
-              backgroundColor: "rgba(0, 0, 0, 0.3)",
-              color: "#185118",
-              boxShadow: "0 0 0 2px #185118, 0 0 0 4px rgba(0, 0, 0, 0.3)",
-            }}
+            style={buttonStyle}
           >
             <Shuffle />
           </IconButton>

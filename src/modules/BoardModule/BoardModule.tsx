@@ -99,7 +99,7 @@ const BoardModule: React.FC<BoardModuleProps> = ({
           playerHand={playerHand}
           disabled={handDisabled}
           boardSide={boardSide}
-          onDoubleClick={(card) => {
+          onCardPlay={(card) => {
             moveCardScript({
               card: card,
               to: BoardParts.BOARD,
