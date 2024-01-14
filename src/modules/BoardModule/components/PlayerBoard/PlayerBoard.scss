@@ -1,18 +1,27 @@
 #playerBoard {
   display: flex;
-  justify-content: center;
-  gap: 40px;
+  justify-content: space-around;
   align-items: center;
   position: relative;
 
   margin: 0 auto;
 
+  @media (min-width: 540px) {
+    justify-content: center;
+    gap: 40px;
+  }
+
   .cardSpot {
-    width: 130px;
-    height: 160px;
+    width: 100px;
+    height: 120px;
     border-radius: 8px;
     background-color: rgba($color: #000000, $alpha: 0.2);
     box-shadow: 0 0 0 6px rgba($color: #000000, $alpha: 0.1);
+
+    @media (min-width: 540px) {
+      width: 130px;
+      height: 160px;
+    }
   }
 
   .score,

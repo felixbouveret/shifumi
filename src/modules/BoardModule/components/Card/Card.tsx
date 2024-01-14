@@ -69,9 +69,9 @@ const Card: React.FC<CardProps> = ({
         </div>
         <div className="front">
           <div className="content">
-            <p className="letter top">{cardContent().title[0]}</p>
+            <p className="letters top">{cardContent().title[0]}</p>
             <h2>{cardContent().icon}</h2>
-            <p className="letter bot">{cardContent().title[0]}</p>
+            <p className="letters bot">{cardContent().title[0]}</p>
           </div>
         </div>
       </div>

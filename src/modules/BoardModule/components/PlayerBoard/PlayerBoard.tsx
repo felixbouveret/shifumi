@@ -2,7 +2,7 @@ import "./PlayerBoard.scss";
 import React from "react";
 import Card from "../Card";
 import { IconButton } from "@mui/joy";
-import { QuestionMark } from "@mui/icons-material";
+import { Shuffle } from "@mui/icons-material";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import { BoardParts, BoardSide, CardType } from "@/types/game.enum";
 
@@ -27,8 +27,17 @@ const PlayerBoard: React.FC<PlayerBoardProps> = ({
     <div id="playerBoard">
       <div className="action">
         {boardSide === BoardSide.BOTTOM && (
-          <IconButton className="button" size="lg" onClick={randomPlay}>
-            <QuestionMark />
+          <IconButton
+            className="button"
+            size="lg"
+            onClick={randomPlay}
+            style={{
+              backgroundColor: "rgba(0, 0, 0, 0.3)",
+              color: "#185118",
+              boxShadow: "0 0 0 2px #185118, 0 0 0 4px rgba(0, 0, 0, 0.3)",
+            }}
+          >
+            <Shuffle />
           </IconButton>
         )}
       </div>

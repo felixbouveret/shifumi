@@ -23,8 +23,8 @@ $card-back-color: #791111;
 
 .card {
   width: 100%;
-  min-width: 130px;
-  height: 160px;
+  min-width: 100px;
+  height: 120px;
   background-color: $card-background;
   border: solid 1px rgba($color: #000000, $alpha: 0.1);
   box-shadow: 0 0 10px 1px rgba($color: #000000, $alpha: 0.1);
@@ -34,13 +34,9 @@ $card-back-color: #791111;
   border-radius: 8px;
   user-select: none;
 
-  .content {
-    background-color: $card-background;
-
-    h2 {
-      margin: 0;
-      font-size: 2.4em;
-    }
+  @media (min-width: 540px) {
+    height: 160px;
+    min-width: 130px;
   }
 
   .front,
@@ -52,19 +48,30 @@ $card-back-color: #791111;
     padding: 8px;
   }
 
+  .content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-color: $card-background;
+    height: 100%;
+    width: 100%;
+
+    h2 {
+      margin: 0;
+      font-size: 2.4em;
+    }
+  }
+
   .front {
     .content {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      height: 100%;
-      border-radius: 6px;
       border: solid 2px black;
+      border-radius: 6px;
     }
 
-    .letter {
+    .letters {
       position: absolute;
       display: block;
       color: #000000;
@@ -92,10 +99,7 @@ $card-back-color: #791111;
     backface-visibility: visible;
 
     .content {
-      height: 100%;
-      width: 100%;
       background-color: $card-back-color;
-      background-size: contain;
       border-radius: 10px;
       padding: 10px;
 
