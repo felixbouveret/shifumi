@@ -1,0 +1,20 @@
+#gameModule {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 24px;
+  height: 100vh;
+  padding: 20px;
+  overflow: hidden;
+
+  & > * {
+    flex: 1;
+  }
+
+  .header {
+    position: absolute;
+    z-index: 9;
+    top: 24px;
+    left: 24px;
+  }
+}

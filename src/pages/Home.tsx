@@ -1,5 +1,5 @@
 import React from "react";
-import HomeModule from "../modules/HomeModule/HomeModule";
+import HomeModule from "@/modules/HomeModule";
 
 const Home: React.FC = () => <HomeModule />;
 

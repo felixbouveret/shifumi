@@ -1,0 +1,10 @@
+#playerSide {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+
+  &.top {
+    flex-direction: column-reverse;
+  }
+}
