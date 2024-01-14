@@ -1,5 +1,6 @@
 import "./Card.scss";
 import React from "react";
+import ConfettiExplosion, { ConfettiProps } from "react-confetti-explosion";
 import { CardType } from "@/types/game.enum";
 
 interface CardProps {
@@ -32,6 +33,13 @@ const Card: React.FC<CardProps> = ({
     }
   };
 
+  const confettiConfig: ConfettiProps = {
+    force: 0.4,
+    duration: 2500,
+    particleCount: 30,
+    width: 400,
+  };
+
   return (
     <div
       className={[
@@ -40,6 +48,9 @@ const Card: React.FC<CardProps> = ({
         winnerCard ? "winnerContainer" : "",
       ].join(" ")}
     >
+      <div className="confetti">
+        {winnerCard && <ConfettiExplosion {...confettiConfig} />}
+      </div>
       <div
         className={[
           "card",

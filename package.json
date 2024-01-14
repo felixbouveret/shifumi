@@ -20,6 +20,7 @@
     "node-sass": "^9.0.0",
     "react": "^18.2.0",
     "react-beautiful-dnd": "^13.1.1",
+    "react-confetti-explosion": "^2.1.2",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.21.2",
     "tween-functions": "^1.2.0"
