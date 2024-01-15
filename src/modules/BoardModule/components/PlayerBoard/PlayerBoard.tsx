@@ -16,9 +16,10 @@ interface PlayerBoardProps {
 }
 
 const buttonStyle = {
-  backgroundColor: "rgba(0, 0, 0, 0.3)",
-  color: "#185118",
-  boxShadow: "0 0 0 2px #185118, 0 0 0 4px rgba(0, 0, 0, 0.3)",
+  backgroundColor: "#ffd700",
+  color: "rgb(189 164 29)",
+  boxShadow:
+    "0 0 0 3px rgb(189 164 29), 0 0 0 6px #ffd700, 0 0 20px 0px rgba(0,0,0, 0.2)",
 };
 
 const PlayerBoard: React.FC<PlayerBoardProps> = ({

@@ -7,7 +7,7 @@ const MainLayout: React.FC = () => {
   const location: Location<RoutesEnum> = useLocation();
 
   return (
-    <div className="MainLayout" style={{ overflow: "hidden" }}>
+    <div className="MainLayout" style={{ overflow: "hidden", height: "100vh" }}>
       <AppMenu currenPage={location} />
       <Outlet />
     </div>

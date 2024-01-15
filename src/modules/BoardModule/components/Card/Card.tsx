@@ -5,8 +5,9 @@ import ConfettiExplosion, { ConfettiProps } from "react-confetti-explosion";
 import { CardType } from "@/types/game.enum";
 
 interface CardProps {
-  type: CardType;
+  type?: CardType;
   isFlipped?: boolean;
+  flipOnHover?: boolean;
   hoverable?: boolean;
   isPlayed?: boolean;
   isDisabled?: boolean;
@@ -16,6 +17,7 @@ interface CardProps {
 const Card: React.FC<CardProps> = ({
   type,
   isFlipped,
+  flipOnHover,
   hoverable,
   isPlayed,
   isDisabled,
@@ -30,12 +32,15 @@ const Card: React.FC<CardProps> = ({
     width: 400,
   };
 
+  const cardType = type || CardType.UNKNOWN;
+
   return (
     <div
       className={[
         "cardContainer",
         isPlayed ? "playedContainer" : "",
         winnerCard ? "winnerContainer" : "",
+        flipOnHover ? "flipOnHover" : "",
       ].join(" ")}
     >
       <div className="confetti">
@@ -59,9 +64,9 @@ const Card: React.FC<CardProps> = ({
         </div>
         <div className="front">
           <div className="content">
-            <p className="letters top">{getCardContent(type).title[0]}</p>
-            <h2>{getCardContent(type).icon}</h2>
-            <p className="letters bot">{getCardContent(type).title[0]}</p>
+            <p className="letters top">{getCardContent(cardType).title[0]}</p>
+            <h2>{getCardContent(cardType).icon}</h2>
+            <p className="letters bot">{getCardContent(cardType).title[0]}</p>
           </div>
         </div>
       </div>

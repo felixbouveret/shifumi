@@ -1,12 +1,39 @@
 .homeContainer {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  justify-content: space-around;
+  gap: 90px;
+  height: 100%;
   max-width: 300px;
   width: 100%;
   margin: 0 auto;
   padding: 0 20px;
   text-align: center;
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 24px;
+  }
+
+  .cardsSlider {
+    display: flex;
+    position: relative;
+    transform: rotate(30deg);
+    justify-content: center;
+
+    .cardsInner {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      animation: slide 300s linear infinite alternate;
+      width: fit-content;
+    }
+    &.bot .cardsInner {
+      animation-direction: alternate-reverse;
+    }
+  }
 
   h1 {
     margin: 0;
@@ -15,4 +42,13 @@
 
 .button {
   width: 100%;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(-20%);
+  }
+  100% {
+    transform: translateX(20%);
+  }
 }
