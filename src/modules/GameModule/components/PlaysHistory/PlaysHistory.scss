@@ -9,6 +9,12 @@
   min-width: 136px;
   max-height: 300px;
 
+  transition: transform 0.3s ease-in-out;
+
+  @media screen and (max-width: 1020px) {
+    transform: translate(calc(-300% - 4px), -50%);
+  }
+
   .play,
   .labels {
     display: flex;
