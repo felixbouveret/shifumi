@@ -48,6 +48,7 @@ const GamesHistory: React.FC = () => {
           variant="plain"
           color="neutral"
           onClick={clearHistory}
+          style={{ color: "#113b11" }}
         >
           Clear history
         </Button>
