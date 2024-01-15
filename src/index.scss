@@ -1,5 +1,10 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  @font-face {
+    font-family: Tocco;
+    src: url(./Tocco-Bold.woff);
+  }
+
+  font-family: Tocco, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -19,8 +24,6 @@
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   overflow: hidden;
   min-width: 320px;
   min-height: 100dvh;
