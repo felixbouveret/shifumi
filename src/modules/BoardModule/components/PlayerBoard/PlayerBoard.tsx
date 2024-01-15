@@ -1,6 +1,6 @@
 import "./PlayerBoard.scss";
 import React from "react";
-import Card from "../Card";
+import Card from "@/components/Card";
 import { IconButton } from "@mui/joy";
 import { Shuffle } from "@mui/icons-material";
 import { Draggable, Droppable } from "react-beautiful-dnd";
@@ -18,8 +18,9 @@ interface PlayerBoardProps {
 const buttonStyle = {
   backgroundColor: "#ffd700",
   color: "rgb(189 164 29)",
-  boxShadow:
-    "0 0 0 3px rgb(189 164 29), 0 0 0 6px #ffd700, 0 0 20px 0px rgba(0,0,0, 0.2)",
+  borderRadius: "8px",
+  border: "solid 3px rgb(189 164 29)",
+  boxShadow: "0 0 0 3px #ffd700, 0 0 20px 0px rgba(0,0,0, 0.2)",
 };
 
 const PlayerBoard: React.FC<PlayerBoardProps> = ({

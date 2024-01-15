@@ -1,11 +1,6 @@
 .gamesHistory {
-  background-color: #185118;
   display: flex;
   flex-direction: column;
-  border-radius: 16px;
-  padding-top: 20px;
-  border: solid 6px #113b11;
-  box-shadow: 0 0 0 1px rgb(255, 240, 190), 0 0 0 3px #ffd700;
   max-height: 300px;
 
   .heading {
@@ -24,6 +19,7 @@
       border-bottom: solid 1px #ffd700;
       margin: 0;
     }
+
     .labels {
       display: flex;
       justify-content: space-between;
@@ -31,6 +27,15 @@
       font-weight: bold;
       font-size: 16px;
       border-bottom: solid 2px #113b11;
+    }
+  }
+
+  .scores {
+    display: flex;
+    span {
+      text-align: center;
+      display: block;
+      width: 16px;
     }
   }
 

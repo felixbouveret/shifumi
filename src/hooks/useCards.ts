@@ -1,4 +1,4 @@
-import useGameUtils from "./useGameUtils";
+import useGameUtils from "@/hooks/useGameUtils";
 import { CardType } from "@/types/game.enum";
 
 interface useCardsReturn {

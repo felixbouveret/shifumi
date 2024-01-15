@@ -1,10 +1,16 @@
-import useGameUtils from "./useGameUtils";
-import usePlayerHand from "./usePlayerHand";
-import useGamesHistory from "./useGamesHistory";
+import useGameUtils from "@/hooks/useGameUtils";
+import usePlayerHand from "@/hooks/usePlayerHand";
+import useGamesHistory from "@/hooks/useGamesHistory";
 import { useState } from "react";
-import { moveCardScriptParams } from "./useSensors";
+import { moveCardScriptParams } from "@/hooks/useSensors";
 import { Game, PlaysHistory } from "@/types/game.interface";
-import { BoardPart, BoardSide, CardType, PlayerType } from "@/types/game.enum";
+import {
+  BoardPart,
+  BoardSide,
+  CardType,
+  PlayerType,
+  RoundResult,
+} from "@/types/game.enum";
 
 interface UseGameParams {
   topMoveCardScript: (params: moveCardScriptParams) => void;
@@ -26,7 +32,12 @@ const useGame = ({
   topMoveCardScript,
   bottomMoveCardScript,
 }: UseGameParams): UseGameReturn => {
-  const { getFreshPlayer, checkPoints, checkRoundWinner } = useGameUtils();
+  const {
+    getFreshGame,
+    checkPoints,
+    getRoundResult,
+    getRoundWinnerFromResult,
+  } = useGameUtils();
   const { getRandomPlayableCard } = usePlayerHand();
   const { saveGame } = useGamesHistory();
 
@@ -34,6 +45,7 @@ const useGame = ({
   const [revealPlays, setRevealPlays] = useState<boolean>(false);
   const [isGameStarted, setIsGameStarted] = useState<boolean>(false);
 
+  // State setters
   const setPlayerHand = (playerType: PlayerType, cards: CardType[]) => {
     if (!game) return;
     const newGame = { ...game };
@@ -52,29 +64,17 @@ const useGame = ({
     setGame(newGame);
   };
 
+  // Game logic
   const start = () => {
-    const newGame: Game = {
-      id: new Date().getTime().toString(),
-      localUser: getFreshPlayer(PlayerType.LOCAL_USER),
-      opponent: getFreshPlayer(PlayerType.OPPONENT),
-      rounds: 0,
-      drawsCount: 0,
-      isGameOver: false,
-      winner: null,
-      playsHistory: [],
-    };
+    const newGame: Game = getFreshGame();
 
     setGame(newGame);
 
     setIsGameStarted(true);
-
-    console.log("Waiting for user play...");
   };
 
-  const setCardsReveal = async (bool: boolean): Promise<void> => {
-    setRevealPlays(bool);
-    return await new Promise((resolve) => setTimeout(resolve, 1000));
-  };
+  const wait = async (ms: number): Promise<void> =>
+    await new Promise((resolve) => setTimeout(resolve, ms));
 
   const resetCards = () => {
     if (!game) return;
@@ -93,6 +93,7 @@ const useGame = ({
   const cleanBoard = () => {
     if (!game) return;
     const newGame = { ...game };
+
     newGame.rounds++;
     newGame.localUser.wonTheRound = false;
     newGame.opponent.wonTheRound = false;
@@ -119,29 +120,34 @@ const useGame = ({
       side: BoardSide.TOP,
     });
 
-    setTimeout(revealPlaysAndCalculateWinner, 1000);
+    revealPlaysAndCalculateWinner();
   };
 
   const revealPlaysAndCalculateWinner = async () => {
+    await wait(1000); // Wait for card to be moved
+
     if (!game) return;
 
-    await setCardsReveal(true);
+    setRevealPlays(true);
+    await wait(1000); // Wait for cards to be revealed
     savePlay();
 
     const newGame = { ...game };
 
-    const roundWinner = checkRoundWinner(newGame);
+    const roundWinner = getRoundResult(newGame);
+
     switch (roundWinner) {
-      case PlayerType.LOCAL_USER:
+      case RoundResult.WIN:
         newGame.localUser.wonTheRound = true;
         newGame.localUser.score++;
         break;
-      case PlayerType.OPPONENT:
+      case RoundResult.LOSE:
         newGame.opponent.wonTheRound = true;
         newGame.opponent.score++;
         break;
+      case RoundResult.DRAW:
+        break;
       default:
-        newGame.drawsCount++;
         break;
     }
 
@@ -156,9 +162,9 @@ const useGame = ({
 
     if (winner) return saveGame(newGame);
 
-    setTimeout(() => {
-      cleanBoard();
-    }, 2000);
+    if (roundWinner !== RoundResult.DRAW) await wait(1500); // Wait for win animation
+
+    cleanBoard();
   };
 
   const savePlay = () => {
@@ -172,7 +178,7 @@ const useGame = ({
     const history: PlaysHistory = {
       [PlayerType.LOCAL_USER]: localUser.play,
       [PlayerType.OPPONENT]: opponent.play,
-      roundWinner: checkRoundWinner(newGame),
+      roundWinner: getRoundWinnerFromResult(getRoundResult(newGame)),
     };
     newGame.playsHistory.push(history);
 

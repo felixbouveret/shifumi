@@ -42,6 +42,10 @@
 
 .button {
   width: 100%;
+
+  &:hover {
+    background-color: rgb(237 200 0) !important;
+  }
 }
 
 @keyframes slide {

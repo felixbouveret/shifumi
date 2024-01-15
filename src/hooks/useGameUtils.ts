@@ -1,12 +1,14 @@
-import usePlayerHand from "./usePlayerHand";
+import usePlayerHand from "@/hooks/usePlayerHand";
 import { Game, Player } from "@/types/game.interface";
 import { CardType, PlayerType, RoundResult } from "@/types/game.enum";
 
 interface useGameUtilsReturn {
   getFreshPlayer: <T>(type: T) => Player<T>;
+  getFreshGame: () => Game;
   checkPoints: (game: Game) => PlayerType | null;
-  checkRoundWinner: (game: Game) => PlayerType | null;
-  getRoundResult: (roundWinner: PlayerType | null) => RoundResult;
+  getRoundWinnerFromResult: (result: RoundResult) => PlayerType | null;
+  getRoundResultFromWinner: (result: PlayerType | null) => RoundResult;
+  getRoundResult: (game: Game) => RoundResult;
   getIconFromEnum: (
     roundWinner: PlayerType | RoundResult | CardType | null
   ) => string | null;
@@ -24,6 +26,16 @@ const useGameUtils = (): useGameUtilsReturn => {
     hasPlayed: false,
   });
 
+  const getFreshGame = (): Game => ({
+    id: new Date().getTime().toString(),
+    localUser: getFreshPlayer(PlayerType.LOCAL_USER),
+    opponent: getFreshPlayer(PlayerType.OPPONENT),
+    rounds: 0,
+    isGameOver: false,
+    winner: null,
+    playsHistory: [],
+  });
+
   const checkPoints = (game: Game): PlayerType | null => {
     const { localUser, opponent } = game;
 
@@ -33,10 +45,10 @@ const useGameUtils = (): useGameUtilsReturn => {
     return null;
   };
 
-  const checkRoundWinner = (game: Game): PlayerType | null => {
+  const getRoundResult = (game: Game): RoundResult => {
     const { localUser, opponent } = game;
 
-    if (localUser.play === opponent.play) return null;
+    if (localUser.play === opponent.play) return RoundResult.DRAW;
 
     if (
       (localUser.play === CardType.ROCK &&
@@ -44,13 +56,20 @@ const useGameUtils = (): useGameUtilsReturn => {
       (localUser.play === CardType.PAPER && opponent.play === CardType.ROCK) ||
       (localUser.play === CardType.SCISSORS && opponent.play === CardType.PAPER)
     )
-      return PlayerType.LOCAL_USER;
-    else return PlayerType.OPPONENT;
+      return RoundResult.WIN;
+    else return RoundResult.LOSE;
   };
 
-  const getRoundResult = (roundWinner: PlayerType | null): RoundResult => {
-    if (roundWinner === null) return RoundResult.DRAW;
-    return roundWinner === PlayerType.LOCAL_USER
+  const getRoundWinnerFromResult = (result: RoundResult): PlayerType | null => {
+    if (result === RoundResult.DRAW) return null;
+    return result === RoundResult.WIN
+      ? PlayerType.LOCAL_USER
+      : PlayerType.OPPONENT;
+  };
+
+  const getRoundResultFromWinner = (player: PlayerType | null): RoundResult => {
+    if (player === null) return RoundResult.DRAW;
+    return player === PlayerType.LOCAL_USER
       ? RoundResult.WIN
       : RoundResult.LOSE;
   };
@@ -84,8 +103,10 @@ const useGameUtils = (): useGameUtilsReturn => {
 
   return {
     getFreshPlayer,
+    getFreshGame,
     checkPoints,
-    checkRoundWinner,
+    getRoundWinnerFromResult,
+    getRoundResultFromWinner,
     getRoundResult,
     getIconFromEnum,
   };
