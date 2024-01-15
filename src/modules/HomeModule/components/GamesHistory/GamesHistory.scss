@@ -1,0 +1,58 @@
+.gamesHistory {
+  display: flex;
+  flex-direction: column;
+  max-height: 300px;
+
+  .heading {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0 20px;
+
+    h2 {
+      font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+      display: block;
+      color: #ffd700;
+      text-align: center;
+      font-weight: bold;
+      padding-bottom: 4px;
+      margin-bottom: 4px;
+      border-bottom: solid 1px #ffd700;
+      margin: 0;
+    }
+
+    .labels {
+      display: flex;
+      justify-content: space-between;
+      color: #113b11;
+      font-weight: bold;
+      font-size: 16px;
+      border-bottom: solid 2px #113b11;
+    }
+  }
+
+  .scores {
+    display: flex;
+    span {
+      text-align: center;
+      display: block;
+      width: 16px;
+    }
+  }
+
+  .gamesList {
+    overflow-y: auto;
+    flex: 1;
+    padding: 8px 20px 8px;
+  }
+
+  .game {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .button {
+    margin-top: 8px;
+  }
+}

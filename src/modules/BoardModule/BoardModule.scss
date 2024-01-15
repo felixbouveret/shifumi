@@ -1,0 +1,18 @@
+#playerSide {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+
+  > .playerBoard {
+    padding: 20px 0 28px;
+  }
+
+  &.top {
+    flex-direction: column-reverse;
+
+    > .playerBoard {
+      padding: 28px 0 20px;
+    }
+  }
+}

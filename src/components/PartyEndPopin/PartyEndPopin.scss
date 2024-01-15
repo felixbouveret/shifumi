@@ -1,0 +1,22 @@
+.partyEndPopin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+
+  .confetti {
+    position: absolute;
+  }
+
+  h2 {
+    color: #ffd700;
+    font-size: 48px;
+    margin: 0;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+  }
+}
