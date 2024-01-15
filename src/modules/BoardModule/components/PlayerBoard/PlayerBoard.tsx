@@ -37,7 +37,7 @@ const PlayerBoard: React.FC<PlayerBoardProps> = ({
         {boardSide === BoardSide.BOTTOM && (
           <IconButton
             className="button"
-            disabled={!!plays.length}
+            disabled={!!plays.length || cardsHidden}
             size="lg"
             onClick={randomPlay}
             style={buttonStyle}
