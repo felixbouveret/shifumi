@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import { Game } from "@/types/game.interface";
 
 const useGamesHistory = () => {
-  const { getFromLocalStorage, setInLocalStorage } = useStorage();
+  const { getFromLocalStorage, setInLocalStorage, removeFromLocalStorage } =
+    useStorage();
 
   const [gamesHistory, setGamesHistory] = useState<Game[]>([]);
 
@@ -20,7 +21,12 @@ const useGamesHistory = () => {
     setGamesHistory((prev) => [...prev, game]);
   };
 
-  return { gamesHistory, saveGame };
+  const clearHistory = () => {
+    setGamesHistory([]);
+    removeFromLocalStorage(["gamesHistory"]);
+  };
+
+  return { gamesHistory, saveGame, clearHistory };
 };
 
 export default useGamesHistory;

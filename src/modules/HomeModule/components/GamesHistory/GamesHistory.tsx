@@ -2,9 +2,10 @@ import "./GamesHistory.scss";
 import React from "react";
 import useGameUtils from "@/hooks/useGameUtils";
 import useGamesHistory from "@/hooks/useGamesHistory";
+import { Button } from "@mui/joy";
 
 const GamesHistory: React.FC = () => {
-  const { gamesHistory } = useGamesHistory();
+  const { gamesHistory, clearHistory } = useGamesHistory();
   const { getIconFromEnum } = useGameUtils();
 
   if (gamesHistory.length === 0) return;
@@ -26,6 +27,15 @@ const GamesHistory: React.FC = () => {
             </div>
           </div>
         ))}
+        <Button
+          className="button"
+          size="sm"
+          variant="plain"
+          color="neutral"
+          onClick={clearHistory}
+        >
+          Clear history
+        </Button>
       </div>
     </div>
   );
