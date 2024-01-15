@@ -4,6 +4,7 @@ import { CardType, PlayerType, RoundResult } from "@/types/game.enum";
 
 interface useGameUtilsReturn {
   getFreshPlayer: <T>(type: T) => Player<T>;
+  getFreshGame: () => Game;
   checkPoints: (game: Game) => PlayerType | null;
   getRoundWinnerFromResult: (result: RoundResult) => PlayerType | null;
   getRoundResultFromWinner: (result: PlayerType | null) => RoundResult;
@@ -23,6 +24,16 @@ const useGameUtils = (): useGameUtilsReturn => {
     score: 0,
     wonTheRound: false,
     hasPlayed: false,
+  });
+
+  const getFreshGame = (): Game => ({
+    id: new Date().getTime().toString(),
+    localUser: getFreshPlayer(PlayerType.LOCAL_USER),
+    opponent: getFreshPlayer(PlayerType.OPPONENT),
+    rounds: 0,
+    isGameOver: false,
+    winner: null,
+    playsHistory: [],
   });
 
   const checkPoints = (game: Game): PlayerType | null => {
@@ -92,6 +103,7 @@ const useGameUtils = (): useGameUtilsReturn => {
 
   return {
     getFreshPlayer,
+    getFreshGame,
     checkPoints,
     getRoundWinnerFromResult,
     getRoundResultFromWinner,

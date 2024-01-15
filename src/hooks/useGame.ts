@@ -33,7 +33,7 @@ const useGame = ({
   bottomMoveCardScript,
 }: UseGameParams): UseGameReturn => {
   const {
-    getFreshPlayer,
+    getFreshGame,
     checkPoints,
     getRoundResult,
     getRoundWinnerFromResult,
@@ -45,6 +45,7 @@ const useGame = ({
   const [revealPlays, setRevealPlays] = useState<boolean>(false);
   const [isGameStarted, setIsGameStarted] = useState<boolean>(false);
 
+  // State setters
   const setPlayerHand = (playerType: PlayerType, cards: CardType[]) => {
     if (!game) return;
     const newGame = { ...game };
@@ -63,16 +64,9 @@ const useGame = ({
     setGame(newGame);
   };
 
+  // Game logic
   const start = () => {
-    const newGame: Game = {
-      id: new Date().getTime().toString(),
-      localUser: getFreshPlayer(PlayerType.LOCAL_USER),
-      opponent: getFreshPlayer(PlayerType.OPPONENT),
-      rounds: 0,
-      isGameOver: false,
-      winner: null,
-      playsHistory: [],
-    };
+    const newGame: Game = getFreshGame();
 
     setGame(newGame);
 

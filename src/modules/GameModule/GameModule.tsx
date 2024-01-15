@@ -2,7 +2,7 @@ import "./GameModule.scss";
 import useGame from "@/hooks/useGame";
 import React, { useEffect } from "react";
 import BoardModule from "@/modules/BoardModule";
-import usePlayerHand from "@/hooks/usePlayerHand";
+import useGameUtils from "@/hooks/useGameUtils";
 import PlaysHistory from "./components/PlaysHistory";
 import PartyEndPopin from "@/components/PartyEndPopin";
 import { Player } from "@/types/game.interface";
@@ -10,16 +10,9 @@ import { useSensors } from "@/hooks/useSensors";
 import { BoardSide, CardType, PlayerType } from "@/types/game.enum";
 
 const GameModule: React.FC = () => {
-  const { defaultPlayerHand } = usePlayerHand();
+  const { getFreshPlayer } = useGameUtils();
 
-  const initialPlayer: Player = {
-    type: PlayerType.OPPONENT,
-    play: undefined,
-    score: 0,
-    cards: defaultPlayerHand,
-    hasPlayed: false,
-    wonTheRound: false,
-  };
+  const initialPlayer: Player = getFreshPlayer(PlayerType.OPPONENT);
 
   const topSensorHook = useSensors();
   const bottomSensorHook = useSensors();
@@ -37,7 +30,6 @@ const GameModule: React.FC = () => {
     topMoveCardScript: topSensorHook.moveCardScript,
     bottomMoveCardScript: bottomSensorHook.moveCardScript,
   });
-  console.log(game);
 
   useEffect(() => {
     setTimeout(() => start(), 1000);
