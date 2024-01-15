@@ -1,19 +1,46 @@
 .gamesHistory {
   background-color: #185118;
+  display: flex;
+  flex-direction: column;
   border-radius: 16px;
-  padding: 20px;
+  padding-top: 20px;
   border: solid 6px #113b11;
+  max-height: 300px;
+
+  .heading {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0 20px;
+
+    h2 {
+      display: block;
+      color: #ffd700;
+      text-align: center;
+      font-weight: bold;
+      padding-bottom: 4px;
+      margin-bottom: 4px;
+      border-bottom: solid 1px #ffd700;
+      margin: 0;
+    }
+    .labels {
+      display: flex;
+      justify-content: space-between;
+      color: #113b11;
+      font-weight: bold;
+      font-size: 16px;
+      border-bottom: solid 2px #113b11;
+    }
+  }
+
+  .gamesList {
+    overflow-y: auto;
+    flex: 1;
+    padding: 8px 20px 8px;
+  }
 
   .game {
     display: flex;
     justify-content: space-between;
-
-    &.heading {
-      color: #c4af3b;
-      font-weight: bold;
-      padding-bottom: 4px;
-      margin-bottom: 4px;
-      border-bottom: solid 2px #113b11;
-    }
   }
 }

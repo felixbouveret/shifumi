@@ -1,5 +1,6 @@
 import "./Card.scss";
 import React from "react";
+import useCards from "@/hooks/useCards";
 import ConfettiExplosion, { ConfettiProps } from "react-confetti-explosion";
 import { CardType } from "@/types/game.enum";
 
@@ -20,18 +21,7 @@ const Card: React.FC<CardProps> = ({
   isDisabled,
   winnerCard,
 }) => {
-  const cardContent = () => {
-    switch (type) {
-      case CardType.ROCK:
-        return { icon: "🪨", title: "Rock" };
-      case CardType.PAPER:
-        return { icon: "📄", title: "Paper" };
-      case CardType.SCISSORS:
-        return { icon: "✂️", title: "Scissors" };
-      case CardType.UNKNOWN:
-        return { icon: "❓", title: "Unknown" };
-    }
-  };
+  const { getCardContent } = useCards();
 
   const confettiConfig: ConfettiProps = {
     force: 0.4,
@@ -69,9 +59,9 @@ const Card: React.FC<CardProps> = ({
         </div>
         <div className="front">
           <div className="content">
-            <p className="letters top">{cardContent().title[0]}</p>
-            <h2>{cardContent().icon}</h2>
-            <p className="letters bot">{cardContent().title[0]}</p>
+            <p className="letters top">{getCardContent(type).title[0]}</p>
+            <h2>{getCardContent(type).icon}</h2>
+            <p className="letters bot">{getCardContent(type).title[0]}</p>
           </div>
         </div>
       </div>

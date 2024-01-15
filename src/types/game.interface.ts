@@ -9,11 +9,19 @@ export interface Player<T = PlayerType> {
   wonTheRound: boolean;
 }
 
+export interface PlaysHistory {
+  [PlayerType.LOCAL_USER]: CardType;
+  [PlayerType.OPPONENT]: CardType;
+  roundWinner: PlayerType | null;
+}
+
 export interface Game {
   id: string;
   [PlayerType.LOCAL_USER]: Player<PlayerType.LOCAL_USER>;
   [PlayerType.OPPONENT]: Player<PlayerType.OPPONENT>;
-  round: number;
+  playsHistory: PlaysHistory[];
+  rounds: number;
+  drawsCount: number;
   isGameOver: boolean;
   winner: PlayerType | null;
 }

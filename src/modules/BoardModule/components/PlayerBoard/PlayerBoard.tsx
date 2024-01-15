@@ -4,7 +4,7 @@ import Card from "../Card";
 import { IconButton } from "@mui/joy";
 import { Shuffle } from "@mui/icons-material";
 import { Draggable, Droppable } from "react-beautiful-dnd";
-import { BoardParts, BoardSide, CardType } from "@/types/game.enum";
+import { BoardPart, BoardSide, CardType } from "@/types/game.enum";
 
 interface PlayerBoardProps {
   cardsHidden?: boolean;
@@ -44,7 +44,7 @@ const PlayerBoard: React.FC<PlayerBoardProps> = ({
           </IconButton>
         )}
       </div>
-      <Droppable droppableId={`${BoardParts.BOARD}${boardSide}`}>
+      <Droppable droppableId={`${BoardPart.BOARD}${boardSide}`}>
         {(provided) => (
           <div
             className="cardSpot"

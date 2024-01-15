@@ -1,6 +1,6 @@
 import * as tweenFunctions from "tween-functions";
 import { FluidDragActions, SensorAPI } from "react-beautiful-dnd";
-import { BoardParts, BoardSide, CardType } from "@/types/game.enum";
+import { BoardPart, BoardSide, CardType } from "@/types/game.enum";
 
 const draggableAttribute = "data-rbd-drag-handle-draggable-id";
 const droppableAttribute = "data-rbd-droppable-id";
@@ -11,7 +11,7 @@ export interface UseSensorsReturn {
 }
 export interface moveCardScriptParams {
   card: CardType;
-  to: BoardParts;
+  to: BoardPart;
   side: BoardSide;
 }
 

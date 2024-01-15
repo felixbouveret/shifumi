@@ -83,6 +83,7 @@ $card-back-color: #791111;
       padding: 4px;
       background-color: $card-background;
       border-radius: 8px;
+      text-transform: capitalize;
 
       &.top {
         top: -8px;

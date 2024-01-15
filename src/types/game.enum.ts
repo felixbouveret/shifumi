@@ -15,7 +15,13 @@ export enum BoardSide {
   BOTTOM = "bottom",
 }
 
-export enum BoardParts {
+export enum BoardPart {
   HAND = "hand",
   BOARD = "board",
+}
+
+export enum RoundResult {
+  WIN = "win",
+  LOSE = "lose",
+  DRAW = "draw",
 }

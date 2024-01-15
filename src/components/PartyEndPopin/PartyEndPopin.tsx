@@ -1,6 +1,7 @@
 import "./PartyEndPopin.scss";
 import React from "react";
 import Popin from "../Popin";
+import ConfettiExplosion, { ConfettiProps } from "react-confetti-explosion";
 import { Button } from "@mui/joy";
 import { PlayerType } from "@/types/game.enum";
 import { useNavigate } from "react-router-dom";
@@ -11,6 +12,12 @@ interface PartyEndPopinProps {
   onClosed: () => void;
 }
 
+const confettiConfig: ConfettiProps = {
+  force: 1,
+  duration: 10000,
+  particleCount: 250,
+  width: 1600,
+};
 const PartyEndPopin: React.FC<PartyEndPopinProps> = ({
   visible,
   player,
@@ -18,13 +25,16 @@ const PartyEndPopin: React.FC<PartyEndPopinProps> = ({
 }) => {
   const navigate = useNavigate();
 
-  const winner =
-    player === PlayerType.LOCAL_USER
-      ? "You won the game!"
-      : "Your opponent won the game!";
+  const winner = player === PlayerType.LOCAL_USER ? "Victory!" : "Defeat...";
 
   return (
     <Popin className="partyEndPopin" visible={visible}>
+      {player === PlayerType.LOCAL_USER && (
+        <div className="confetti">
+          <ConfettiExplosion {...confettiConfig} />
+        </div>
+      )}
+
       <h2>{winner}</h2>
       <div className="buttons">
         <Button onClick={() => navigate("/")}>Back to home</Button>

@@ -2,7 +2,7 @@ import "./PlayerHand.scss";
 import React from "react";
 import Card from "../Card";
 import { Draggable, Droppable } from "react-beautiful-dnd";
-import { BoardParts, BoardSide, CardType } from "@/types/game.enum";
+import { BoardPart, BoardSide, CardType } from "@/types/game.enum";
 
 interface PlayerHandProps {
   cardsHidden?: boolean;
@@ -20,7 +20,7 @@ const PlayerHand: React.FC<PlayerHandProps> = ({
   onCardPlay,
 }) => {
   return (
-    <Droppable droppableId={BoardParts.HAND + boardSide} direction="horizontal">
+    <Droppable droppableId={BoardPart.HAND + boardSide} direction="horizontal">
       {(provided) => (
         <div
           id="playerHand"
