@@ -6,12 +6,7 @@ import PlayerBoard from "./components/PlayerBoard";
 import { Player } from "@/types/game.interface";
 import { UseSensorsReturn } from "@/hooks/useSensors";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
-import {
-  BoardParts,
-  BoardSide,
-  CardType,
-  PlayerType,
-} from "@//types/game.enum";
+import { BoardPart, BoardSide, CardType, PlayerType } from "@//types/game.enum";
 
 interface BoardModuleProps {
   handDisabled: boolean;
@@ -55,7 +50,7 @@ const BoardModule: React.FC<BoardModuleProps> = ({
       return;
     }
 
-    if (start.includes(BoardParts.HAND) && end.includes(BoardParts.BOARD)) {
+    if (start.includes(BoardPart.HAND) && end.includes(BoardPart.BOARD)) {
       const [cardPlayed] = cards.splice(result.source.index, 1);
       setPlayerHand(cards);
       setPlayerPlay(cardPlayed);
@@ -63,7 +58,7 @@ const BoardModule: React.FC<BoardModuleProps> = ({
       return;
     }
 
-    if (start.includes(BoardParts.BOARD) && end.includes(BoardParts.HAND)) {
+    if (start.includes(BoardPart.BOARD) && end.includes(BoardPart.HAND)) {
       cards.splice(result.destination.index, 0, playerPlay[0]);
       setPlayerHand(cards);
       setPlayerPlay(undefined);
@@ -76,7 +71,7 @@ const BoardModule: React.FC<BoardModuleProps> = ({
   const randomPlay = () => {
     moveCardScript({
       card: getRandomPlayableCard(),
-      to: BoardParts.BOARD,
+      to: BoardPart.BOARD,
       side: boardSide,
     });
   };
@@ -99,10 +94,10 @@ const BoardModule: React.FC<BoardModuleProps> = ({
           playerHand={playerHand}
           disabled={handDisabled}
           boardSide={boardSide}
-          onDoubleClick={(card) => {
+          onCardPlay={(card) => {
             moveCardScript({
               card: card,
-              to: BoardParts.BOARD,
+              to: BoardPart.BOARD,
               side: boardSide,
             });
           }}

@@ -16,6 +16,11 @@
     left: 50%;
     transform: translate(-50%, -50%);
   }
+  &.flipOnHover {
+    &:hover .card {
+      transform: rotateY(0);
+    }
+  }
 }
 
 $card-background: #dbd495;
@@ -83,6 +88,7 @@ $card-back-color: #791111;
       padding: 4px;
       background-color: $card-background;
       border-radius: 8px;
+      text-transform: capitalize;
 
       &.top {
         top: -8px;

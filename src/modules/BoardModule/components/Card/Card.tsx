@@ -1,11 +1,13 @@
 import "./Card.scss";
 import React from "react";
+import useCards from "@/hooks/useCards";
 import ConfettiExplosion, { ConfettiProps } from "react-confetti-explosion";
 import { CardType } from "@/types/game.enum";
 
 interface CardProps {
-  type: CardType;
+  type?: CardType;
   isFlipped?: boolean;
+  flipOnHover?: boolean;
   hoverable?: boolean;
   isPlayed?: boolean;
   isDisabled?: boolean;
@@ -15,23 +17,13 @@ interface CardProps {
 const Card: React.FC<CardProps> = ({
   type,
   isFlipped,
+  flipOnHover,
   hoverable,
   isPlayed,
   isDisabled,
   winnerCard,
 }) => {
-  const cardContent = () => {
-    switch (type) {
-      case CardType.ROCK:
-        return { icon: "🪨", title: "Rock" };
-      case CardType.PAPER:
-        return { icon: "📄", title: "Paper" };
-      case CardType.SCISSORS:
-        return { icon: "✂️", title: "Scissors" };
-      case CardType.UNKNOWN:
-        return { icon: "❓", title: "Unknown" };
-    }
-  };
+  const { getCardContent } = useCards();
 
   const confettiConfig: ConfettiProps = {
     force: 0.4,
@@ -40,12 +32,15 @@ const Card: React.FC<CardProps> = ({
     width: 400,
   };
 
+  const cardType = type || CardType.UNKNOWN;
+
   return (
     <div
       className={[
         "cardContainer",
         isPlayed ? "playedContainer" : "",
         winnerCard ? "winnerContainer" : "",
+        flipOnHover ? "flipOnHover" : "",
       ].join(" ")}
     >
       <div className="confetti">
@@ -69,9 +64,9 @@ const Card: React.FC<CardProps> = ({
         </div>
         <div className="front">
           <div className="content">
-            <p className="letters top">{cardContent().title[0]}</p>
-            <h2>{cardContent().icon}</h2>
-            <p className="letters bot">{cardContent().title[0]}</p>
+            <p className="letters top">{getCardContent(cardType).title[0]}</p>
+            <h2>{getCardContent(cardType).icon}</h2>
+            <p className="letters bot">{getCardContent(cardType).title[0]}</p>
           </div>
         </div>
       </div>

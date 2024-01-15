@@ -4,7 +4,7 @@ import Card from "../Card";
 import { IconButton } from "@mui/joy";
 import { Shuffle } from "@mui/icons-material";
 import { Draggable, Droppable } from "react-beautiful-dnd";
-import { BoardParts, BoardSide, CardType } from "@/types/game.enum";
+import { BoardPart, BoardSide, CardType } from "@/types/game.enum";
 
 interface PlayerBoardProps {
   cardsHidden?: boolean;
@@ -14,6 +14,13 @@ interface PlayerBoardProps {
   wonTheRound: boolean;
   randomPlay: () => void;
 }
+
+const buttonStyle = {
+  backgroundColor: "#ffd700",
+  color: "rgb(189 164 29)",
+  boxShadow:
+    "0 0 0 3px rgb(189 164 29), 0 0 0 6px #ffd700, 0 0 20px 0px rgba(0,0,0, 0.2)",
+};
 
 const PlayerBoard: React.FC<PlayerBoardProps> = ({
   cardsHidden,
@@ -29,19 +36,16 @@ const PlayerBoard: React.FC<PlayerBoardProps> = ({
         {boardSide === BoardSide.BOTTOM && (
           <IconButton
             className="button"
+            disabled={!!plays.length}
             size="lg"
             onClick={randomPlay}
-            style={{
-              backgroundColor: "rgba(0, 0, 0, 0.3)",
-              color: "#185118",
-              boxShadow: "0 0 0 2px #185118, 0 0 0 4px rgba(0, 0, 0, 0.3)",
-            }}
+            style={buttonStyle}
           >
             <Shuffle />
           </IconButton>
         )}
       </div>
-      <Droppable droppableId={`${BoardParts.BOARD}${boardSide}`}>
+      <Droppable droppableId={`${BoardPart.BOARD}${boardSide}`}>
         {(provided) => (
           <div
             className="cardSpot"

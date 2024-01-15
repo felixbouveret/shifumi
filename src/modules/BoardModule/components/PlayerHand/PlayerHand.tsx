@@ -2,14 +2,14 @@ import "./PlayerHand.scss";
 import React from "react";
 import Card from "../Card";
 import { Draggable, Droppable } from "react-beautiful-dnd";
-import { BoardParts, BoardSide, CardType } from "@/types/game.enum";
+import { BoardPart, BoardSide, CardType } from "@/types/game.enum";
 
 interface PlayerHandProps {
   cardsHidden?: boolean;
   boardSide: BoardSide;
   playerHand: CardType[];
   disabled: boolean;
-  onDoubleClick: (card: CardType) => void;
+  onCardPlay: (card: CardType) => void;
 }
 
 const PlayerHand: React.FC<PlayerHandProps> = ({
@@ -17,10 +17,10 @@ const PlayerHand: React.FC<PlayerHandProps> = ({
   playerHand,
   boardSide,
   disabled,
-  onDoubleClick,
+  onCardPlay,
 }) => {
   return (
-    <Droppable droppableId={BoardParts.HAND + boardSide} direction="horizontal">
+    <Droppable droppableId={BoardPart.HAND + boardSide} direction="horizontal">
       {(provided) => (
         <div
           id="playerHand"
@@ -42,7 +42,8 @@ const PlayerHand: React.FC<PlayerHandProps> = ({
               >
                 {(provided) => (
                   <div
-                    onDoubleClick={() => onDoubleClick(cardType)}
+                    onDoubleClick={() => onCardPlay(cardType)}
+                    onClick={() => onCardPlay(cardType)}
                     className="cardWrapper"
                     ref={provided.innerRef}
                     {...provided.draggableProps}
