@@ -1,6 +1,6 @@
 import "./PlayerHand.scss";
 import React from "react";
-import Card from "../Card";
+import Card from "@/components/Card";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import { BoardPart, BoardSide, CardType } from "@/types/game.enum";
 

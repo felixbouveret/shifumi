@@ -1,6 +1,6 @@
 import "./PlayerBoard.scss";
 import React from "react";
-import Card from "../Card";
+import Card from "@/components/Card";
 import { IconButton } from "@mui/joy";
 import { Shuffle } from "@mui/icons-material";
 import { Draggable, Droppable } from "react-beautiful-dnd";

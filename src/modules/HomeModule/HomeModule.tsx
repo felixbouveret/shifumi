@@ -1,6 +1,6 @@
 import "./HomeModule.scss";
 import React from "react";
-import Card from "../BoardModule/components/Card";
+import Card from "@/components/Card";
 import usePlayerHand from "@/hooks/usePlayerHand";
 import GamesHistory from "./components/GamesHistory";
 import { Button } from "@mui/joy";
