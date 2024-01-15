@@ -2,6 +2,8 @@ import "./PlaysHistory.scss";
 import React from "react";
 import useCards from "@/hooks/useCards";
 import useGameUtils from "@/hooks/useGameUtils";
+import CarpetContainer from "@/components/CarpetContainer";
+import { PlayerType } from "@/types/game.enum";
 import { PlaysHistory } from "@/types/game.interface";
 
 interface PlaysHistoryProps {
@@ -13,23 +15,32 @@ const PlaysHistory: React.FC<PlaysHistoryProps> = ({ history }) => {
   const { getIconFromEnum, getRoundResultFromWinner } = useGameUtils();
 
   return (
-    <div id="PlaysHistory">
-      <div className="placeholder" />
-      <div className="inner">
-        {history &&
-          history.map((play, index) => (
-            <div className="play" key={index}>
-              <div className="cards">
-                <div>{getCardContent(play.localUser).icon}</div>
-                <div>{getCardContent(play.opponent).icon}</div>
-              </div>
-              <div className="result">
-                {getIconFromEnum(getRoundResultFromWinner(play.roundWinner))}
-              </div>
-            </div>
-          ))}
+    <CarpetContainer className="PlaysHistoryContainer" goldFrame>
+      <div className="labels">
+        <div className="cards">
+          <span>{getIconFromEnum(PlayerType.LOCAL_USER)}</span>
+          <span>{getIconFromEnum(PlayerType.OPPONENT)}</span>
+        </div>
+        <span className="result">R</span>
       </div>
-    </div>
+      <div className="PlaysHistory">
+        <div className="placeholder" />
+        <div className="inner">
+          {history &&
+            history.map((play, index) => (
+              <div className="play" key={index}>
+                <div className="cards">
+                  <div>{getCardContent(play.localUser).icon}</div>
+                  <div>{getCardContent(play.opponent).icon}</div>
+                </div>
+                <div className="result">
+                  {getIconFromEnum(getRoundResultFromWinner(play.roundWinner))}
+                </div>
+              </div>
+            ))}
+        </div>
+      </div>
+    </CarpetContainer>
   );
 };
 

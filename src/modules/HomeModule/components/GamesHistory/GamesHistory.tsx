@@ -2,6 +2,7 @@ import "./GamesHistory.scss";
 import React from "react";
 import useGameUtils from "@/hooks/useGameUtils";
 import useGamesHistory from "@/hooks/useGamesHistory";
+import CarpetContainer from "@/components/CarpetContainer";
 import { Button } from "@mui/joy";
 import { Game } from "@/types/game.interface";
 
@@ -18,7 +19,7 @@ const GamesHistory: React.FC = () => {
 
   if (gamesHistory.length === 0) return;
   return (
-    <div className="gamesHistory">
+    <CarpetContainer className="gamesHistory" goldFrame>
       <div className="heading">
         <h2>Games history</h2>
         <div className="labels">
@@ -51,7 +52,7 @@ const GamesHistory: React.FC = () => {
           Clear history
         </Button>
       </div>
-    </div>
+    </CarpetContainer>
   );
 };
 

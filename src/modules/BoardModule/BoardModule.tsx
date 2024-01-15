@@ -3,6 +3,7 @@ import React from "react";
 import PlayerHand from "./components/PlayerHand";
 import usePlayerHand from "@/hooks/usePlayerHand";
 import PlayerBoard from "./components/PlayerBoard";
+import CarpetContainer from "@/components/CarpetContainer";
 import { Player } from "@/types/game.interface";
 import { UseSensorsReturn } from "@/hooks/useSensors";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
@@ -79,7 +80,7 @@ const BoardModule: React.FC<BoardModuleProps> = ({
   return (
     <div id="playerSide" className={boardSide}>
       <DragDropContext onDragEnd={onDragEnd} sensors={[scriptedSensor]}>
-        <div className="playerBoard">
+        <CarpetContainer className="playerBoard" goldInset>
           <PlayerBoard
             cardsHidden={isOpponentPlayer && !showPlay}
             plays={playerPlay}
@@ -88,7 +89,7 @@ const BoardModule: React.FC<BoardModuleProps> = ({
             randomPlay={randomPlay}
             wonTheRound={player.wonTheRound}
           />
-        </div>
+        </CarpetContainer>
         <PlayerHand
           cardsHidden={isOpponentPlayer}
           playerHand={playerHand}
