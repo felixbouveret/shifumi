@@ -66,6 +66,12 @@
 
     gap: 20px;
 
+    .index {
+      position: absolute;
+      transform: translateX(calc(-100% - 8px));
+      color: #113b11;
+    }
+
     .cards {
       display: flex;
       gap: 4px;

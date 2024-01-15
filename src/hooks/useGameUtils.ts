@@ -87,7 +87,7 @@ const useGameUtils = (): useGameUtilsReturn => {
       case CardType.UNKNOWN:
         return "❓";
       case PlayerType.LOCAL_USER:
-        return "👤";
+        return "🙋‍♂️";
       case PlayerType.OPPONENT:
         return "🤖";
       case RoundResult.WIN:

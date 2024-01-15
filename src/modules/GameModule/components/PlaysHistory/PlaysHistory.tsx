@@ -29,6 +29,7 @@ const PlaysHistory: React.FC<PlaysHistoryProps> = ({ history }) => {
           {history &&
             history.map((play, index) => (
               <div className="play" key={index}>
+                <p className="index">{index + 1}</p>
                 <div className="cards">
                   <div>{getCardContent(play.localUser).icon}</div>
                   <div>{getCardContent(play.opponent).icon}</div>
