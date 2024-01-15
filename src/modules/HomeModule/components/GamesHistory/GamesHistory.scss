@@ -33,6 +33,14 @@
       border-bottom: solid 2px #113b11;
     }
   }
+  .scores {
+    display: flex;
+    span {
+      text-align: center;
+      display: block;
+      width: 16px;
+    }
+  }
 
   .gamesList {
     overflow-y: auto;

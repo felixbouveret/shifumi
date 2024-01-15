@@ -10,7 +10,7 @@ interface PlaysHistoryProps {
 
 const PlaysHistory: React.FC<PlaysHistoryProps> = ({ history }) => {
   const { getCardContent } = useCards();
-  const { getIconFromEnum, getRoundResult } = useGameUtils();
+  const { getIconFromEnum, getRoundResultFromWinner } = useGameUtils();
 
   return (
     <div id="PlaysHistory">
@@ -24,7 +24,7 @@ const PlaysHistory: React.FC<PlaysHistoryProps> = ({ history }) => {
                 <div>{getCardContent(play.opponent).icon}</div>
               </div>
               <div className="result">
-                {getIconFromEnum(getRoundResult(play.roundWinner))}
+                {getIconFromEnum(getRoundResultFromWinner(play.roundWinner))}
               </div>
             </div>
           ))}

@@ -21,7 +21,6 @@ export interface Game {
   [PlayerType.OPPONENT]: Player<PlayerType.OPPONENT>;
   playsHistory: PlaysHistory[];
   rounds: number;
-  drawsCount: number;
   isGameOver: boolean;
   winner: PlayerType | null;
 }

@@ -4,7 +4,13 @@ import useGamesHistory from "./useGamesHistory";
 import { useState } from "react";
 import { moveCardScriptParams } from "./useSensors";
 import { Game, PlaysHistory } from "@/types/game.interface";
-import { BoardPart, BoardSide, CardType, PlayerType } from "@/types/game.enum";
+import {
+  BoardPart,
+  BoardSide,
+  CardType,
+  PlayerType,
+  RoundResult,
+} from "@/types/game.enum";
 
 interface UseGameParams {
   topMoveCardScript: (params: moveCardScriptParams) => void;
@@ -26,7 +32,12 @@ const useGame = ({
   topMoveCardScript,
   bottomMoveCardScript,
 }: UseGameParams): UseGameReturn => {
-  const { getFreshPlayer, checkPoints, checkRoundWinner } = useGameUtils();
+  const {
+    getFreshPlayer,
+    checkPoints,
+    getRoundResult,
+    getRoundWinnerFromResult,
+  } = useGameUtils();
   const { getRandomPlayableCard } = usePlayerHand();
   const { saveGame } = useGamesHistory();
 
@@ -58,7 +69,6 @@ const useGame = ({
       localUser: getFreshPlayer(PlayerType.LOCAL_USER),
       opponent: getFreshPlayer(PlayerType.OPPONENT),
       rounds: 0,
-      drawsCount: 0,
       isGameOver: false,
       winner: null,
       playsHistory: [],
@@ -93,6 +103,7 @@ const useGame = ({
   const cleanBoard = () => {
     if (!game) return;
     const newGame = { ...game };
+
     newGame.rounds++;
     newGame.localUser.wonTheRound = false;
     newGame.opponent.wonTheRound = false;
@@ -130,18 +141,20 @@ const useGame = ({
 
     const newGame = { ...game };
 
-    const roundWinner = checkRoundWinner(newGame);
+    const roundWinner = getRoundResult(newGame);
+
     switch (roundWinner) {
-      case PlayerType.LOCAL_USER:
+      case RoundResult.WIN:
         newGame.localUser.wonTheRound = true;
         newGame.localUser.score++;
         break;
-      case PlayerType.OPPONENT:
+      case RoundResult.LOSE:
         newGame.opponent.wonTheRound = true;
         newGame.opponent.score++;
         break;
+      case RoundResult.DRAW:
+        break;
       default:
-        newGame.drawsCount++;
         break;
     }
 
@@ -172,7 +185,7 @@ const useGame = ({
     const history: PlaysHistory = {
       [PlayerType.LOCAL_USER]: localUser.play,
       [PlayerType.OPPONENT]: opponent.play,
-      roundWinner: checkRoundWinner(newGame),
+      roundWinner: getRoundWinnerFromResult(getRoundResult(newGame)),
     };
     newGame.playsHistory.push(history);
 
