@@ -14,7 +14,7 @@ const GamesHistory: React.FC = () => {
         <h2>Games history</h2>
         <div className="labels">
           <div>Winner</div>
-          <div>L W D</div>
+          <div>W L D</div>
         </div>
       </div>
       <div className="gamesList">
