@@ -1,6 +1,6 @@
-import { useStorage } from "./useStorage";
 import { useEffect, useState } from "react";
 import { Game } from "@/types/game.interface";
+import { useStorage } from "@/hooks/useStorage";
 
 const useGamesHistory = () => {
   const { getFromLocalStorage, setInLocalStorage, removeFromLocalStorage } =

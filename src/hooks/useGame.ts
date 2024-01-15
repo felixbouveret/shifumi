@@ -1,8 +1,8 @@
-import useGameUtils from "./useGameUtils";
-import usePlayerHand from "./usePlayerHand";
-import useGamesHistory from "./useGamesHistory";
+import useGameUtils from "@/hooks/useGameUtils";
+import usePlayerHand from "@/hooks/usePlayerHand";
+import useGamesHistory from "@/hooks/useGamesHistory";
 import { useState } from "react";
-import { moveCardScriptParams } from "./useSensors";
+import { moveCardScriptParams } from "@/hooks/useSensors";
 import { Game, PlaysHistory } from "@/types/game.interface";
 import {
   BoardPart,
@@ -71,14 +71,10 @@ const useGame = ({
     setGame(newGame);
 
     setIsGameStarted(true);
-
-    console.log("Waiting for user play...");
   };
 
-  const setCardsReveal = async (bool: boolean): Promise<void> => {
-    setRevealPlays(bool);
-    return await new Promise((resolve) => setTimeout(resolve, 1000));
-  };
+  const wait = async (ms: number): Promise<void> =>
+    await new Promise((resolve) => setTimeout(resolve, ms));
 
   const resetCards = () => {
     if (!game) return;
@@ -124,13 +120,16 @@ const useGame = ({
       side: BoardSide.TOP,
     });
 
-    setTimeout(revealPlaysAndCalculateWinner, 1000);
+    revealPlaysAndCalculateWinner();
   };
 
   const revealPlaysAndCalculateWinner = async () => {
+    await wait(1000); // Wait for card to be moved
+
     if (!game) return;
 
-    await setCardsReveal(true);
+    setRevealPlays(true);
+    await wait(1000); // Wait for cards to be revealed
     savePlay();
 
     const newGame = { ...game };
@@ -163,9 +162,9 @@ const useGame = ({
 
     if (winner) return saveGame(newGame);
 
-    setTimeout(() => {
-      cleanBoard();
-    }, 2000);
+    if (roundWinner !== RoundResult.DRAW) await wait(1500); // Wait for win animation
+
+    cleanBoard();
   };
 
   const savePlay = () => {

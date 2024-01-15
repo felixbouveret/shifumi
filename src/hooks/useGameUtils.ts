@@ -1,4 +1,4 @@
-import usePlayerHand from "./usePlayerHand";
+import usePlayerHand from "@/hooks/usePlayerHand";
 import { Game, Player } from "@/types/game.interface";
 import { CardType, PlayerType, RoundResult } from "@/types/game.enum";
 
