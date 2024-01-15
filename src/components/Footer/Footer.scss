@@ -1,0 +1,27 @@
+.Footer {
+  position: fixed;
+  z-index: 999;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 24px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+  p {
+    background-color: rgba(black, 0.5);
+    display: block;
+    padding: 4px 12px;
+    border-radius: 12px;
+    margin: 0;
+  }
+
+  a {
+    color: #ffd700;
+    text-decoration: none;
+    font-weight: bold;
+  }
+}
