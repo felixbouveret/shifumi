@@ -1,6 +1,7 @@
 import "./HomeModule.scss";
 import React from "react";
 import Card from "@/components/Card";
+import Footer from "@/components/Footer";
 import usePlayerHand from "@/hooks/usePlayerHand";
 import GamesHistory from "./components/GamesHistory";
 import { Button } from "@mui/joy";
@@ -43,6 +44,7 @@ const HomeModule: React.FC = () => {
         <GamesHistory />
       </div>
       <div className="cardsSlider bot">{cardsList}</div>
+      <Footer />
     </div>
   );
 };
