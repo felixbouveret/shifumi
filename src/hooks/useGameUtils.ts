@@ -14,6 +14,27 @@ interface useGameUtilsReturn {
   ) => string | null;
 }
 
+const winningCombos = {
+  [CardType.PAPER]: [CardType.ROCK, CardType.WELL],
+  [CardType.WELL]: [CardType.ROCK, CardType.SCISSORS],
+  [CardType.ROCK]: [CardType.SCISSORS],
+  [CardType.SCISSORS]: [CardType.PAPER],
+  [CardType.UNKNOWN]: [CardType.UNKNOWN],
+};
+
+const icons = {
+  [CardType.PAPER]: "📄",
+  [CardType.WELL]: "🕳️",
+  [CardType.ROCK]: "🪨",
+  [CardType.SCISSORS]: "✂️",
+  [CardType.UNKNOWN]: "❓",
+  [PlayerType.LOCAL_USER]: "🙋‍♂️",
+  [PlayerType.OPPONENT]: "🤖",
+  [RoundResult.WIN]: "🎉",
+  [RoundResult.LOSE]: "😭",
+  [RoundResult.DRAW]: "🤝",
+};
+
 const useGameUtils = (): useGameUtilsReturn => {
   const { defaultPlayerHand } = usePlayerHand();
 
@@ -48,14 +69,14 @@ const useGameUtils = (): useGameUtilsReturn => {
   const getRoundResult = (game: Game): RoundResult => {
     const { localUser, opponent } = game;
 
-    if (localUser.play === opponent.play) return RoundResult.DRAW;
-
     if (
-      (localUser.play === CardType.ROCK &&
-        opponent.play === CardType.SCISSORS) ||
-      (localUser.play === CardType.PAPER && opponent.play === CardType.ROCK) ||
-      (localUser.play === CardType.SCISSORS && opponent.play === CardType.PAPER)
+      localUser.play === undefined ||
+      opponent.play === undefined ||
+      localUser.play === opponent.play
     )
+      return RoundResult.DRAW;
+
+    if (winningCombos[localUser.play].includes(opponent.play))
       return RoundResult.WIN;
     else return RoundResult.LOSE;
   };
@@ -77,28 +98,8 @@ const useGameUtils = (): useGameUtilsReturn => {
   const getIconFromEnum = (
     code: CardType | PlayerType | RoundResult | null
   ): string | null => {
-    switch (code) {
-      case CardType.ROCK:
-        return "🪨";
-      case CardType.PAPER:
-        return "📄";
-      case CardType.SCISSORS:
-        return "✂️";
-      case CardType.UNKNOWN:
-        return "❓";
-      case PlayerType.LOCAL_USER:
-        return "🙋‍♂️";
-      case PlayerType.OPPONENT:
-        return "🤖";
-      case RoundResult.WIN:
-        return "🎉";
-      case RoundResult.LOSE:
-        return "😭";
-      case RoundResult.DRAW:
-        return "🤝";
-      default:
-        return null;
-    }
+    if (code === null) return null;
+    return icons[code];
   };
 
   return {
