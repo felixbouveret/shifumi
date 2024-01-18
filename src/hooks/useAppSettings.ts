@@ -25,7 +25,7 @@ const useAppSettings = (): UseAppSettingsReturn => {
     useStorage();
 
   const [appSettings, setAppSettings] = useState<AppSettings>(
-    getFromLocalStorage<AppSettings>(StorageID.APP_SETTINGS) ||
+    (getFromLocalStorage<AppSettings>(StorageID.APP_SETTINGS) as AppSettings) ||
       defaultAppSettings
   );
 
@@ -35,11 +35,11 @@ const useAppSettings = (): UseAppSettingsReturn => {
     );
     if (appSettings && typeof appSettings !== "string")
       setAppSettings(appSettings);
-  }, [getFromLocalStorage]);
+  }, []);
 
   useEffect(() => {
-    setInLocalStorage(StorageID.APP_SETTINGS, appSettings);
-  }, [appSettings, setInLocalStorage]);
+    if (appSettings) setInLocalStorage(StorageID.APP_SETTINGS, appSettings);
+  }, [appSettings]);
 
   const saveAppSettings = (settings: AppSettings) => {
     setAppSettings((prev) => ({ ...prev, settings }));
