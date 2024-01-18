@@ -1,3 +1,5 @@
+import { StorageID } from "@/types/storage.enum";
+
 const getFromStorage = <T>(
   key: string,
   storage: Storage
@@ -20,7 +22,7 @@ const setInStorage = (key: string, value: any, storage: Storage): void => {
   storage.setItem(key, formattedValue);
 };
 
-const removeFromStorage = (keys: string[], storage: Storage): void => {
+const removeFromStorage = (keys: StorageID[], storage: Storage): void => {
   keys.forEach((key) => storage.removeItem(key));
 };
 
@@ -37,7 +39,7 @@ const setInLocalStorage = (key: string, value: any): void => {
   setInStorage(key, value, window.localStorage);
 };
 
-const removeFromLocalStorage = (keys: string[]): void => {
+const removeFromLocalStorage = (keys: StorageID[]): void => {
   removeFromStorage(keys, window.localStorage);
 };
 

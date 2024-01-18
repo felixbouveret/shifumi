@@ -2,6 +2,7 @@ import "./HomeModule.scss";
 import React from "react";
 import Card from "@/components/Card";
 import Footer from "@/components/Footer";
+import WellSwitch from "./components/WellSwitch";
 import usePlayerHand from "@/hooks/usePlayerHand";
 import GamesHistory from "./components/GamesHistory";
 import { Button } from "@mui/joy";
@@ -40,6 +41,7 @@ const HomeModule: React.FC = () => {
         >
           Play now
         </Button>
+        <WellSwitch />
 
         <GamesHistory />
       </div>
