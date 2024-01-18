@@ -1,5 +1,5 @@
-import "./GamesHistory.scss";
 import React from "react";
+import style from "./GamesHistory.module.scss";
 import useGameUtils from "@/hooks/useGameUtils";
 import useGamesHistory from "@/hooks/useGamesHistory";
 import CarpetContainer from "@/components/CarpetContainer";
@@ -19,23 +19,23 @@ const GamesHistory: React.FC = () => {
 
   if (gamesHistory.length === 0) return;
   return (
-    <CarpetContainer className="gamesHistory" goldFrame>
-      <div className="heading">
+    <CarpetContainer className={style.gamesHistory} goldFrame>
+      <div className={style.heading}>
         <h2>Games history</h2>
-        <div className="labels">
+        <div className={style.labels}>
           <div>Winner</div>
-          <div className="scores">
+          <div className={style.scores}>
             <span>W</span>
             <span>L</span>
             <span>D</span>
           </div>
         </div>
       </div>
-      <div className="gamesList">
+      <div className={style.gamesList}>
         {gamesHistory.map((game, index) => (
-          <div className="game" key={index}>
+          <div className={style.game} key={index}>
             <div>{getIconFromEnum(game.winner)}</div>
-            <div className="scores">
+            <div className={style.scores}>
               <span>{game.localUser.score}</span>
               <span>{game.opponent.score}</span>
               <span>{getDrawsCount(game)}</span>
@@ -43,7 +43,7 @@ const GamesHistory: React.FC = () => {
           </div>
         ))}
         <Button
-          className="button"
+          className={style.button}
           size="sm"
           variant="plain"
           color="neutral"

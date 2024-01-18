@@ -1,9 +1,9 @@
-import "./Footer.scss";
 import React from "react";
+import style from "./Footer.module.scss";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="Footer">
+    <footer className={style.Footer}>
       <p>
         Made with{" "}
         <span role="img" aria-label="love">

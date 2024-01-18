@@ -1,5 +1,5 @@
-import "./AppMenu.scss";
 import React from "react";
+import style from "./AppMenu.module.scss";
 import { RoutesEnum } from "@/Router";
 import { Location, useNavigate } from "react-router-dom";
 import { ExitToApp, Settings } from "@mui/icons-material";
@@ -22,7 +22,7 @@ const AppMenu: React.FC<MenuProps> = ({ currenPage }) => {
   const isHomePage = currenPage.pathname === RoutesEnum.HOME;
 
   return (
-    <div id="Menu">
+    <div className={style.menu}>
       {!isHomePage && (
         <Dropdown>
           <MenuButton

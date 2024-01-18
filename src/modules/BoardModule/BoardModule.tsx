@@ -1,5 +1,6 @@
-import "./BoardModule.scss";
 import React from "react";
+import useStyles from "@/hooks/useStyles";
+import style from "./BoardModule.module.scss";
 import PlayerHand from "./components/PlayerHand";
 import usePlayerHand from "@/hooks/usePlayerHand";
 import PlayerBoard from "./components/PlayerBoard";
@@ -31,6 +32,7 @@ const BoardModule: React.FC<BoardModuleProps> = ({
   sensorHook,
 }) => {
   const { getDefaultPlayerHand, getRandomPlayableCard } = usePlayerHand();
+  const { s } = useStyles();
 
   const isOpponentPlayer = player.type === PlayerType.OPPONENT;
   const playerHand = player.cards || getDefaultPlayerHand();
@@ -78,9 +80,9 @@ const BoardModule: React.FC<BoardModuleProps> = ({
   };
 
   return (
-    <div id="playerSide" className={boardSide}>
+    <div className={s([style.playerSide, style[boardSide]])}>
       <DragDropContext onDragEnd={onDragEnd} sensors={[scriptedSensor]}>
-        <CarpetContainer className="playerBoard" goldInset>
+        <CarpetContainer className={style.playerBoard} goldInset>
           <PlayerBoard
             cardsHidden={isOpponentPlayer && !showPlay}
             plays={playerPlay}

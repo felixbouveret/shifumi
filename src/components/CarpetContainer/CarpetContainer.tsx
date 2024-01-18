@@ -1,5 +1,6 @@
-import "./CarpetContainer.scss";
 import React from "react";
+import useStyles from "@/hooks/useStyles";
+import style from "./CarpetContainer.module.scss";
 
 interface CarpetContainerProps {
   children: React.ReactNode;
@@ -14,14 +15,15 @@ const CarpetContainer: React.FC<CarpetContainerProps> = ({
   goldInset,
   goldFrame,
 }) => {
+  const { s } = useStyles();
   return (
     <div
-      className={[
-        "CarpetContainer",
+      className={s([
         className,
-        goldInset ? "goldInset" : "",
-        goldFrame ? "goldFrame" : "",
-      ].join(" ")}
+        style.CarpetContainer,
+        { [style.goldInset]: goldInset },
+        { [style.goldFrame]: goldFrame },
+      ])}
     >
       {children}
     </div>

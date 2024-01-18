@@ -1,6 +1,6 @@
-import "./PlayerBoard.scss";
 import React from "react";
 import Card from "@/components/Card";
+import style from "./PlayerBoard.module.scss";
 import { IconButton } from "@mui/joy";
 import { Shuffle } from "@mui/icons-material";
 import { Draggable, Droppable } from "react-beautiful-dnd";
@@ -32,11 +32,11 @@ const PlayerBoard: React.FC<PlayerBoardProps> = ({
   randomPlay,
 }) => {
   return (
-    <div id="playerBoard">
-      <div className="action">
+    <div id={style.playerBoard}>
+      <div className={style.action}>
         {boardSide === BoardSide.BOTTOM && (
           <IconButton
-            className="button"
+            className={style.button}
             disabled={!!plays.length || cardsHidden}
             size="lg"
             onClick={randomPlay}
@@ -49,7 +49,7 @@ const PlayerBoard: React.FC<PlayerBoardProps> = ({
       <Droppable droppableId={`${BoardPart.BOARD}${boardSide}`}>
         {(provided) => (
           <div
-            className="cardSpot"
+            className={style.cardSpot}
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
@@ -61,7 +61,7 @@ const PlayerBoard: React.FC<PlayerBoardProps> = ({
               >
                 {(provided) => (
                   <div
-                    className="cardWrapper"
+                    className={style.cardWrapper}
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
@@ -81,7 +81,7 @@ const PlayerBoard: React.FC<PlayerBoardProps> = ({
           </div>
         )}
       </Droppable>
-      <p className="score">{score}</p>
+      <p className={style.score}>{score}</p>
     </div>
   );
 };

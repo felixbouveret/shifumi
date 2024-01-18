@@ -1,6 +1,7 @@
-import "./Card.scss";
 import React from "react";
+import style from "./Card.module.scss";
 import useCards from "@/hooks/useCards";
+import useStyles from "@/hooks/useStyles";
 import ConfettiExplosion, { ConfettiProps } from "react-confetti-explosion";
 import { CardType } from "@/types/game.enum";
 
@@ -24,6 +25,7 @@ const Card: React.FC<CardProps> = ({
   winnerCard,
 }) => {
   const { getCardContent } = useCards();
+  const { s } = useStyles();
 
   const confettiConfig: ConfettiProps = {
     force: 0.4,
@@ -36,37 +38,43 @@ const Card: React.FC<CardProps> = ({
 
   return (
     <div
-      className={[
-        "cardContainer",
-        isPlayed ? "playedContainer" : "",
-        winnerCard ? "winnerContainer" : "",
-        flipOnHover ? "flipOnHover" : "",
-      ].join(" ")}
+      className={s([
+        style.cardContainer,
+        {
+          [style.playedContainer]: isPlayed,
+          [style.winnerContainer]: winnerCard,
+          [style.flipOnHover]: flipOnHover,
+        },
+      ])}
     >
-      <div className="confetti">
+      <div className={style.confetti}>
         {winnerCard && <ConfettiExplosion {...confettiConfig} />}
       </div>
       <div
-        className={[
-          "card",
-          hoverable ? "hoverable" : "",
-          isFlipped ? "flipped" : "",
-          isPlayed ? "played" : "",
-          isDisabled ? "disabled" : "",
-        ].join(" ")}
+        className={s([
+          style.card,
+          { [style.hoverable]: hoverable },
+          { [style.flipped]: isFlipped },
+          { [style.played]: isPlayed },
+          { [style.disabled]: isDisabled },
+        ])}
       >
-        <div className="back">
-          <div className="content">
-            <div className="detail">
+        <div className={style.back}>
+          <div className={style.content}>
+            <div className={style.detail}>
               <h2>♠️</h2>
             </div>
           </div>
         </div>
-        <div className="front">
-          <div className="content">
-            <p className="letters top">{getCardContent(cardType).title[0]}</p>
+        <div className={style.front}>
+          <div className={style.content}>
+            <p className={s([style.letters, style.top])}>
+              {getCardContent(cardType).title[0]}
+            </p>
             <h2>{getCardContent(cardType).icon}</h2>
-            <p className="letters bot">{getCardContent(cardType).title[0]}</p>
+            <p className={s([style.letters, style.bot])}>
+              {getCardContent(cardType).title[0]}
+            </p>
           </div>
         </div>
       </div>
