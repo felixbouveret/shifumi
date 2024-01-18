@@ -13,22 +13,22 @@
       font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 
       display: block;
-      color: #ffd700;
+      color: $gold;
       text-align: center;
       font-weight: bold;
       padding-bottom: 4px;
       margin-bottom: 4px;
-      border-bottom: solid 1px #ffd700;
+      border-bottom: solid 1px $gold;
       margin: 0;
     }
 
     .labels {
       display: flex;
       justify-content: space-between;
-      color: #113b11;
+      color: $dark-green;
       font-weight: bold;
       font-size: 16px;
-      border-bottom: solid 2px #113b11;
+      border-bottom: solid 2px $dark-green;
     }
   }
 

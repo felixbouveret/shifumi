@@ -31,10 +31,10 @@
   .labels {
     justify-content: space-between;
     gap: 20px;
-    color: #113b11;
+    color: $dark-green;
     font-weight: bold;
     font-size: 16px;
-    border-bottom: solid 2px #113b11;
+    border-bottom: solid 2px $dark-green;
     padding: 8px 0;
     margin: 0 20px;
 
@@ -69,7 +69,7 @@
     .index {
       position: absolute;
       transform: translateX(calc(-100% - 8px));
-      color: #113b11;
+      color: $dark-green;
     }
 
     .cards {
