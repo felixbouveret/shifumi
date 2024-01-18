@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/felixbouveret/shifumi/compare/v1.0.0...v1.1.0) (2024-01-18)
+
+
+### Features
+
+* **QA:** add husky and lint-staged config ([7c1dd0f](https://github.com/felixbouveret/shifumi/commit/7c1dd0f05e4852a3d9bb468cc47774b65458aebd))
+
 # 1.0.0 (2024-01-18)
 
 
