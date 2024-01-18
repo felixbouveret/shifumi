@@ -7,6 +7,7 @@ export enum CardType {
   ROCK = "rock",
   PAPER = "paper",
   SCISSORS = "scissors",
+  WELL = "well",
   UNKNOWN = "unknown",
 }
 
