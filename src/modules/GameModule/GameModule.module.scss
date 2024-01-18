@@ -1,4 +1,4 @@
-#gameModule {
+.gameModule {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -27,5 +27,6 @@
     font-size: 20px;
     font-weight: 700;
     color: rgba(white, 0.5);
+    font-family: $accent-font;
   }
 }

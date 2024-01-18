@@ -1,5 +1,5 @@
-import "./WellSwitch.scss";
 import React from "react";
+import style from "./WellSwitch.module.scss";
 import useAppSettings from "@/hooks/useAppSettings";
 import { Switch, Typography } from "@mui/joy";
 
@@ -7,7 +7,7 @@ const WellSwitch: React.FC = () => {
   const { appSettings, saveAppSettings } = useAppSettings();
 
   return (
-    <div className="wellSwitch">
+    <div className={style.wellSwitch}>
       <Typography
         component="label"
         startDecorator={

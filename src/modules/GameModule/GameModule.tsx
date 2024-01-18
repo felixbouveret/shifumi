@@ -1,6 +1,6 @@
-import "./GameModule.scss";
 import useGame from "@/hooks/useGame";
 import React, { useEffect } from "react";
+import style from "./GameModule.module.scss";
 import BoardModule from "@/modules/BoardModule";
 import useGameUtils from "@/hooks/useGameUtils";
 import PlaysHistory from "./components/PlaysHistory";
@@ -36,9 +36,9 @@ const GameModule: React.FC = () => {
   }, []);
 
   return (
-    <div id="gameModule">
+    <div className={style.gameModule}>
       {<PlaysHistory history={game?.playsHistory} />}
-      <div className="boards">
+      <div className={style.boards}>
         <BoardModule
           handDisabled={!isGameStarted || !!game?.opponent?.hasPlayed}
           boardSide={BoardSide.TOP}
@@ -54,8 +54,8 @@ const GameModule: React.FC = () => {
           sensorHook={topSensorHook}
         />
       </div>
-      <p className="roundCount">Round {game ? game.rounds + 1 : 1}</p>
-      <div className="boards">
+      <p className={style.roundCount}>Round {game ? game.rounds + 1 : 1}</p>
+      <div className={style.boards}>
         <BoardModule
           handDisabled={!isGameStarted || !!game?.localUser?.hasPlayed}
           boardSide={BoardSide.BOTTOM}

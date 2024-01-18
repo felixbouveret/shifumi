@@ -23,9 +23,6 @@
   }
 }
 
-$card-background: #dbd495;
-$card-back-color: #791111;
-
 .card {
   width: 100%;
   min-width: 100px;
@@ -87,6 +84,7 @@ $card-back-color: #791111;
       padding: 4px;
       background-color: $card-background;
       text-transform: capitalize;
+      font-family: $accent-font;
 
       &.top {
         top: -8px;

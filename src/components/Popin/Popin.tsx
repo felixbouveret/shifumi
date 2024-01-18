@@ -1,5 +1,6 @@
-import "./Popin.scss";
 import React from "react";
+import style from "./Popin.module.scss";
+import useStyles from "@/hooks/useStyles";
 
 interface PopinProps {
   visible: boolean;
@@ -8,7 +9,10 @@ interface PopinProps {
 }
 
 const Popin: React.FC<PopinProps> = ({ visible, children, className }) => {
-  return visible && <div className={`popin ${className}`}>{children}</div>;
+  const { s } = useStyles();
+  return (
+    visible && <div className={s([className, style.popin])}>{children}</div>
+  );
 };
 
 export default Popin;
