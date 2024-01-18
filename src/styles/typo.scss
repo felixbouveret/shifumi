@@ -1,0 +1,53 @@
+@font-face {
+  font-family: Tocco;
+  src: url(./fonts/Tocco-Bold.woff);
+}
+
+$accent-font: "Tocco", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+$content-font: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+@mixin typo-large-title {
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 1em;
+  color: inherit;
+  font-family: $accent-font;
+}
+@mixin typo-medium-title {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1em;
+  color: inherit;
+  font-family: $accent-font;
+}
+
+@mixin typo-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: inherit;
+  font-family: $accent-font;
+}
+
+@mixin typo-tag {
+  font-weight: 500;
+  line-height: 1em;
+  font-size: 14px;
+  font-family: $content-font;
+}
+@mixin typo-body {
+  font-weight: 500;
+  line-height: 1.2em;
+  font-size: 16px;
+  font-family: $content-font;
+}
+
+@mixin typo-headline {
+  font-weight: 500;
+  line-height: 1em;
+  font-size: 16px;
+  font-family: $content-font;
+}
+
+h1 {
+  @include typo-large-title;
+}

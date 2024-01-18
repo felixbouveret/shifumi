@@ -1,0 +1,42 @@
+$screen-xsmall: "380px";
+$screen-small: "520px";
+$screen-medium: "980px";
+$screen-large: "1200px";
+
+@mixin below($screen) {
+  @if $screen == "xsmall" {
+    $screen: $screen-xsmall;
+  }
+  @if $screen == "small" {
+    $screen: $screen-small;
+  }
+  @if $screen == "medium" {
+    $screen: $screen-medium;
+  }
+  @if $screen == "large" {
+    $screen: $screen-large;
+  }
+
+  @media (max-width: $screen) {
+    @content;
+  }
+}
+
+@mixin above($screen) {
+  @if $screen == "xsmall" {
+    $screen: $screen-xsmall;
+  }
+  @if $screen == "small" {
+    $screen: $screen-small;
+  }
+  @if $screen == "medium" {
+    $screen: $screen-medium;
+  }
+  @if $screen == "large" {
+    $screen: $screen-large;
+  }
+
+  @media (min-width: $screen) {
+    @content;
+  }
+}

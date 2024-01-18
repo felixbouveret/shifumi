@@ -33,19 +33,8 @@ const PlayerBoard: React.FC<PlayerBoardProps> = ({
 }) => {
   return (
     <div id={style.playerBoard}>
-      <div className={style.action}>
-        {boardSide === BoardSide.BOTTOM && (
-          <IconButton
-            className={style.button}
-            disabled={!!plays.length || cardsHidden}
-            size="lg"
-            onClick={randomPlay}
-            style={buttonStyle}
-          >
-            <Shuffle />
-          </IconButton>
-        )}
-      </div>
+      <p className={style.score}>{score}</p>
+
       <Droppable droppableId={`${BoardPart.BOARD}${boardSide}`}>
         {(provided) => (
           <div
@@ -81,7 +70,20 @@ const PlayerBoard: React.FC<PlayerBoardProps> = ({
           </div>
         )}
       </Droppable>
-      <p className={style.score}>{score}</p>
+
+      <div className={style.action}>
+        {boardSide === BoardSide.BOTTOM && (
+          <IconButton
+            className={style.button}
+            disabled={!!plays.length || cardsHidden}
+            size="lg"
+            onClick={randomPlay}
+            style={buttonStyle}
+          >
+            <Shuffle />
+          </IconButton>
+        )}
+      </div>
     </div>
   );
 };
