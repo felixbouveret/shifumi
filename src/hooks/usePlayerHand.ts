@@ -1,14 +1,14 @@
 import { CardType } from "@/types/game.enum";
 
 interface usePlayerHandReturn {
-  defaultPlayerHand: Omit<CardType[], CardType.UNKNOWN>;
+  defaultPlayerHand: CardType[];
   defaultOpponentHand: CardType.UNKNOWN[];
   getRandomPlayableCard: () => CardType;
 }
 
 const usePlayerHand = (): usePlayerHandReturn => {
   const defaultPlayerHand = Object.values(CardType).filter(
-    (cardType) => cardType !== CardType.UNKNOWN
+    (cardType) => cardType !== CardType.UNKNOWN && cardType !== CardType.WELL
   );
 
   const defaultOpponentHand = new Array(3).fill(CardType.UNKNOWN);
