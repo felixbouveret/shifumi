@@ -1,11 +1,21 @@
 import { useEffect, useState } from "react";
 import { useStorage } from "@/hooks/useStorage";
 import { StorageID } from "@/types/storage.enum";
+import { AppSettings } from "@/types/settings.interface";
+import { CardBackStyle, Theme } from "@/types/settings.enum";
 
-interface AppSettings {}
+const defaultAppSettings: AppSettings = {
+  game: {
+    cards: {
+      well: false,
+    },
+  },
+  theme: Theme.DARK,
+  cardBackStyle: CardBackStyle.DEFAULT,
+};
 
 interface UseAppSettingsReturn {
-  appSettings: AppSettings | undefined;
+  appSettings: AppSettings;
   saveAppSettings: (settings: AppSettings) => void;
   clearHistory: () => void;
 }
@@ -14,7 +24,8 @@ const useAppSettings = (): UseAppSettingsReturn => {
   const { getFromLocalStorage, setInLocalStorage, removeFromLocalStorage } =
     useStorage();
 
-  const [appSettings, setAppSettings] = useState<AppSettings>();
+  const [appSettings, setAppSettings] =
+    useState<AppSettings>(defaultAppSettings);
 
   useEffect(() => {
     const appSettings = getFromLocalStorage<AppSettings>(
@@ -33,7 +44,7 @@ const useAppSettings = (): UseAppSettingsReturn => {
   };
 
   const clearHistory = () => {
-    setAppSettings([]);
+    setAppSettings(defaultAppSettings);
     removeFromLocalStorage([StorageID.APP_SETTINGS]);
   };
 
