@@ -1,6 +1,7 @@
 import "./PlayerHand.scss";
-import React from "react";
 import Card from "@/components/Card";
+import React, { useMemo } from "react";
+import { useMediaQuery } from "@mui/material";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import { BoardPart, BoardSide, CardType } from "@/types/game.enum";
 
@@ -19,6 +20,15 @@ const PlayerHand: React.FC<PlayerHandProps> = ({
   disabled,
   onCardPlay,
 }) => {
+  const matches = useMediaQuery("(min-width: 540px)");
+  const cardsNumber = useMemo(() => playerHand.length, []);
+
+  const playerHandStyle = {
+    width: matches
+      ? 138 * cardsNumber - 8 + "px"
+      : 108 * cardsNumber - 8 + "px",
+  };
+
   return (
     <Droppable droppableId={BoardPart.HAND + boardSide} direction="horizontal">
       {(provided) => (
@@ -29,6 +39,7 @@ const PlayerHand: React.FC<PlayerHandProps> = ({
             cardsHidden ? "cardsHidden" : "",
             boardSide,
           ].join(" ")}
+          style={playerHandStyle}
           ref={provided.innerRef}
           {...provided.droppableProps}
         >
