@@ -30,10 +30,10 @@ const BoardModule: React.FC<BoardModuleProps> = ({
   setPlayerPlay,
   sensorHook,
 }) => {
-  const { defaultPlayerHand, getRandomPlayableCard } = usePlayerHand();
+  const { getDefaultPlayerHand, getRandomPlayableCard } = usePlayerHand();
 
   const isOpponentPlayer = player.type === PlayerType.OPPONENT;
-  const playerHand = player.cards || defaultPlayerHand;
+  const playerHand = player.cards || getDefaultPlayerHand();
   const playerPlay = player.play ? [player.play] : [];
 
   const onDragEnd = (result: DropResult) => {

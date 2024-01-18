@@ -24,8 +24,10 @@ const useAppSettings = (): UseAppSettingsReturn => {
   const { getFromLocalStorage, setInLocalStorage, removeFromLocalStorage } =
     useStorage();
 
-  const [appSettings, setAppSettings] =
-    useState<AppSettings>(defaultAppSettings);
+  const [appSettings, setAppSettings] = useState<AppSettings>(
+    getFromLocalStorage<AppSettings>(StorageID.APP_SETTINGS) ||
+      defaultAppSettings
+  );
 
   useEffect(() => {
     const appSettings = getFromLocalStorage<AppSettings>(

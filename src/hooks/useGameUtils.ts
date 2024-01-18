@@ -36,12 +36,12 @@ const icons = {
 };
 
 const useGameUtils = (): useGameUtilsReturn => {
-  const { defaultPlayerHand } = usePlayerHand();
+  const { getDefaultPlayerHand } = usePlayerHand();
 
   const getFreshPlayer = <T>(type: T): Player<T> => ({
     type,
     play: undefined,
-    cards: defaultPlayerHand,
+    cards: getDefaultPlayerHand(),
     score: 0,
     wonTheRound: false,
     hasPlayed: false,
