@@ -1,3 +1,18 @@
+# [1.2.0](https://github.com/felixbouveret/shifumi/compare/v1.1.0...v1.2.0) (2024-01-19)
+
+
+### Bug Fixes
+
+* build and netlify reload ([e007500](https://github.com/felixbouveret/shifumi/commit/e0075008ba352530d1bd8ca450fee0790f903ec8))
+* typos issues due to css reset ([#17](https://github.com/felixbouveret/shifumi/issues/17)) ([909dfa9](https://github.com/felixbouveret/shifumi/commit/909dfa9f5e0a24412c388b2b47f9bdd767013839))
+
+
+### Features
+
+* add settings and new well card option ([#15](https://github.com/felixbouveret/shifumi/issues/15)) ([39f9d66](https://github.com/felixbouveret/shifumi/commit/39f9d66ac6dedf849045ef8ce4c3dd06e6f008c6))
+* **SEO:** update favicon and add og image ([056ca35](https://github.com/felixbouveret/shifumi/commit/056ca357d710b38801ffe0185e9eb98ac3bc62b1))
+* switch to css modules and add global styles ([#16](https://github.com/felixbouveret/shifumi/issues/16)) ([cd951bd](https://github.com/felixbouveret/shifumi/commit/cd951bd2e2f5e4c681b0e4c68f822561a2eea1da))
+
 # [1.1.0](https://github.com/felixbouveret/shifumi/compare/v1.0.0...v1.1.0) (2024-01-18)
 
 
