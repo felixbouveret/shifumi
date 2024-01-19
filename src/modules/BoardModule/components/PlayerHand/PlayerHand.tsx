@@ -1,6 +1,8 @@
-import "./PlayerHand.scss";
-import React from "react";
 import Card from "@/components/Card";
+import React, { useMemo } from "react";
+import useStyles from "@/hooks/useStyles";
+import style from "./PlayerHand.module.scss";
+import { useMediaQuery } from "@mui/material";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import { BoardPart, BoardSide, CardType } from "@/types/game.enum";
 
@@ -19,16 +21,27 @@ const PlayerHand: React.FC<PlayerHandProps> = ({
   disabled,
   onCardPlay,
 }) => {
+  const { s } = useStyles();
+  const matches = useMediaQuery("(min-width: 540px)");
+  const cardsNumber = useMemo(() => playerHand.length, []);
+
+  const playerHandStyle = {
+    width: matches
+      ? 138 * cardsNumber - 8 + "px"
+      : 108 * cardsNumber - 8 + "px",
+  };
+
   return (
     <Droppable droppableId={BoardPart.HAND + boardSide} direction="horizontal">
       {(provided) => (
         <div
-          id="playerHand"
-          className={[
-            disabled ? "handDisabled" : "",
-            cardsHidden ? "cardsHidden" : "",
-            boardSide,
-          ].join(" ")}
+          className={s([
+            style.playerHand,
+            style[boardSide],
+            { [style.handDisabled]: disabled },
+            { [style.cardsHidden]: cardsHidden },
+          ])}
+          style={playerHandStyle}
           ref={provided.innerRef}
           {...provided.droppableProps}
         >
@@ -44,7 +57,7 @@ const PlayerHand: React.FC<PlayerHandProps> = ({
                   <div
                     onDoubleClick={() => onCardPlay(cardType)}
                     onClick={() => onCardPlay(cardType)}
-                    className="cardWrapper"
+                    className={style.cardWrapper}
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}

@@ -1,15 +1,9 @@
-#playerHand {
+.playerHand {
   display: flex;
-  margin-left: -8px;
-  width: 100%;
-  max-width: calc((108px) * 3 - 8px);
+  margin-right: -8px;
   transition: transform 0.5s ease;
   animation: slideUp 0.8s ease;
   align-self: center;
-
-  @media (min-width: 540px) {
-    max-width: calc((138px) * 3 - 8px);
-  }
 
   &.top {
     animation: slideDown 0.8s ease;

@@ -1,6 +1,6 @@
-import "./PartyEndPopin.scss";
 import React from "react";
 import Popin from "../Popin";
+import style from "./PartyEndPopin.module.scss";
 import ConfettiExplosion, { ConfettiProps } from "react-confetti-explosion";
 import { Button } from "@mui/joy";
 import { PlayerType } from "@/types/game.enum";
@@ -28,15 +28,15 @@ const PartyEndPopin: React.FC<PartyEndPopinProps> = ({
   const winner = player === PlayerType.LOCAL_USER ? "Victory!" : "Defeat...";
 
   return (
-    <Popin className="partyEndPopin" visible={visible}>
+    <Popin className={style.partyEndPopin} visible={visible}>
       {player === PlayerType.LOCAL_USER && (
-        <div className="confetti">
+        <div className={style.confetti}>
           <ConfettiExplosion {...confettiConfig} />
         </div>
       )}
 
       <h2>{winner}</h2>
-      <div className="buttons">
+      <div className={style.buttons}>
         <Button onClick={() => navigate("/")}>Back to home</Button>
         <Button onClick={() => onClosed()}>Play again</Button>
       </div>
