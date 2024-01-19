@@ -10,19 +10,22 @@
     padding: 0 20px;
 
     h2 {
-      font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+      @include typo-title;
+      font-family: $content-font;
 
       display: block;
       color: $gold;
       text-align: center;
       font-weight: bold;
+      margin: 0;
       padding-bottom: 4px;
       margin-bottom: 4px;
       border-bottom: solid 1px $gold;
-      margin: 0;
     }
 
     .labels {
+      font-family: $accent-font;
+
       display: flex;
       justify-content: space-between;
       color: $dark-green;
