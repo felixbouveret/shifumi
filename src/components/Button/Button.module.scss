@@ -1,0 +1,86 @@
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+  border-radius: 12px;
+  padding: 8px 24px;
+  font-size: 16px;
+  line-height: 24px;
+  cursor: pointer;
+  text-decoration: none;
+
+  transition: background-color 0.1s ease;
+  transition-property: background-color, border-color, box-shadow, color, fill,
+    stroke, opacity;
+
+  .content {
+    height: 24px;
+  }
+
+  &.iconButton {
+    max-height: 44px;
+    max-width: 44px;
+    padding: 8px;
+  }
+
+  &.gold {
+    background-color: $gold;
+    color: $dark-gold;
+    border: solid 3px $dark-gold;
+    box-shadow: 0 0 0 3px $gold, 0 0 20px 0px rgba(0, 0, 0, 0.2);
+
+    &:hover {
+      background-color: $hover-gold;
+    }
+  }
+
+  &.silver {
+    background-color: $silver;
+    color: $dark-silver;
+    border: solid 3px $dark-silver;
+    box-shadow: 0 0 0 3px $silver, 0 0 20px 0px rgba(0, 0, 0, 0.2);
+
+    &:hover {
+      background-color: $hover-silver;
+    }
+  }
+
+  &.clear {
+    background-color: transparent;
+    color: $dark-green;
+    border: 0;
+    box-shadow: none;
+
+    &:hover {
+      color: $darker-green;
+      background-color: $green;
+    }
+  }
+
+  &.disabled {
+    background-color: $silver;
+    color: $dark-silver;
+    cursor: not-allowed;
+    border: solid 3px $dark-silver;
+    box-shadow: 0 0 0 3px $silver, 0 0 20px 0px rgba(0, 0, 0, 0.2);
+
+    &:hover {
+      background-color: $silver;
+    }
+  }
+
+  &.loading {
+    cursor: progress;
+    &:hover {
+      background-color: $gold;
+    }
+
+    &.disabled {
+      &:hover {
+        background-color: $silver;
+      }
+    }
+  }
+}

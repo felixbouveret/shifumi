@@ -7,8 +7,7 @@
   margin: 0 auto;
 
   @media (min-width: 540px) {
-    justify-content: center;
-    gap: 40px;
+    justify-content: space-evenly;
   }
 
   .cardSpot {

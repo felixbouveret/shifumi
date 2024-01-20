@@ -5,14 +5,14 @@
   gap: 24px;
 
   > .playerBoard {
-    padding: 20px 0 28px;
+    padding: 20px 8px 28px;
   }
 
   &.top {
     flex-direction: column-reverse;
 
     > .playerBoard {
-      padding: 28px 0 20px;
+      padding: 28px 8px 20px;
     }
   }
 }

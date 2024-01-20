@@ -1,9 +1,9 @@
 import React from "react";
+import Button from "@/components/Button";
 import style from "./GamesHistory.module.scss";
 import useGameUtils from "@/hooks/useGameUtils";
 import useGamesHistory from "@/hooks/useGamesHistory";
 import CarpetContainer from "@/components/CarpetContainer";
-import { Button } from "@mui/joy";
 import { Game } from "@/types/game.interface";
 
 const GamesHistory: React.FC = () => {
@@ -42,14 +42,7 @@ const GamesHistory: React.FC = () => {
             </div>
           </div>
         ))}
-        <Button
-          className={style.button}
-          size="sm"
-          variant="plain"
-          color="neutral"
-          onClick={clearHistory}
-          style={{ color: "#113b11" }}
-        >
+        <Button className={style.button} variant="clear" onClick={clearHistory}>
           Clear history
         </Button>
       </div>
