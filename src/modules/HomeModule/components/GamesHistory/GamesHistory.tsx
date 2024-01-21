@@ -42,7 +42,12 @@ const GamesHistory: React.FC = () => {
             </div>
           </div>
         ))}
-        <Button className={style.button} variant="clear" onClick={clearHistory}>
+        <Button
+          className={style.button}
+          variant="clear"
+          color="green"
+          onClick={clearHistory}
+        >
           Clear history
         </Button>
       </div>

@@ -7,7 +7,8 @@ interface ButtonProps {
   className?: string;
   children: React.ReactNode;
   iconButton?: boolean;
-  variant?: "gold" | "silver" | "clear";
+  variant?: "solid" | "clear";
+  color?: "gold" | "silver" | "white" | "green";
   onClick?: () => void;
   href?: string;
   disabled?: boolean;
@@ -20,7 +21,8 @@ const Button: React.FC<ButtonProps> = ({
   className,
   children,
   iconButton = false,
-  variant = "gold",
+  variant = "solid",
+  color = "gold",
   onClick,
   href,
   disabled,
@@ -34,6 +36,7 @@ const Button: React.FC<ButtonProps> = ({
     className,
     style.buttonContainer,
     style[variant],
+    style[color],
     {
       [style.disabled]: disabled,
       [style.loading]: loading,
