@@ -6,8 +6,6 @@ interface SwitchProps {
   className?: string;
   checked: boolean;
   label: string;
-  variant?: "solid" | "clear";
-  color?: "gold" | "silver" | "white" | "green";
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   disabled?: boolean;
   loading?: boolean;
@@ -17,8 +15,6 @@ const Switch: React.FC<SwitchProps> = ({
   className,
   checked,
   label,
-  variant = "solid",
-  color = "gold",
   onChange,
   disabled,
   loading,
@@ -28,8 +24,6 @@ const Switch: React.FC<SwitchProps> = ({
   const classes = s([
     className,
     style.switchContainer,
-    style[variant],
-    style[color],
     {
       [style.disabled]: disabled,
       [style.loading]: loading,
