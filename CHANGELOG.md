@@ -1,3 +1,15 @@
+# [1.3.0](https://github.com/felixbouveret/shifumi/compare/v1.2.0...v1.3.0) (2024-01-25)
+
+
+### Bug Fixes
+
+* **PlaysHistory:** fix layout and alignments [#20](https://github.com/felixbouveret/shifumi/issues/20) ([7ef7dd2](https://github.com/felixbouveret/shifumi/commit/7ef7dd2601b0fc433ad3922c6bf07d8dac461770))
+
+
+### Features
+
+* remove mui/joy lib - create global components - update app menu ([#19](https://github.com/felixbouveret/shifumi/issues/19)) ([99cb5ed](https://github.com/felixbouveret/shifumi/commit/99cb5edd20e8e461f45e4c190288bdbedcc1e5a8))
+
 # [1.2.0](https://github.com/felixbouveret/shifumi/compare/v1.1.0...v1.2.0) (2024-01-19)
 
 
