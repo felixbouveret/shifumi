@@ -109,4 +109,8 @@
       }
     }
   }
+
+  &:focus-visible {
+    outline: solid 2px $light-gold;
+  }
 }
