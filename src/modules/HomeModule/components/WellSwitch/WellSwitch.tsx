@@ -9,7 +9,7 @@ const WellSwitch: React.FC = () => {
   return (
     <div className={style.wellSwitch}>
       <Switch
-        label="Turn on well mode 🕳️"
+        label="Enable well mode 🕳️"
         checked={appSettings.game.cards.well}
         onChange={(e) => {
           const newAppSettings = { ...appSettings };
