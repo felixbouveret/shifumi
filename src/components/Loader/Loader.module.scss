@@ -1,0 +1,51 @@
+.loaderContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  height: 100%;
+
+  &.gold .dot {
+    background-color: $dark-gold;
+  }
+  &.silver .dot {
+    background-color: $dark-silver;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    transform: translateY(-2px);
+
+    animation: dot-slide 1s ease-in-out infinite;
+
+    &:nth-child(2) {
+      animation-delay: 0.1s;
+    }
+
+    &:nth-child(3) {
+      animation-delay: 0.2s;
+    }
+  }
+
+  &.small {
+    gap: 2px;
+    .dot {
+      width: 4px;
+      height: 4px;
+    }
+  }
+}
+
+@keyframes dot-slide {
+  0% {
+    transform: translateY(-2px);
+  }
+  50% {
+    transform: translateY(2px);
+  }
+  100% {
+    transform: translateY(-2px);
+  }
+}

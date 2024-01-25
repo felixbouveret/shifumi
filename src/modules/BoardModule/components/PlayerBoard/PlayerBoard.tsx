@@ -1,7 +1,7 @@
 import React from "react";
 import Card from "@/components/Card";
+import Button from "@/components/Button";
 import style from "./PlayerBoard.module.scss";
-import { IconButton } from "@mui/joy";
 import { Shuffle } from "@mui/icons-material";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import { BoardPart, BoardSide, CardType } from "@/types/game.enum";
@@ -14,14 +14,6 @@ interface PlayerBoardProps {
   wonTheRound: boolean;
   randomPlay: () => void;
 }
-
-const buttonStyle = {
-  backgroundColor: "#ffd700",
-  color: "rgb(189 164 29)",
-  borderRadius: "8px",
-  border: "solid 3px rgb(189 164 29)",
-  boxShadow: "0 0 0 3px #ffd700, 0 0 20px 0px rgba(0,0,0, 0.2)",
-};
 
 const PlayerBoard: React.FC<PlayerBoardProps> = ({
   cardsHidden,
@@ -73,15 +65,14 @@ const PlayerBoard: React.FC<PlayerBoardProps> = ({
 
       <div className={style.action}>
         {boardSide === BoardSide.BOTTOM && (
-          <IconButton
+          <Button
+            iconButton
             className={style.button}
             disabled={!!plays.length || cardsHidden}
-            size="lg"
             onClick={randomPlay}
-            style={buttonStyle}
           >
             <Shuffle />
-          </IconButton>
+          </Button>
         )}
       </div>
     </div>

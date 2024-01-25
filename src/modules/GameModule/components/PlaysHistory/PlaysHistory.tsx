@@ -1,5 +1,6 @@
 import React from "react";
 import useCards from "@/hooks/useCards";
+import useStyles from "@/hooks/useStyles";
 import style from "./PlaysHistory.module.scss";
 import useGameUtils from "@/hooks/useGameUtils";
 import CarpetContainer from "@/components/CarpetContainer";
@@ -12,31 +13,32 @@ interface PlaysHistoryProps {
 
 const PlaysHistory: React.FC<PlaysHistoryProps> = ({ history }) => {
   const { getCardContent } = useCards();
+  const { s } = useStyles();
   const { getIconFromEnum, getRoundResultFromWinner } = useGameUtils();
 
   return (
-    <CarpetContainer className={style.PlaysHistoryContainer} goldFrame>
-      <div className={style.labels}>
+    <CarpetContainer className={style.playsHistoryContainer} goldFrame>
+      <div className={s([style.head, style.row])}>
         <div className={style.cards}>
           <span>{getIconFromEnum(PlayerType.LOCAL_USER)}</span>
           <span>{getIconFromEnum(PlayerType.OPPONENT)}</span>
         </div>
         <span className={style.result}>R</span>
       </div>
-      <div className={style.PlaysHistory}>
+      <div className={style.playsHistory}>
         <div className={style.placeholder} />
         <div className={style.inner}>
           {history &&
             history.map((play, index) => (
-              <div className={style.play} key={index}>
+              <div className={s([style.play, style.row])} key={index}>
                 <p className={style.index}>{index + 1}</p>
                 <div className={style.cards}>
-                  <div>{getCardContent(play.localUser).icon}</div>
-                  <div>{getCardContent(play.opponent).icon}</div>
+                  <span>{getCardContent(play.localUser).icon}</span>
+                  <span>{getCardContent(play.opponent).icon}</span>
                 </div>
-                <div className={style.result}>
+                <span className={style.result}>
                   {getIconFromEnum(getRoundResultFromWinner(play.roundWinner))}
-                </div>
+                </span>
               </div>
             ))}
         </div>
