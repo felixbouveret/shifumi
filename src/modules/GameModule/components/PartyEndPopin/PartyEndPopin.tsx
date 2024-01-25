@@ -1,6 +1,6 @@
 import React from "react";
-import Popin from "../Popin";
-import Button from "../Button";
+import Popin from "@/components/Popin";
+import Button from "@/components/Button";
 import style from "./PartyEndPopin.module.scss";
 import ConfettiExplosion, { ConfettiProps } from "react-confetti-explosion";
 import { PlayerType } from "@/types/game.enum";
