@@ -13,9 +13,9 @@
     display: flex;
     background-color: $hover-silver;
     border: solid 2px $dark-silver;
-    width: 32px;
+    width: 40px;
     height: 22px;
-    border-radius: 8px;
+    border-radius: 24px;
     padding: 2px;
 
     cursor: pointer;
@@ -25,7 +25,7 @@
       stroke, opacity;
 
     &:hover {
-      background-color: $hover-silver;
+      background-color: $silver;
     }
 
     &:before {
@@ -35,7 +35,7 @@
       width: calc(50% - 8px);
       height: calc(100% - 8px);
 
-      border-radius: 4px;
+      border-radius: 23px;
 
       background-color: $light-silver;
       border: solid 2px $dark-silver;
@@ -63,6 +63,10 @@
         border-color: $dark-gold;
         background-color: $light-gold;
       }
+
+      &:hover {
+        background-color: $hover-gold;
+      }
     }
 
     &:focus-visible {
@@ -74,22 +78,29 @@
     }
 
     &:checked + .label .slider::before {
-      left: calc(100% - 12px);
+      left: calc(100% - 16px);
     }
   }
 
   &.disabled {
+    opacity: 0.3;
     &:hover {
     }
   }
 
   &.loading {
-    &:hover {
+    .slider {
+      display: flex;
+      justify-content: center;
+      cursor: progress;
+
+      &:before {
+        opacity: 0.2;
+      }
     }
 
     &.disabled {
-      &:hover {
-      }
+      opacity: 0.1;
     }
   }
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import Loader from "../Loader";
 import style from "./Switch.module.scss";
 import useStyles from "@/hooks/useStyles";
 
@@ -32,18 +33,31 @@ const Switch: React.FC<SwitchProps> = ({
 
   const randomId = Math.random().toString(36).substring(7);
 
+  const onValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (disabled || loading) return null;
+    onChange(e);
+  };
+
   return (
     <div className={classes}>
       <input
         className={style.input}
         checked={checked}
-        onChange={onChange}
+        onChange={onValueChange}
         type="checkbox"
         id={randomId}
         disabled={disabled}
       />
       <label className={style.label} htmlFor={randomId}>
-        <div className={style.slider}></div>
+        <div className={style.slider}>
+          {loading && (
+            <Loader
+              small
+              className={style.loader}
+              color={checked ? "gold" : "silver"}
+            />
+          )}
+        </div>
         {label}
       </label>
     </div>
