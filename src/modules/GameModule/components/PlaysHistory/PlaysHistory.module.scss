@@ -1,4 +1,4 @@
-.PlaysHistoryContainer {
+.playsHistoryContainer {
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -15,10 +15,10 @@
     transform: translate(calc(-300% - 4px), -50%);
   }
 
-  .play,
-  .labels {
+  .row {
     display: flex;
     align-items: center;
+    justify-content: space-between;
 
     gap: 20px;
 
@@ -26,28 +26,28 @@
       display: flex;
       gap: 4px;
     }
-  }
 
-  .labels {
-    justify-content: space-between;
-    gap: 20px;
-    color: $dark-green;
-    font-weight: bold;
-    font-size: 16px;
-    border-bottom: solid 2px $dark-green;
-    padding: 8px 0;
-    margin: 0 20px;
-
-    & span {
-      font-family: $accent-font;
+    span {
       text-align: center;
       display: block;
       width: 20px;
     }
   }
+
+  .head {
+    color: $dark-green;
+    font-weight: bold;
+    border-bottom: solid 2px $dark-green;
+    padding: 8px 0;
+    margin: 0 20px;
+
+    span {
+      font-family: $accent-font;
+    }
+  }
 }
 
-.PlaysHistory {
+.playsHistory {
   display: flex;
   flex-direction: column-reverse;
   height: 100%;
@@ -63,21 +63,12 @@
 
   .play {
     position: relative;
-    display: flex;
-    align-items: center;
-
-    gap: 20px;
 
     .index {
       position: absolute;
       transform: translateX(calc(-100% - 8px));
       color: $dark-green;
       font-family: $accent-font;
-    }
-
-    .cards {
-      display: flex;
-      gap: 4px;
     }
   }
 
