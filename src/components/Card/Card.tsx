@@ -1,6 +1,6 @@
 import React from "react";
+import Icon from "../Icon";
 import style from "./Card.module.scss";
-import useCards from "@/hooks/useCards";
 import useStyles from "@/hooks/useStyles";
 import ConfettiExplosion, { ConfettiProps } from "react-confetti-explosion";
 import { CardType } from "@/types/game.enum";
@@ -24,7 +24,6 @@ const Card: React.FC<CardProps> = ({
   isDisabled,
   winnerCard,
 }) => {
-  const { getCardContent } = useCards();
   const { s } = useStyles();
 
   const confettiConfig: ConfettiProps = {
@@ -62,19 +61,15 @@ const Card: React.FC<CardProps> = ({
         <div className={style.back}>
           <div className={style.content}>
             <div className={style.detail}>
-              <h2>♠️</h2>
+              <Icon name="spades" size={38} />
             </div>
           </div>
         </div>
         <div className={style.front}>
           <div className={style.content}>
-            <p className={s([style.letters, style.top])}>
-              {getCardContent(cardType).title[0]}
-            </p>
-            <h2>{getCardContent(cardType).icon}</h2>
-            <p className={s([style.letters, style.bot])}>
-              {getCardContent(cardType).title[0]}
-            </p>
+            <p className={s([style.letters, style.top])}>{cardType[0]}</p>
+            <Icon name={cardType} size={38} />
+            <p className={s([style.letters, style.bot])}>{cardType[0]}</p>
           </div>
         </div>
       </div>
