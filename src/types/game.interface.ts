@@ -24,3 +24,5 @@ export interface Game {
   isGameOver: boolean;
   winner: PlayerType | null;
 }
+
+export type CardIcons = keyof typeof import("@/assets/cards");

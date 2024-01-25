@@ -6,7 +6,7 @@ import useStyles from "@/hooks/useStyles";
 interface SwitchProps {
   className?: string;
   checked: boolean;
-  label: string;
+  children: React.ReactNode;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   disabled?: boolean;
   loading?: boolean;
@@ -14,8 +14,8 @@ interface SwitchProps {
 
 const Switch: React.FC<SwitchProps> = ({
   className,
+  children,
   checked,
-  label,
   onChange,
   disabled,
   loading,
@@ -58,7 +58,7 @@ const Switch: React.FC<SwitchProps> = ({
             />
           )}
         </div>
-        {label}
+        {children}
       </label>
     </div>
   );
