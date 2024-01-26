@@ -1,19 +1,18 @@
 #playerBoard {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
   position: relative;
-  margin: 0 auto;
 
-  @media (width >= 540px) {
-    justify-content: space-evenly;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  margin: 0 auto;
 
   .cardSpot {
     width: 100px;
     height: 120px;
-    border-radius: 8px;
+
     background-color: rgb(#000, 20%);
+    border-radius: 8px;
     box-shadow: 0 0 0 6px rgb(#000, 10%);
 
     @media (width >= 540px) {
@@ -29,20 +28,26 @@
   .score,
   .action {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+
     width: 60px;
+
     font-family: $accent-font;
   }
 
   .score {
+    margin: 0;
     font-size: 64px;
     font-weight: 700;
     color: rgb(#000, 30%);
-    margin: 0;
   }
 
   .button {
     width: auto;
+  }
+
+  @media (width >= 540px) {
+    justify-content: space-evenly;
   }
 }

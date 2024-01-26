@@ -3,24 +3,29 @@
   z-index: 999;
   bottom: 0;
   left: 0;
-  width: 100%;
-  padding: 24px;
-  text-align: center;
+
   display: flex;
   justify-content: center;
+
+  width: 100%;
+  padding: 24px;
+
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  text-align: center;
 
   p {
-    background-color: rgb(black, 50%);
     display: block;
-    padding: 4px 12px;
-    border-radius: 12px;
+
     margin: 0;
+    padding: 4px 12px;
+
+    background-color: rgb(black, 50%);
+    border-radius: 12px;
   }
 
   a {
+    font-weight: bold;
     color: $gold;
     text-decoration: none;
-    font-weight: bold;
   }
 }

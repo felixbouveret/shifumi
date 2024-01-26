@@ -1,34 +1,39 @@
 .buttonContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  font-weight: bold;
-  border-radius: 12px;
-  padding: 8px 24px;
-  font-size: 16px;
-  line-height: 24px;
   cursor: pointer;
+
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+
+  padding: 8px 24px;
+
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 24px;
   text-decoration: none;
+
+  border-radius: 12px;
+
   transition: background-color 0.1s ease;
   transition-property: background-color, border-color, box-shadow, color, fill,
     stroke, opacity;
 
   .content {
-    height: 24px;
     display: flex;
+    height: 24px;
   }
 
   &.iconButton {
-    max-height: 44px;
     max-width: 44px;
+    max-height: 44px;
     padding: 8px;
   }
 
   &.solid {
     &.gold {
-      background-color: $gold;
       color: $dark-gold;
+      background-color: $gold;
       border: solid 3px $dark-gold;
       box-shadow: 0 0 0 3px $gold, 0 0 20px 0 rgba(black, 0.2);
 
@@ -38,8 +43,8 @@
     }
 
     &.silver {
-      background-color: $silver;
       color: $dark-silver;
+      background-color: $silver;
       border: solid 3px $dark-silver;
       box-shadow: 0 0 0 3px $silver, 0 0 20px 0 rgb(black, 20%);
 
@@ -93,9 +98,11 @@
 
   &.solid.disabled,
   &.clear.disabled {
-    background-color: $silver;
-    color: $dark-silver;
     cursor: not-allowed;
+
+    color: $dark-silver;
+
+    background-color: $silver;
     border: solid 3px $dark-silver;
     box-shadow: 0 0 0 3px $silver, 0 0 20px 0 rgb(black, 20%);
 

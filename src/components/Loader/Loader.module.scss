@@ -1,8 +1,9 @@
 .loaderContainer {
   display: flex;
-  justify-content: center;
-  align-items: center;
   gap: 4px;
+  align-items: center;
+  justify-content: center;
+
   height: 100%;
 
   &.gold .dot {
@@ -14,10 +15,13 @@
   }
 
   .dot {
+    transform: translateY(-2px);
+
     width: 8px;
     height: 8px;
+
     border-radius: 50%;
-    transform: translateY(-2px);
+
     animation: dot-slide 1s ease-in-out infinite;
 
     &:nth-child(2) {

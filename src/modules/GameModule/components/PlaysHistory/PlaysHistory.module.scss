@@ -1,24 +1,23 @@
 .playsHistoryContainer {
   position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(calc(-100% - 4px), -50%);
+
   display: flex;
   flex-direction: column;
-  left: 0;
-  top: 50%;
-  transform: translate(calc(-100% - 4px), -50%);
-  height: 100%;
-  min-width: 136px;
-  max-height: 300px;
-  transition: transform 0.3s ease-in-out;
 
-  @media screen and (width <= 1020px) {
-    transform: translate(calc(-300% - 4px), -50%);
-  }
+  min-width: 136px;
+  height: 100%;
+  max-height: 300px;
+
+  transition: transform 0.3s ease-in-out;
 
   .row {
     display: flex;
+    gap: 20px;
     align-items: center;
     justify-content: space-between;
-    gap: 20px;
 
     .cards {
       display: flex;
@@ -33,30 +32,37 @@
   }
 
   .head {
-    color: $dark-green;
-    font-weight: bold;
-    border-bottom: solid 2px $dark-green;
-    padding: 8px 0;
     margin: 0 20px;
+    padding: 8px 0;
+
+    font-weight: bold;
+    color: $dark-green;
+
+    border-bottom: solid 2px $dark-green;
 
     span {
       font-family: $accent-font;
     }
   }
+
+  @media screen and (width <= 1020px) {
+    transform: translate(calc(-300% - 4px), -50%);
+  }
 }
 
 .playsHistory {
+  overflow-y: scroll;
   display: flex;
   flex-direction: column-reverse;
   height: 100%;
-  overflow-y: scroll;
 
   .inner {
     display: flex;
     flex-direction: column;
-    padding: 12px 20px 8px;
-    height: fit-content;
     gap: 8px;
+
+    height: fit-content;
+    padding: 12px 20px 8px;
   }
 
   .play {
@@ -65,8 +71,8 @@
     .index {
       position: absolute;
       transform: translateX(calc(-100% - 8px));
-      color: $dark-green;
       font-family: $accent-font;
+      color: $dark-green;
     }
   }
 

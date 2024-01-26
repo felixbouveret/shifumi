@@ -1,13 +1,15 @@
 :root {
   @include typo-body;
 
-  color-scheme: light dark;
   color: rgb(255, 255, 255, 87%);
-  background-color: #242424;
-  font-synthesis: none;
   text-rendering: optimizelegibility;
+
+  color-scheme: light dark;
+  background-color: #242424;
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-synthesis: none;
 }
 
 * {
@@ -15,8 +17,8 @@
 }
 
 body {
-  margin: 0;
   overflow: hidden;
   min-width: 320px;
   min-height: 100dvh;
+  margin: 0;
 }

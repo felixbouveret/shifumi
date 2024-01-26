@@ -1,34 +1,38 @@
 .homeContainer {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   gap: 90px;
-  height: 100%;
-  max-width: 300px;
+  justify-content: space-around;
+
   width: 100%;
+  max-width: 300px;
+  height: 100%;
   margin: 0 auto;
   padding: 0 20px;
+
   text-align: center;
 
   .content {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     gap: 24px;
+    justify-content: center;
   }
 
   .cardsSlider {
-    display: flex;
     position: relative;
     transform: rotate(30deg);
+    display: flex;
     justify-content: center;
 
     .cardsInner {
       display: flex;
-      justify-content: center;
       gap: 16px;
-      animation: slide 300s linear infinite alternate;
+      justify-content: center;
+
       width: fit-content;
+
+      animation: slide 300s linear infinite alternate;
     }
 
     &.bot .cardsInner {
