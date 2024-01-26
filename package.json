@@ -17,7 +17,7 @@
     "*.{ts,tsx}": [
       "eslint --ext '.ts,.tsx' --fix"
     ],
-    "*.{module.scss}": [
+    "*.module.scss": [
       "npx stylelint"
     ]
   },
