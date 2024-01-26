@@ -1,4 +1,4 @@
-import "./index.scss";
+import "./index.module.scss";
 import "./fonts/Tocco-Bold.woff";
 import App from "./App.tsx";
 import ReactDOM from "react-dom/client";

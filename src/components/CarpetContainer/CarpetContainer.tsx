@@ -20,7 +20,7 @@ const CarpetContainer: React.FC<CarpetContainerProps> = ({
     <div
       className={s([
         className,
-        style.CarpetContainer,
+        style.carpetContainer,
         { [style.goldInset]: goldInset },
         { [style.goldFrame]: goldFrame },
       ])}

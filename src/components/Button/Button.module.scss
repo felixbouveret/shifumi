@@ -10,7 +10,6 @@
   line-height: 24px;
   cursor: pointer;
   text-decoration: none;
-
   transition: background-color 0.1s ease;
   transition-property: background-color, border-color, box-shadow, color, fill,
     stroke, opacity;
@@ -31,7 +30,7 @@
       background-color: $gold;
       color: $dark-gold;
       border: solid 3px $dark-gold;
-      box-shadow: 0 0 0 3px $gold, 0 0 20px 0px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 0 0 3px $gold, 0 0 20px 0 rgba(black, 0.2);
 
       &:hover {
         background-color: $hover-gold;
@@ -42,7 +41,7 @@
       background-color: $silver;
       color: $dark-silver;
       border: solid 3px $dark-silver;
-      box-shadow: 0 0 0 3px $silver, 0 0 20px 0px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 0 0 3px $silver, 0 0 20px 0 rgb(black, 20%);
 
       &:hover {
         background-color: $hover-silver;
@@ -57,27 +56,34 @@
 
     &.gold {
       color: $gold;
+
       &:hover {
         color: $dark-gold;
         background-color: $gold;
       }
     }
+
     &.silver {
       color: $silver;
+
       &:hover {
         color: $dark-silver;
         background-color: $silver;
       }
     }
+
     &.green {
       color: $dark-green;
+
       &:hover {
         color: $darker-green;
         background-color: $green;
       }
     }
+
     &.white {
       color: white;
+
       &:hover {
         color: black;
         background-color: white;
@@ -85,12 +91,13 @@
     }
   }
 
-  &.disabled {
+  &.solid.disabled,
+  &.clear.disabled {
     background-color: $silver;
     color: $dark-silver;
     cursor: not-allowed;
     border: solid 3px $dark-silver;
-    box-shadow: 0 0 0 3px $silver, 0 0 20px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 0 3px $silver, 0 0 20px 0 rgb(black, 20%);
 
     &:hover {
       background-color: $silver;
@@ -99,6 +106,7 @@
 
   &.loading {
     cursor: progress;
+
     &:hover {
       background-color: $gold;
     }

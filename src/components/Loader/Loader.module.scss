@@ -8,6 +8,7 @@
   &.gold .dot {
     background-color: $dark-gold;
   }
+
   &.silver .dot {
     background-color: $dark-silver;
   }
@@ -17,7 +18,6 @@
     height: 8px;
     border-radius: 50%;
     transform: translateY(-2px);
-
     animation: dot-slide 1s ease-in-out infinite;
 
     &:nth-child(2) {
@@ -31,6 +31,7 @@
 
   &.small {
     gap: 2px;
+
     .dot {
       width: 4px;
       height: 4px;
@@ -42,9 +43,11 @@
   0% {
     transform: translateY(-2px);
   }
+
   50% {
     transform: translateY(2px);
   }
+
   100% {
     transform: translateY(-2px);
   }

@@ -1,4 +1,4 @@
-.Footer {
+.footer {
   position: fixed;
   z-index: 999;
   bottom: 0;
@@ -8,11 +8,10 @@
   text-align: center;
   display: flex;
   justify-content: center;
-
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 
   p {
-    background-color: rgba(black, 0.5);
+    background-color: rgb(black, 50%);
     display: block;
     padding: 4px 12px;
     border-radius: 12px;

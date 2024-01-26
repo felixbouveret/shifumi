@@ -1,8 +1,8 @@
-.CarpetContainer {
+.carpetContainer {
   background-color: $green;
   border-radius: 16px;
   border: solid 6px $dark-green;
-  box-shadow: inset 0 0 20px rgba(black, 0.2);
+  box-shadow: inset 0 0 20px rgb(black, 20%);
 
   &.goldInset {
     position: relative;
@@ -16,12 +16,12 @@
       width: calc(100% - 16px);
       height: calc(100% - 16px);
       border-radius: 8px;
-      border: solid 1px rgba($gold, 0.3);
+      border: solid 1px rgb($gold, 0.3);
     }
   }
 
   &.goldFrame {
-    box-shadow: inset 0 0 20px rgba(black, 0.2), 0 0 0 1px $light-gold,
+    box-shadow: inset 0 0 20px rgb(black, 20%), 0 0 0 1px $light-gold,
       0 0 0 3px $gold;
   }
 }
