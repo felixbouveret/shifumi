@@ -1,20 +1,22 @@
 .playerHand {
   display: flex;
-  margin-right: -8px;
-  transition: transform 0.5s ease;
-  animation: slideUp 0.8s ease;
   align-self: center;
 
+  margin-right: -8px;
+
+  transition: transform 0.5s ease;
+  animation: slide-up 0.8s ease;
+
   &.top {
-    animation: slideDown 0.8s ease;
+    animation: slide-down 0.8s ease;
   }
 
   .cardWrapper {
-    margin-right: 8px;
     width: 100px;
     height: 120px;
+    margin-right: 8px;
 
-    @media (min-width: 540px) {
+    @media (width >= 540px) {
       width: 130px;
       height: 160px;
     }
@@ -34,19 +36,21 @@
   }
 }
 
-@keyframes slideDown {
+@keyframes slide-down {
   0% {
     transform: translateY(calc(-100% - 80px));
   }
+
   100% {
     transform: translateY(-50%);
   }
 }
 
-@keyframes slideUp {
+@keyframes slide-up {
   0% {
     transform: translateY(calc(100% + 80px));
   }
+
   100% {
     transform: translateY(50%);
   }

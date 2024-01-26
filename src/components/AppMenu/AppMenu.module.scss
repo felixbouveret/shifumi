@@ -6,38 +6,47 @@
 }
 
 .menuList {
-  position: absolute;
-  opacity: 0;
   pointer-events: none;
-  width: fit-content;
-  background-color: white;
-  overflow: hidden;
-  padding: 8px 0;
-  border-radius: 8px;
+
+  position: absolute;
   transform: translateY(0);
+
+  overflow: hidden;
+
+  width: fit-content;
+  padding: 8px 0;
+
+  opacity: 0;
+  background-color: white;
+  border-radius: 8px;
+
   transition: 0.2s ease-in-out;
   transition-property: transform, opacity;
 
   &.menuListDisplayed {
-    opacity: 1;
     pointer-events: all;
     transform: translateY(8px);
+    opacity: 1;
   }
 }
 
 .menuItem {
   button {
+    cursor: pointer;
+
     display: flex;
+    gap: 8px;
     align-items: center;
+
     width: max-content;
     min-width: 100%;
+    padding: 4px 12px 4px 8px;
+
+    color: black;
+
+    background-color: transparent;
     border: 0;
     border-radius: 0;
-    background-color: transparent;
-    cursor: pointer;
-    gap: 8px;
-    padding: 4px 12px 4px 8px;
-    color: black;
 
     & > * {
       flex-shrink: 0;
