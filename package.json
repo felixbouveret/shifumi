@@ -16,6 +16,9 @@
   "lint-staged": {
     "*.{ts,tsx}": [
       "eslint --ext '.ts,.tsx' --fix"
+    ],
+    "*.{module.scss}": [
+      "npx stylelint"
     ]
   },
   "dependencies": {
@@ -51,6 +54,8 @@
     "lint-staged": "^15.2.0",
     "sass": "^1.69.7",
     "semantic-release": "^22.0.12",
+    "stylelint": "^16.2.0",
+    "stylelint-config-standard": "^36.0.0",
     "typescript": "^5.2.2",
     "vite": "^5.0.8"
   }
