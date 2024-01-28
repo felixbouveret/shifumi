@@ -2,20 +2,7 @@ import React from "react";
 import Loader from "@/components/Loader";
 import style from "./Button.module.scss";
 import useStyles from "@/hooks/useStyles";
-
-interface ButtonProps {
-  className?: string;
-  children: React.ReactNode;
-  iconButton?: boolean;
-  variant?: "solid" | "clear";
-  color?: "gold" | "silver" | "white" | "green";
-  onClick?: () => void;
-  href?: string;
-  disabled?: boolean;
-  loading?: boolean;
-  startIcon?: React.ReactNode;
-  endIcon?: React.ReactNode;
-}
+import { ButtonProps, ButtonRolesEnum } from "./Button.types";
 
 const Button: React.FC<ButtonProps> = ({
   className,
@@ -25,6 +12,7 @@ const Button: React.FC<ButtonProps> = ({
   color = "gold",
   onClick,
   href,
+  target,
   disabled,
   loading,
   startIcon,
@@ -51,19 +39,31 @@ const Button: React.FC<ButtonProps> = ({
           <Loader color={disabled ? "silver" : "gold"} />
         </span>
       );
-    if (iconButton) return <span className={style.content}>{children}</span>;
+    if (iconButton)
+      return (
+        <span className={style.content} role={ButtonRolesEnum.ICON}>
+          {children}
+        </span>
+      );
     return (
       <span className={style.content}>
-        {startIcon}
+        {startIcon && (
+          <span role={ButtonRolesEnum.START_ICON}>{startIcon}</span>
+        )}
         {children}
-        {endIcon}
+        {endIcon && <span role={ButtonRolesEnum.END_ICON}>{endIcon}</span>}
       </span>
     );
   };
 
   if (href)
     return (
-      <a className={classes} href={href}>
+      <a
+        className={classes}
+        href={href}
+        target={target}
+        role={ButtonRolesEnum.LINK}
+      >
         {content()}
       </a>
     );
@@ -72,7 +72,12 @@ const Button: React.FC<ButtonProps> = ({
   const onUserClick = () => canClick() && onClick && onClick();
 
   return (
-    <button onClick={onUserClick} className={classes} disabled={disabled}>
+    <button
+      onClick={onUserClick}
+      className={classes}
+      disabled={disabled}
+      role={ButtonRolesEnum.BUTTON}
+    >
       {content()}
     </button>
   );

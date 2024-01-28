@@ -1,6 +1,6 @@
 import React from "react";
 import AppMenu from "@/components/AppMenu";
-import { RoutesEnum } from "@/Router";
+import { RoutesEnum } from "@/types/routes.enum";
 import { Location, Outlet, useLocation } from "react-router-dom";
 
 const MainLayout: React.FC = () => {
