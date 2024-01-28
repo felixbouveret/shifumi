@@ -1,12 +1,20 @@
 <h1 align="center">Shifumi App</h1>
 <p align="center"> 
-<img src="public/favicon.png" alt="Git View Logo" height="32" />
-<br>
-A simple shifumi app. Try beat the computer random's choice.
-<br>
-Using ReactJs, ViteJs and Typescript
-<br>
-<img src="https://cdn.worldvectorlogo.com/logos/react-2.svg" width="32" height="32" /> <img src="https://cdn.worldvectorlogo.com/logos/typescript.svg" height="32" width="32" />
+  <img src="public/favicon.png" alt="Git View Logo" height="32" />
+  <br>
+  A simple shifumi app. Try beat the computer random's choice.
+  <br>
+  Using ReactJs, ViteJs and Typescript
+  <br>
+  <img src="https://cdn.worldvectorlogo.com/logos/react-2.svg" width="32" height="32" /> <img src="https://cdn.worldvectorlogo.com/logos/typescript.svg" height="32" width="32" />
+  <br>
+  <br>
+  <a href="https://github.com/felixbouveret/shifumi/releases/latest">
+  <img alt="App version" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Ffelixbouveret%2Fshifumi%2Fmain%2Fpackage.json&query=version&label=version" />
+  </a>
+  <a href="https://app.netlify.com/sites/shifumiapp/deploys">
+  <img alt="Netlify Status" src="https://api.netlify.com/api/v1/badges/53bf82ca-3d9c-45a4-b2da-a752081680f9/deploy-status">
+  </a>
 </p>
 
 ## 📖 Table of content
