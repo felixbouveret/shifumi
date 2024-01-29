@@ -1,8 +1,8 @@
 .playerSide {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   gap: 24px;
+  justify-content: space-between;
 
   > .playerBoard {
     padding: 20px 8px 28px;

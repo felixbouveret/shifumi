@@ -1,14 +1,13 @@
 import React from "react";
+import Icon from "@/components/Icon";
 import Button from "@/components/Button";
 import style from "./GamesHistory.module.scss";
-import useGameUtils from "@/hooks/useGameUtils";
 import useGamesHistory from "@/hooks/useGamesHistory";
 import CarpetContainer from "@/components/CarpetContainer";
 import { Game } from "@/types/game.interface";
 
 const GamesHistory: React.FC = () => {
   const { gamesHistory, clearHistory } = useGamesHistory();
-  const { getIconFromEnum } = useGameUtils();
 
   const getDrawsCount = (game: Game) => {
     const { localUser, opponent } = game;
@@ -34,7 +33,7 @@ const GamesHistory: React.FC = () => {
       <div className={style.gamesList}>
         {gamesHistory.map((game, index) => (
           <div className={style.game} key={index}>
-            <div>{getIconFromEnum(game.winner)}</div>
+            <Icon name={game.winner} size={16} />
             <div className={style.scores}>
               <span>{game.localUser.score}</span>
               <span>{game.opponent.score}</span>

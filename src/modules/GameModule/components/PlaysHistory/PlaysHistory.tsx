@@ -1,27 +1,25 @@
 import React from "react";
-import useCards from "@/hooks/useCards";
+import Icon from "@/components/Icon";
 import useStyles from "@/hooks/useStyles";
 import style from "./PlaysHistory.module.scss";
 import useGameUtils from "@/hooks/useGameUtils";
 import CarpetContainer from "@/components/CarpetContainer";
 import { PlayerType } from "@/types/game.enum";
 import { PlaysHistory } from "@/types/game.interface";
-
 interface PlaysHistoryProps {
   history: PlaysHistory[] | undefined;
 }
 
 const PlaysHistory: React.FC<PlaysHistoryProps> = ({ history }) => {
-  const { getCardContent } = useCards();
   const { s } = useStyles();
-  const { getIconFromEnum, getRoundResultFromWinner } = useGameUtils();
+  const { getRoundResultFromWinner } = useGameUtils();
 
   return (
     <CarpetContainer className={style.playsHistoryContainer} goldFrame>
       <div className={s([style.head, style.row])}>
         <div className={style.cards}>
-          <span>{getIconFromEnum(PlayerType.LOCAL_USER)}</span>
-          <span>{getIconFromEnum(PlayerType.OPPONENT)}</span>
+          <Icon name={PlayerType.LOCAL_USER} size={16} />
+          <Icon name={PlayerType.OPPONENT} size={16} />
         </div>
         <span className={style.result}>R</span>
       </div>
@@ -33,12 +31,14 @@ const PlaysHistory: React.FC<PlaysHistoryProps> = ({ history }) => {
               <div className={s([style.play, style.row])} key={index}>
                 <p className={style.index}>{index + 1}</p>
                 <div className={style.cards}>
-                  <span>{getCardContent(play.localUser).icon}</span>
-                  <span>{getCardContent(play.opponent).icon}</span>
+                  <Icon name={play.localUser} size={16} />
+                  <Icon name={play.opponent} size={16} />
                 </div>
-                <span className={style.result}>
-                  {getIconFromEnum(getRoundResultFromWinner(play.roundWinner))}
-                </span>
+                <Icon
+                  className={style.result}
+                  name={getRoundResultFromWinner(play.roundWinner)}
+                  size={16}
+                />
               </div>
             ))}
         </div>

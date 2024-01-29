@@ -1,23 +1,23 @@
 .partyEndPopin {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 40px;
+  align-items: center;
 
   .confetti {
     position: absolute;
   }
 
   h2 {
-    font-family: $accent-font;
-    color: $gold;
-    font-size: 48px;
     margin: 0;
+    font-family: $accent-font;
+    font-size: 48px;
+    color: $gold;
   }
 
   .buttons {
     display: flex;
-    justify-content: space-between;
     gap: 16px;
+    justify-content: space-between;
   }
 }

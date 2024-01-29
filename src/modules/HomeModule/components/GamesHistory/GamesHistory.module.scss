@@ -11,42 +11,51 @@
 
     h2 {
       @include typo-title;
-      font-family: $content-font;
+
       display: block;
+
+      margin: 4px 0;
+      padding-bottom: 4px;
+
+      font-family: $content-font;
+      font-weight: bold;
       color: $gold;
       text-align: center;
-      font-weight: bold;
-      margin: 0;
-      padding-bottom: 4px;
-      margin: 4px 0;
+
       border-bottom: solid 1px $gold;
     }
 
     .labels {
-      font-family: $accent-font;
-
       display: flex;
       justify-content: space-between;
-      color: $dark-green;
-      font-weight: bold;
+
+      font-family: $accent-font;
       font-size: 16px;
+      font-weight: bold;
+      color: $dark-green;
+
       border-bottom: solid 2px $dark-green;
     }
   }
 
   .scores {
     display: flex;
+
     span {
-      text-align: center;
       display: block;
       width: 16px;
+      text-align: center;
     }
   }
 
   .gamesList {
     overflow-y: auto;
+    display: flex;
     flex: 1;
-    padding: 8px 20px 8px;
+    flex-direction: column;
+    gap: 4px;
+
+    padding: 8px 20px;
   }
 
   .game {
@@ -55,7 +64,7 @@
   }
 
   .button {
-    margin-top: 8px;
     width: 100%;
+    margin-top: 8px;
   }
 }

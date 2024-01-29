@@ -2,7 +2,7 @@ import Button from "../Button";
 import style from "./AppMenu.module.scss";
 import useStyles from "@/hooks/useStyles";
 import React, { useEffect, useRef } from "react";
-import { RoutesEnum } from "@/Router";
+import { RoutesEnum } from "@/types/routes.enum";
 import { Location, useNavigate } from "react-router-dom";
 import { ExitToApp, Settings } from "@mui/icons-material";
 

@@ -3,11 +3,7 @@ import Home from "./pages/Home";
 import Game from "./pages/Game";
 import MainLayout from "./layouts/MainLayout";
 import { Routes, Route } from "react-router-dom";
-
-export enum RoutesEnum {
-  HOME = "/",
-  GAME = "/game",
-}
+import { RoutesEnum } from "./types/routes.enum";
 
 const AppRouter: React.FC = () => {
   return (

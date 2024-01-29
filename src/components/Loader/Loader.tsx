@@ -17,6 +17,7 @@ const Loader: React.FC<LoaderProps> = ({
 
   return (
     <div
+      role="loader"
       className={s([
         className,
         style.loaderContainer,

@@ -9,9 +9,6 @@ interface useGameUtilsReturn {
   getRoundWinnerFromResult: (result: RoundResult) => PlayerType | null;
   getRoundResultFromWinner: (result: PlayerType | null) => RoundResult;
   getRoundResult: (game: Game) => RoundResult;
-  getIconFromEnum: (
-    roundWinner: PlayerType | RoundResult | CardType | null
-  ) => string | null;
 }
 
 const winningCombos = {
@@ -20,19 +17,6 @@ const winningCombos = {
   [CardType.ROCK]: [CardType.SCISSORS],
   [CardType.SCISSORS]: [CardType.PAPER],
   [CardType.UNKNOWN]: [CardType.UNKNOWN],
-};
-
-const icons = {
-  [CardType.PAPER]: "📄",
-  [CardType.WELL]: "🕳️",
-  [CardType.ROCK]: "🪨",
-  [CardType.SCISSORS]: "✂️",
-  [CardType.UNKNOWN]: "❓",
-  [PlayerType.LOCAL_USER]: "🙋‍♂️",
-  [PlayerType.OPPONENT]: "🤖",
-  [RoundResult.WIN]: "🎉",
-  [RoundResult.LOSE]: "😭",
-  [RoundResult.DRAW]: "🤝",
 };
 
 const useGameUtils = (): useGameUtilsReturn => {
@@ -95,13 +79,6 @@ const useGameUtils = (): useGameUtilsReturn => {
       : RoundResult.LOSE;
   };
 
-  const getIconFromEnum = (
-    code: CardType | PlayerType | RoundResult | null
-  ): string | null => {
-    if (code === null) return null;
-    return icons[code];
-  };
-
   return {
     getFreshPlayer,
     getFreshGame,
@@ -109,7 +86,6 @@ const useGameUtils = (): useGameUtilsReturn => {
     getRoundWinnerFromResult,
     getRoundResultFromWinner,
     getRoundResult,
-    getIconFromEnum,
   };
 };
 
