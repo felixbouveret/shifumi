@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/felixbouveret/shifumi/compare/v1.4.0...v1.4.1) (2024-01-30)
+
+
+### Bug Fixes
+
+* add seo description ([638f1f2](https://github.com/felixbouveret/shifumi/commit/638f1f298a520f774940af72989f72a5e5be32d1))
+
 # [1.4.0](https://github.com/felixbouveret/shifumi/compare/v1.3.0...v1.4.0) (2024-01-29)
 
 
