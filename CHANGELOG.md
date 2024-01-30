@@ -1,3 +1,15 @@
+# [1.4.0](https://github.com/felixbouveret/shifumi/compare/v1.3.0...v1.4.0) (2024-01-29)
+
+
+### Bug Fixes
+
+* add and apply stylelint config ([#23](https://github.com/felixbouveret/shifumi/issues/23)) ([aff5a94](https://github.com/felixbouveret/shifumi/commit/aff5a94c75117525dd91e2b97ffdd57dc8504bb1))
+
+
+### Features
+
+* replace all emojis with pngs [#22](https://github.com/felixbouveret/shifumi/issues/22) ([2518e1c](https://github.com/felixbouveret/shifumi/commit/2518e1c99ee1fe9a5021c6c0fd22995d1ab394b8))
+
 # [1.3.0](https://github.com/felixbouveret/shifumi/compare/v1.2.0...v1.3.0) (2024-01-25)
 
 
